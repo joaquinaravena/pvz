@@ -889,7 +889,7 @@
 											"top": 159,
 											"width": 121.7353515625,
 											"height": 13,
-											"text": "GeneradorNIvel"
+											"text": "GeneradorNivel"
 										},
 										{
 											"_type": "LabelView",
@@ -4778,7 +4778,7 @@
 											"top": 199,
 											"width": 79.46630859375,
 											"height": 13,
-											"text": "Reloj Musica"
+											"text": "RelojMusica"
 										},
 										{
 											"_type": "LabelView",
@@ -4954,7 +4954,7 @@
 											"top": 271,
 											"width": 81.63720703125,
 											"height": 13,
-											"text": "Reloj Plantas"
+											"text": "RelojPlantas"
 										},
 										{
 											"_type": "LabelView",
@@ -5130,7 +5130,7 @@
 											"top": 367,
 											"width": 88.84814453125,
 											"height": 13,
-											"text": "Reloj Zombies"
+											"text": "RelojZombies"
 										},
 										{
 											"_type": "LabelView",
@@ -6151,7 +6151,7 @@
 											"top": 455,
 											"width": 197.6025390625,
 											"height": 13,
-											"text": "Reloj Proyectiles"
+											"text": "RelojProyectiles"
 										},
 										{
 											"_type": "LabelView",
@@ -15033,7 +15033,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "GeneradorNIvel",
+					"name": "GeneradorNivel",
 					"operations": [
 						{
 							"_type": "UMLOperation",
@@ -15610,7 +15610,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Reloj Musica",
+					"name": "RelojMusica",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -15675,7 +15675,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Reloj Plantas",
+					"name": "RelojPlantas",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -15740,7 +15740,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Reloj Zombies",
+					"name": "RelojZombies",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -15805,7 +15805,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Reloj Proyectiles",
+					"name": "RelojProyectiles",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
