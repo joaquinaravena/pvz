@@ -11,6 +11,9 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JToggleButton;
+import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class Ventana extends JFrame{
@@ -50,33 +53,49 @@ public class Ventana extends JFrame{
 		setContentPane(panelDia);
 		panelDia.setLayout(null);
 		
+		JLabel lblFondo = new JLabel();
+		//ImageIcon fondoDia = new ImageIcon(Toolkit.getDefaultToolkit().getImage("src/Imagenes/FondoDiaNuevo2.png").getScaledInstance(734, 461, 0));
+		//lblNewLabel.setIcon(fondoDia);
+		lblFondo.setIcon(new ImageIcon(Ventana.class.getResource("/Imagenes/FondoDiaNuevo.png")));
+		lblFondo.setBounds(0, 50, 684, 411);
+		panelDia.add(lblFondo);
+		
 		JPanel panelPlantas = new JPanel();
 		panelPlantas.setBackground(new Color(139, 69, 19));
 		panelPlantas.setBounds(0, 0, 684, 52);
 		panelDia.add(panelPlantas);
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		panelPlantas.add(lblNewLabel_1);
+		JLabel lblSoles = new JLabel("Soles actuales");
+		panelPlantas.add(lblSoles);
 		
-		JToggleButton tglbtnNewToggleButton = new JToggleButton("");
-		panelPlantas.add(tglbtnNewToggleButton);
+		JToggleButton botonPlanta1 = new JToggleButton();		
+		panelPlantas.add(botonPlanta1);
 		
-		JToggleButton tglbtnNewToggleButton_1 = new JToggleButton("");
-		panelPlantas.add(tglbtnNewToggleButton_1);
+		JToggleButton botonPlanta2 = new JToggleButton();
+		panelPlantas.add(botonPlanta2);
 		
-		JToggleButton tglbtnNewToggleButton_2 = new JToggleButton("");
-		panelPlantas.add(tglbtnNewToggleButton_2);
+		JToggleButton botonPlanta3 = new JToggleButton();
+		panelPlantas.add(botonPlanta3);
 		
-		JPanel panelTablero = new JPanel();
-		panelTablero.setBounds(0, 37, 684, 424);
-		panelDia.add(panelTablero);
-		panelTablero.setLayout(null);
+		botonPlanta1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				botonPlanta2.setSelected(false);
+				botonPlanta3.setSelected(false);
+			}
+		});
 		
-		JLabel lblNewLabel = new JLabel();
-		ImageIcon fondoDia = new ImageIcon(Toolkit.getDefaultToolkit().getImage("src/Imagenes/FondoDia.png").getScaledInstance(684, 424, 0));
-		lblNewLabel.setIcon(fondoDia);
-		lblNewLabel.setBounds(0, 0, 684, 424);
-		panelTablero.add(lblNewLabel);
+		botonPlanta2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				botonPlanta1.setSelected(false);
+				botonPlanta3.setSelected(false);
+			}
+		});
+		botonPlanta3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				botonPlanta2.setSelected(false);
+				botonPlanta1.setSelected(false);
+			}
+		});
 		
 	}
 }
