@@ -3,8 +3,8 @@ import Entidades.Zombie;
 public class contextoZombie {
 	private ZombieStrategy estrategia;
 	
-	public contextoZombie(ZombieStrategy estrategia) {
-		this.estrategia=estrategia;
+	public contextoZombie() {
+		this.estrategia=new moverZombie();
 	}
 	
 	public void setEstrategia(ZombieStrategy nueva) {
