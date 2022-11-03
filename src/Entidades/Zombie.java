@@ -3,12 +3,13 @@ import GUI.EntidadGrafica;
 import Logica.*;
 
 public abstract class Zombie {
-	private contextoZombie contexto;
 	private boolean comiendo;
 	private int vida;
 	private int daño;
 	private int velocidad;
 	private EntidadGrafica grafica;
+	private ZombieStrategy miEstrategia;
+	
 	
 	public Zombie(int vida,int daño,int velocidad) {
 		comiendo=false;
@@ -16,13 +17,11 @@ public abstract class Zombie {
 		this.velocidad=velocidad;
 		this.daño=daño;
 		grafica=new EntidadGrafica();//Cuando este implementado entidad grafica acomodarlo.
-		contexto=new contextoZombie();
+		miEstrategia=new moverZombie();
 	}
 	
-	
-	
 	public void realizarAccion(){
-		//Implementar con la estrategia.
+		miEstrategia.realizarAccion(this);
 	}
 	
 	public int getDaño() {
@@ -46,9 +45,16 @@ public abstract class Zombie {
 	public void visitarPlanta(Plata p) {
 		p.chocar(this);
 	}
-	public void visitarProyectil(Proyectil p) {
-		p.chocar(this);
+	public void visitarGuisanteNegro(GuisanteNegro g) {
+		g.chocar(this);
 	}
 	
+	public void visitarGuisanteNegro(GuisanteVerde g) {
+		g.chocar(this);
+	}
+	
+	public void setEstrategia(ZombieStrategy nueva) {
+		miEstrategia=nueva;
+	}
 	
 }
