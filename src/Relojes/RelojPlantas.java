@@ -5,8 +5,8 @@ import java.util.*;
 import Entidades.*;
 
 public class RelojPlantas {
-	protected List<Planta> misPlantas;
-	protected boolean activo;
+	private List<Planta> misPlantas;
+	private boolean activo;
 	
 	public RelojPlantas() {
 		misPlantas = new ArrayList<Planta>();

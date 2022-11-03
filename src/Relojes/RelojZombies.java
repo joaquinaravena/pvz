@@ -5,9 +5,9 @@ import Entidades.*;
 import Logica.*;
 
 public class RelojZombies extends Thread{
-	protected List<Zombie> misZombies;
-	protected boolean activo;
-	protected Juego miJuego;
+	private List<Zombie> misZombies;
+	private boolean activo;
+	private Juego miJuego;
 	
 	public RelojZombies(Juego j) {
 		misZombies = new ArrayList<Zombie>();
