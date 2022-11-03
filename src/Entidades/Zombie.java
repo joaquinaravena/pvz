@@ -2,7 +2,7 @@ package Entidades;
 import GUI.EntidadGrafica;
 import Logica.*;
 
-public abstract class Zombie {
+public abstract class Zombie extends Entidad {
 	private boolean comiendo;
 	private int vida;
 	private int daño;
@@ -67,6 +67,4 @@ public abstract class Zombie {
 	public void setPlantaAtacada(Planta atacada) {
 		plantaAtacada=atacada;
 	}
-	
-
 }
