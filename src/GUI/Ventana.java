@@ -1,4 +1,5 @@
 package GUI;
+import Logica.*;
 
 import java.awt.EventQueue;
 import java.awt.Toolkit;
@@ -14,10 +15,12 @@ import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 @SuppressWarnings("serial")
 public class Ventana extends JFrame{
-
+	Juego miJuego;
 	/**
 	 * Launch the application.
 	 */
@@ -38,6 +41,7 @@ public class Ventana extends JFrame{
 	 * Create the application.
 	 */
 	public Ventana() {
+		miJuego = new Juego();
 		setResizable(false);
 		setBounds(100, 100, 700, 500);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -64,6 +68,22 @@ public class Ventana extends JFrame{
 		panelPlantas.setBackground(new Color(139, 69, 19));
 		panelPlantas.setBounds(0, 0, 684, 52);
 		panelDia.add(panelPlantas);
+		
+		JButton btnPonerMusica = new JButton("Parar Musica");
+		panelPlantas.add(btnPonerMusica);
+		btnPonerMusica.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				miJuego.reproducirMusica();
+			}
+		});
+		
+		JButton btnPararMusica = new JButton("Poner Musica");
+		panelPlantas.add(btnPararMusica);
+		btnPararMusica.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				miJuego.pararMusica();
+			}
+		});
 		
 		JLabel lblSoles = new JLabel("Soles actuales");
 		panelPlantas.add(lblSoles);
