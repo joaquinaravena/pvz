@@ -9,6 +9,7 @@ public abstract class Zombie {
 	private int velocidad;
 	private EntidadGrafica grafica;
 	private ZombieStrategy miEstrategia;
+	private Planta plantaAtacada;
 	
 	
 	public Zombie(int vida,int daño,int velocidad) {
@@ -18,14 +19,23 @@ public abstract class Zombie {
 		this.daño=daño;
 		grafica=new EntidadGrafica();//Cuando este implementado entidad grafica acomodarlo.
 		miEstrategia=new moverZombie();
+		plantaAtacada=null;
 	}
 	
 	public void realizarAccion(){
 		miEstrategia.realizarAccion(this);
 	}
 	
+	public Planta getPlantaAtacada() {
+		return plantaAtacada;
+	}
+	
 	public int getDaño() {
 		return daño;
+	}
+	
+	public int getVida() {
+		return vida;
 	}
 	
 	public void restarVida(int i) {
@@ -38,13 +48,10 @@ public abstract class Zombie {
 		//modificar con el metodo de eliminar grafica y ver como esta implementada la planta
 	}
 	
-	public int getVida() {
-		return vida;
-	}
-	
-	public void visitarPlanta(Plata p) {
+	public void visitarPlanta(Planta p) {
 		p.chocar(this);
 	}
+	//ARREGLAR ESTO PQ ES INSTANCE OF 
 	public void visitarGuisanteNegro(GuisanteNegro g) {
 		g.chocar(this);
 	}
@@ -55,6 +62,10 @@ public abstract class Zombie {
 	
 	public void setEstrategia(ZombieStrategy nueva) {
 		miEstrategia=nueva;
+	}
+	
+	public void setPlantaAtacada(Planta atacada) {
+		plantaAtacada=atacada;
 	}
 	
 }
