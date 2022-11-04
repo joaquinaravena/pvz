@@ -57,21 +57,32 @@ public class Ventana extends JFrame{
 		setContentPane(panelMenu);
 		panelMenu.setLayout(null);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(341, 96, 89, 23);
-		panelMenu.add(btnNewButton);
+		JButton btnModoDia = new JButton("New button");
+		btnModoDia.setBounds(341, 96, 89, 23);
+		panelMenu.add(btnModoDia);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(341, 141, 89, 23);
-		panelMenu.add(btnNewButton_1);
+		JButton btnModoNoche = new JButton("New button");
+		btnModoNoche.setBounds(341, 141, 89, 23);
+		panelMenu.add(btnModoNoche);
 		
-		JButton BtnSalir = new JButton("New button");
-		BtnSalir.setBounds(341, 197, 89, 23);
-		panelMenu.add(BtnSalir);
+		JButton btnSalir = new JButton("New button");
+		btnSalir.setBounds(321, 286, 89, 23);
+		panelMenu.add(btnSalir);
 		
-		JToggleButton btnMusica = new JToggleButton("New toggle button");
-		btnMusica.setBounds(10, 408, 121, 23);
+		JToggleButton btnMusica = new JToggleButton();
+		btnMusica.setOpaque(true);
+		btnMusica.setForeground(new Color(255, 0, 0));
+		btnMusica.setBackground(new Color(0, 0, 0));
+		btnMusica.setToolTipText("frena/reproduce la m\u00FAsica");
+		btnMusica.setSelected(true);
+		btnMusica.setBounds(24, 391, 83, 65);
+		//btnMusica.setSelectedIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource("/Imagenes/stop3.png")).getImage().getScaledInstance(btnMusica.getWidth(), btnMusica.getHeight(), DO_NOTHING_ON_CLOSE)));
+		//btnMusica.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource("/Imagenes/play.jpg")).getImage().getScaledInstance(btnMusica.getWidth(), btnMusica.getHeight(), DO_NOTHING_ON_CLOSE)));
 		panelMenu.add(btnMusica);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(341, 60, 46, 14);
+		panelMenu.add(lblNewLabel);
 	}
 	
 	
