@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 import javax.swing.SwingConstants;
+import javax.swing.JButton;
 
 @SuppressWarnings("serial")
 public class Ventana extends JFrame{
@@ -45,10 +46,34 @@ public class Ventana extends JFrame{
 		setBounds(100, 100, 900, 506);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
-		
-		crearPanelDia();
+		crearPanelMenu();
+		//crearPanelDia();
 		
 	}
+	private void crearPanelMenu() {
+		JPanel panelMenu = new JPanel();
+		panelMenu.setBackground(new Color(205, 133, 63));
+		panelMenu.setBounds(0, 0, 434, 261);
+		setContentPane(panelMenu);
+		panelMenu.setLayout(null);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setBounds(341, 96, 89, 23);
+		panelMenu.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("New button");
+		btnNewButton_1.setBounds(341, 141, 89, 23);
+		panelMenu.add(btnNewButton_1);
+		
+		JButton BtnSalir = new JButton("New button");
+		BtnSalir.setBounds(341, 197, 89, 23);
+		panelMenu.add(BtnSalir);
+		
+		JToggleButton btnMusica = new JToggleButton("New toggle button");
+		btnMusica.setBounds(10, 408, 121, 23);
+		panelMenu.add(btnMusica);
+	}
+	
 	
 	private void crearPanelDia() {
 		JPanel panelDia = new JPanel();
@@ -141,7 +166,7 @@ public class Ventana extends JFrame{
 		lblPrecioP3.setBounds(169, 48, 46, 14);
 		panelPlantas.add(lblPrecioP3);
 		
-		JLabel lblSolesActuales = new JLabel("100");
+		JLabel lblSolesActuales = new JLabel(""+miJuego.getSoles());
 		lblSolesActuales.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSolesActuales.setBounds(6, 48, 46, 14);
 		panelPlantas.add(lblSolesActuales);
@@ -159,12 +184,12 @@ public class Ventana extends JFrame{
 	private void botonVolver() {
 		
 	}
-	private void actualizarGrafica(EntidadGrafica eg) {
+	public void actualizarGrafica(EntidadGrafica eg) {
 		getContentPane().add(eg.getGrafica());
 		getContentPane().repaint();
 		
 	}
-	private void borrarGrafica(EntidadGrafica eg) {
+	public void borrarGrafica(EntidadGrafica eg) {
 		getContentPane().add(eg.getGrafica());
 		getContentPane().repaint();
 	}
@@ -174,5 +199,11 @@ public class Ventana extends JFrame{
 		lblGameOver.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource("/Imagenes/gameOver.png")).getImage().getScaledInstance(lblGameOver.getWidth(), lblGameOver.getHeight(), DO_NOTHING_ON_CLOSE)));
 		getContentPane().add(lblGameOver);
 		getContentPane().repaint();
+	}
+	private void ganarJuego() {
+		
+	}
+	private void salir() {
+		
 	}
 }

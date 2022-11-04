@@ -2,10 +2,12 @@ package Logica;
 import Entidades.*;
 import Relojes.*;
 public class Juego {
-	RelojMusica miRelojMusica;
+	protected RelojMusica miRelojMusica;
+	protected int soles;
 	
 	public Juego() {
 		miRelojMusica = new RelojMusica();
+		soles = 75;
 	}
 	public void agregarZombie(Zombie z) {}
 	
@@ -17,6 +19,18 @@ public class Juego {
 	public void pararMusica() {
 		miRelojMusica.pararMusica();
 		miRelojMusica.stop();
+	}
+	
+	public int getSoles() {
+		return soles;
+	}
+	
+	public void agregarSoles(int s) {
+		soles += s;
+	}
+	
+	public void restarSoles(int s) {
+		soles -= s;
 	}
 	
 }
