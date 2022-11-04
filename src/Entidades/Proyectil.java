@@ -1,7 +1,12 @@
 package Entidades;
 
-public abstract class Proyectil extends Entidad{
+public class Proyectil extends Entidad{
 	protected int valorAccion;
+	
+	public Proyectil(int valorAccion) {
+		this.valorAccion = valorAccion;
+	}
+	
 	public void mover() {
 		x = x+5;
 	}

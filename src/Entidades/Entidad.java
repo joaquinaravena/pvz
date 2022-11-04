@@ -10,7 +10,6 @@ public abstract class Entidad {
 	protected int alto;
 	protected EntidadGrafica grafica;
 
-	
 	public int getX() {
 		return x;
 	}

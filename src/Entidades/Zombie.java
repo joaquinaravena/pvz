@@ -1,22 +1,23 @@
 package Entidades;
 import GUI.EntidadGrafica;
+import GUI.Ventana;
 import Logica.*;
 
-public abstract class Zombie extends Entidad {
-	private boolean comiendo;
-	private int vida;
-	private int daño;
-	private int velocidad;
-	private ZombieStrategy miEstrategia;
-	private Planta plantaAtacada;
+public class Zombie extends Entidad {
+	protected boolean comiendo;
+	protected int vida;
+	protected int daño;
+	protected int velocidad;
+	protected ZombieStrategy miEstrategia;
+	protected Planta plantaAtacada;
 	
 	
-	public Zombie(int vida,int daño,int velocidad) {
+	public Zombie(int vida,int daño,int velocidad,Ventana v) {
 		comiendo=false;
 		this.vida=vida;
 		this.velocidad=velocidad;
 		this.daño=daño;
-		grafica=new EntidadGrafica();//Cuando este implementado entidad grafica acomodarlo.
+		grafica=new EntidadGrafica(v);
 		miEstrategia=new moverZombie();
 		plantaAtacada=null;
 	}
@@ -48,15 +49,11 @@ public abstract class Zombie extends Entidad {
 	}
 	
 	public void visitarPlanta(Planta p) {
-		p.chocar(this);
+		p.realizarAccion(this);
 	}
 	//ARREGLAR ESTO PQ ES INSTANCE OF 
-	public void visitarGuisanteNegro(GuisanteNegro g) {
-		g.chocar(this);
-	}
-	
-	public void visitarGuisanteNegro(GuisanteVerde g) {
-		g.chocar(this);
+	public void visitarProyectil(Proyectil p) {
+		p.chocar(this);
 	}
 	
 	public void setEstrategia(ZombieStrategy nueva) {
