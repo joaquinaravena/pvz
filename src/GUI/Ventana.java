@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JToggleButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 @SuppressWarnings("serial")
 public class Ventana extends JFrame{
@@ -36,6 +37,7 @@ public class Ventana extends JFrame{
 	 * Create the application.
 	 */
 	public Ventana() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Ventana.class.getResource("/Imagenes/logoPVZ.png")));
 		miJuego = new Juego();
 		setResizable(false);
 		setBounds(100, 100, 700, 500);
@@ -63,17 +65,20 @@ public class Ventana extends JFrame{
 		panelDia.add(panelPlantas);
 		
 		JToggleButton botonPlanta1 = new JToggleButton();
-		botonPlanta1.setBounds(204, 7, 33, 9);
+		botonPlanta1.setBounds(307, 7, 41, 39);
+		botonPlanta1.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource("/Imagenes/girasol.png")).getImage().getScaledInstance(botonPlanta1.getWidth(), botonPlanta1.getHeight() , DO_NOTHING_ON_CLOSE)));
+
 		JToggleButton botonPlanta2 = new JToggleButton();
-		botonPlanta2.setBounds(270, 7, 33, 9);
+		botonPlanta2.setBounds(358, 7, 41, 39);
 		JToggleButton botonPlanta3 = new JToggleButton();
-		botonPlanta3.setBounds(336, 7, 33, 20);		
+		botonPlanta3.setBounds(409, 7, 41, 39);		
 		
 		JToggleButton botonMusica = new JToggleButton();
-		botonMusica.setBounds(460, 7, 41, 39);
-		ImageIcon imgg = new ImageIcon(Ventana.class.getResource("/Imagenes/stop.jpg"));
-		//botonMusica.setIcon(new ImageIcon(imgg.getImage().getScaledInstance(20, 20, DO_NOTHING_ON_CLOSE)));
+		botonMusica.setToolTipText("frena/reproduce la m\u00FAsica");
+		botonMusica.setBounds(633, 7, 41, 39);
 		botonMusica.setSelected(true);
+		botonMusica.setSelectedIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource("/Imagenes/stop.jpg")).getImage().getScaledInstance(botonMusica.getWidth(), botonMusica.getHeight(), DO_NOTHING_ON_CLOSE)));
+		botonMusica.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource("/Imagenes/play.jpg")).getImage().getScaledInstance(botonMusica.getWidth(), botonMusica.getHeight(), DO_NOTHING_ON_CLOSE)));
 		
 		botonPlanta1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -110,7 +115,7 @@ public class Ventana extends JFrame{
 		
 		
 		JLabel lblSoles = new JLabel("Soles actuales");
-		lblSoles.setBounds(22, 32, 68, 14);
+		lblSoles.setBounds(41, 32, 68, 14);
 		panelPlantas.setLayout(null);
 		panelPlantas.add(botonPlanta1);
 		panelPlantas.add(botonPlanta2);
@@ -118,5 +123,18 @@ public class Ventana extends JFrame{
 		panelPlantas.add(botonMusica);
 		panelPlantas.add(lblSoles);
 		
+	}
+	
+	private void botonVolver() {
+		
+	}
+	private void actualizarGrafica(EntidadGrafica eg) {
+		getContentPane().add(eg.getGrafica());
+		getContentPane().repaint();
+		
+	}
+	private void borrarGrafica(EntidadGrafica eg) {
+		getContentPane().add(eg.getGrafica());
+		getContentPane().repaint();
 	}
 }
