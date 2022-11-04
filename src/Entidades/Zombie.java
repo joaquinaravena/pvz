@@ -7,7 +7,6 @@ public abstract class Zombie extends Entidad {
 	private int vida;
 	private int daño;
 	private int velocidad;
-	private EntidadGrafica grafica;
 	private ZombieStrategy miEstrategia;
 	private Planta plantaAtacada;
 	

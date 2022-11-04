@@ -1,11 +1,15 @@
 package Entidades;
 
+import GUI.EntidadGrafica;
+
 public abstract class Entidad {
 	
-	private int x;
-	private int y;
-	private int ancho;
-	private int alto;
+	protected int x;
+	protected int y;
+	protected int ancho;
+	protected int alto;
+	protected EntidadGrafica grafica;
+
 	
 	public int getX() {
 		return x;
