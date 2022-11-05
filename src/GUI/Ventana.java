@@ -2,6 +2,7 @@ package GUI;
 import Logica.*;
 
 
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -11,6 +12,10 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JToggleButton;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 import javax.swing.SwingConstants;
@@ -19,6 +24,7 @@ import javax.swing.JButton;
 @SuppressWarnings("serial")
 public class Ventana extends JFrame{
 	Juego miJuego;
+	Properties prop;
 	/**
 	 * Launch the application.
 	 */
@@ -39,15 +45,24 @@ public class Ventana extends JFrame{
 	 * Create the application.
 	 */
 	public Ventana() {
+		try {
+			InputStream input = new FileInputStream(Ventana.class.getResource("/Archivos/configVentana.properties").getFile());
+			prop = new Properties();
+			prop.load(input);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
 		setTitle("Plants Vs Zombies");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Ventana.class.getResource("/Imagenes/logoPVZ.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Ventana.class.getResource(prop.getProperty("logo"))));
 		miJuego = new Juego();
+		
 		setResizable(false);
 		setBounds(100, 100, 900, 506);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
-		crearPanelMenu();
-		//crearPanelDia();
+		//crearPanelMenu();
+		crearPanelDia();
 		
 	}
 	private void crearPanelMenu() {
@@ -57,7 +72,7 @@ public class Ventana extends JFrame{
 		setContentPane(panelMenu);
 		panelMenu.setLayout(null);
 		
-		JButton btnModoDia = new JButton("New button");
+		JButton btnModoDia = new JButton();
 		btnModoDia.setBounds(341, 96, 89, 23);
 		panelMenu.add(btnModoDia);
 		
@@ -100,11 +115,11 @@ public class Ventana extends JFrame{
 		
 		JToggleButton botonPlanta1 = new JToggleButton();
 		botonPlanta1.setBounds(61, 2, 45, 48);
-		botonPlanta1.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource("/Imagenes/girasol.png")).getImage().getScaledInstance(botonPlanta1.getWidth(), botonPlanta1.getHeight() , DO_NOTHING_ON_CLOSE)));
+		botonPlanta1.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("girasol"))).getImage().getScaledInstance(botonPlanta1.getWidth(), botonPlanta1.getHeight() , DO_NOTHING_ON_CLOSE)));
 		
 		JToggleButton botonPlanta2 = new JToggleButton();
 		botonPlanta2.setBounds(114, 2, 45, 48);
-		botonPlanta2.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource("/Imagenes/lanzaGuisantes.png")).getImage().getScaledInstance(botonPlanta2.getWidth(), botonPlanta2.getHeight() , DO_NOTHING_ON_CLOSE)));
+		botonPlanta2.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("lanzaGuisantes"))).getImage().getScaledInstance(botonPlanta2.getWidth(), botonPlanta2.getHeight() , DO_NOTHING_ON_CLOSE)));
 		
 		JToggleButton botonPlanta3 = new JToggleButton();
 		botonPlanta3.setBounds(169, 2, 45, 48);		
@@ -113,13 +128,17 @@ public class Ventana extends JFrame{
 		botonMusica.setToolTipText("frena/reproduce la m\u00FAsica");
 		botonMusica.setBounds(220, 2, 45, 48);
 		botonMusica.setSelected(true);
-		botonMusica.setSelectedIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource("/Imagenes/stop.jpg")).getImage().getScaledInstance(botonMusica.getWidth(), botonMusica.getHeight(), DO_NOTHING_ON_CLOSE)));
-		botonMusica.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource("/Imagenes/play.jpg")).getImage().getScaledInstance(botonMusica.getWidth(), botonMusica.getHeight(), DO_NOTHING_ON_CLOSE)));
+		botonMusica.setSelectedIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("stop"))).getImage().getScaledInstance(botonMusica.getWidth(), botonMusica.getHeight(), DO_NOTHING_ON_CLOSE)));
+		botonMusica.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("play"))).getImage().getScaledInstance(botonMusica.getWidth(), botonMusica.getHeight(), DO_NOTHING_ON_CLOSE)));
 				
 		botonPlanta1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				botonPlanta2.setSelected(false);
 				botonPlanta3.setSelected(false);
+				if(botonPlanta1.isSelected())
+					miJuego.setPlantaEnEspera(null);
+				else
+					miJuego.setPlantaEnEspera(null);
 			}
 		});
 				
@@ -128,6 +147,10 @@ public class Ventana extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				botonPlanta1.setSelected(false);
 				botonPlanta3.setSelected(false);
+				if(botonPlanta2.isSelected())
+					miJuego.setPlantaEnEspera(null);
+				else
+					miJuego.setPlantaEnEspera(null);
 			}
 		});
 				
@@ -136,6 +159,10 @@ public class Ventana extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				botonPlanta2.setSelected(false);
 				botonPlanta1.setSelected(false);
+				if(botonPlanta3.isSelected())
+					miJuego.setPlantaEnEspera(null);
+				else
+					miJuego.setPlantaEnEspera(null);
 			}
 		});
 					
@@ -151,7 +178,7 @@ public class Ventana extends JFrame{
 				
 		JLabel lblSol = new JLabel();
 		lblSol.setBounds(6, 2, 45, 48);
-		lblSol.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource("/Imagenes/sol.png")).getImage().getScaledInstance(lblSol.getWidth(), lblSol.getHeight(), DO_NOTHING_ON_CLOSE)));
+		lblSol.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("sol"))).getImage().getScaledInstance(lblSol.getWidth(), lblSol.getHeight(), DO_NOTHING_ON_CLOSE)));
 		lblSol.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblSol.setHorizontalAlignment(SwingConstants.CENTER);
 		
@@ -186,7 +213,7 @@ public class Ventana extends JFrame{
 		
 		JLabel lblFondo = new JLabel();
 		lblFondo.setBounds(0, 0, 884, 467);
-		lblFondo.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource("/Imagenes/FondoDia.png")).getImage().getScaledInstance(lblFondo.getWidth(), lblFondo.getHeight(), DO_NOTHING_ON_CLOSE)));
+		lblFondo.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("fondoDia"))).getImage().getScaledInstance(lblFondo.getWidth(), lblFondo.getHeight(), DO_NOTHING_ON_CLOSE)));
 		panelDia.add(lblFondo);
 		
 		gameOver();
@@ -207,7 +234,7 @@ public class Ventana extends JFrame{
 	private void gameOver() {
 		JLabel lblGameOver = new JLabel();
 		lblGameOver.setBounds(321, 88, 357, 271);
-		lblGameOver.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource("/Imagenes/gameOver.png")).getImage().getScaledInstance(lblGameOver.getWidth(), lblGameOver.getHeight(), DO_NOTHING_ON_CLOSE)));
+		lblGameOver.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("gameOver"))).getImage().getScaledInstance(lblGameOver.getWidth(), lblGameOver.getHeight(), DO_NOTHING_ON_CLOSE)));
 		getContentPane().add(lblGameOver);
 		getContentPane().repaint();
 	}

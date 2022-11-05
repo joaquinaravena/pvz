@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javax.sound.sampled.*;
 
-import GUI.Ventana;
 
 public class RelojMusica extends Thread {
 	protected File archivoMusica;
@@ -12,7 +11,7 @@ public class RelojMusica extends Thread {
 	protected Clip clip;
 		
 	public RelojMusica() {
-		archivoMusica = new File("Musica/Cancion.wav");
+		archivoMusica = new File("/Musica/Cancion.wav");
 		try {
 			audio = AudioSystem.getAudioInputStream(archivoMusica);
 			if (AudioSystem.getClip()!=null)

@@ -4,6 +4,7 @@ import Relojes.*;
 public class Juego {
 	protected RelojMusica miRelojMusica;
 	protected int soles;
+	protected Planta plantaEnEspera;
 	
 	public Juego() {
 		miRelojMusica = new RelojMusica();
@@ -31,6 +32,14 @@ public class Juego {
 	
 	public void restarSoles(int s) {
 		soles -= s;
+	}
+	
+	public void setPlantaEnEspera(Planta p) {
+		plantaEnEspera = p;
+	}
+	
+	public Planta getPlantaEnEspera() {
+		return plantaEnEspera;
 	}
 	
 }
