@@ -19,7 +19,7 @@ public class Planta extends Entidad {
 		miProyectil = new Proyectil(daño);
 		grafica = new EntidadGrafica(v);
 	}
-	
+
 	public void restarVida(int i) {
 		vida -= i;
 	}
@@ -36,5 +36,12 @@ public class Planta extends Entidad {
 	}
 	public int getPrecio() {
 		return precio;
+	}
+	public Proyectil getProyectil() {
+		return miProyectil;
+	}
+	public Planta clone(Ventana v) {
+		Planta p = new Planta(this.x, this.y, this.ancho, this.alto, this.precio, this.vida, this.getProyectil().getValorAccion() ,v);
+		return p;
 	}
 }

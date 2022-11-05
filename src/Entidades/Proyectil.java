@@ -13,4 +13,7 @@ public class Proyectil extends Entidad{
 	public void chocar(Zombie z) {
 		z.restarVida(valorAccion);
 	}
+	public int getValorAccion() {
+		return valorAccion;
+	}
 }
