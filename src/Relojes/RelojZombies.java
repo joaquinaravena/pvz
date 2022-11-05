@@ -5,9 +5,10 @@ import Entidades.*;
 import Logica.*;
 
 public class RelojZombies extends Thread{
-	private List<Zombie> misZombies;
-	private boolean activo;
-	private Juego miJuego;
+	protected List<Zombie> misZombies;
+	protected boolean activo;
+	protected Juego miJuego;
+	protected boolean resetear;
 	
 	public RelojZombies(Juego j) {
 		misZombies = new ArrayList<Zombie>();
@@ -17,6 +18,10 @@ public class RelojZombies extends Thread{
 	
 	public void resetearListaZombies() {
 		misZombies.clear();
+	}
+	
+	public void removerZombie(Zombie z) {
+		misZombies.remove(z);
 	}
 	
 	public void agregarZombie(Zombie z) {
@@ -30,7 +35,12 @@ public class RelojZombies extends Thread{
 				for (Zombie z: misZombies) {
 					z.realizarAccion();
 				}
-				miJuego.agregarZombie();
+				miJuego.agregarZombieActivo();
+				if (resetear==true)
+					resetearListaZombies();
+				else {
+					miJuego.removerZombies();
+				}
 			}
 		}
 		catch(InterruptedException e) {
@@ -42,4 +52,7 @@ public class RelojZombies extends Thread{
 		activo = a;
 	}
 		
+	public void setearReseteo(boolean a) {
+		resetear = a;
+	}
 }

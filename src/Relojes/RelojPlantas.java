@@ -3,18 +3,26 @@ package Relojes;
 import java.util.*;
 
 import Entidades.*;
+import Logica.Juego;
 
-public class RelojPlantas {
-	private List<Planta> misPlantas;
-	private boolean activo;
+public class RelojPlantas extends Thread{
+	protected List<Planta> misPlantas;
+	protected boolean activo;
+	protected boolean resetear;
+	protected Juego miJuego;
 	
-	public RelojPlantas() {
+	public RelojPlantas(Juego j) {
 		misPlantas = new ArrayList<Planta>();
 		activo = true;
+		miJuego = j;
 	}
 	
 	public void resetearListaPlantas() {
 		misPlantas.clear();
+	}
+	
+	public void removerPlanta(Planta p) {
+		misPlantas.remove(p);
 	}
 	
 	public void agregarPlanta(Planta p) {
@@ -28,6 +36,11 @@ public class RelojPlantas {
 				for (Planta p: misPlantas) {
 					p.realizarAccion();
 				}
+				if (resetear==true)
+					resetearListaPlantas();
+				else {
+					miJuego.removerPlantas();
+				}
 			}
 		}
 		catch(InterruptedException e) {
@@ -37,5 +50,9 @@ public class RelojPlantas {
 	
 	public void setearActivo(boolean a) {
 		activo = a;
+	}
+	
+	public void setearReseteo(boolean a) {
+		resetear = a;
 	}
 }
