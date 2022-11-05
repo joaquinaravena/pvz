@@ -22,5 +22,8 @@ public abstract class Entidad {
 	public int getAlto() {
 		return alto;
 	}
+	public EntidadGrafica getGrafica() {
+		return grafica;
+	}
 
 }
