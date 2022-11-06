@@ -11,7 +11,7 @@ public class RelojMusica extends Thread {
 	protected Clip clip;
 		
 	public RelojMusica() {
-		archivoMusica = new File("/Musica/Cancion.wav");
+		archivoMusica = new File("/Recursos/Cancion.wav");
 		try {
 			audio = AudioSystem.getAudioInputStream(archivoMusica);
 			if (AudioSystem.getClip()!=null)

@@ -137,6 +137,7 @@ public class Juego {
 	
 	public void setPlantaEnEspera(int i) {
 		switch(i) {
+			case 0: plantaEnEspera = null;
 			case 1: plantaEnEspera = fabrica.crearPlantaDebil();
 			case 2: plantaEnEspera = fabrica.crearPlantaMedio();
 			case 3: plantaEnEspera = fabrica.crearPlantaFuerte();

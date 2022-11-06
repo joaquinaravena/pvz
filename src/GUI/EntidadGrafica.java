@@ -8,15 +8,16 @@ public class EntidadGrafica {
 	private Ventana ventana;
 	
 	public EntidadGrafica(Ventana v) {
+		//la grafica deberia pasarse por parametro que clave de property tiene q asignar
 		miGrafica = new JLabel();
 		ventana = v;
 	}
 	
 	public void actualizarGrafica() {
-		//ventana.actualizarGrafica();
+		ventana.actualizarGrafica(this);
 	}
 	public void borrarGrafica() {
-		//ventana.borrarGrafica(this);
+		ventana.borrarGrafica(this);
 	}
 	public JLabel getGrafica() {
 		return miGrafica;

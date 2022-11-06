@@ -87,5 +87,8 @@ public class Fila {
 		return colisionan;
 	}
 	
+	public void resetearListas() {
+		
+	}
 	
 }

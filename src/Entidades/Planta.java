@@ -10,6 +10,7 @@ public class Planta extends Entidad {
 	
 	//x e y representan la posicion, ancho y alto las dimensiones.
 	public Planta(int x, int y, int ancho, int alto,int precio, int vida, int daño, Ventana v) {
+		//todos estos setters pueden modelarse sin pasarlos por parametro, pq siempre van a ser los mismos, desp arreglamos que medidas exactamente
 		this.x = x;
 		this.y = y;
 		this.ancho = ancho;

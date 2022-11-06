@@ -21,6 +21,8 @@ import java.awt.Toolkit;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
 public class Ventana extends JFrame{
@@ -55,13 +57,14 @@ public class Ventana extends JFrame{
 		}
 		setTitle("Plants Vs Zombies");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Ventana.class.getResource(prop.getProperty("logo"))));
-		miJuego = new Juego();
+		miJuego = new Juego(this);
 		
 		setResizable(false);
 		setBounds(100, 100, 900, 506);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
-		crearPanelMenu();
+		//crearPanelMenu();
+		crearPanelDia();
 		
 	}
 	private void crearPanelMenu() {
@@ -131,6 +134,18 @@ public class Ventana extends JFrame{
 		panelDia.add(panelPlantas);
 		
 		JLabel lblFondo = new JLabel();
+		lblFondo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(e.getX() > 210 && e.getX() < 810 && e.getY() >= 30) {
+					System.out.print("x: "+e.getX());
+					System.out.print(" y: "+ e.getY());
+					System.out.println();
+				}
+			}
+		});
+		lblFondo.setIgnoreRepaint(true);
+		lblFondo.setInheritsPopupMenu(false);
 		lblFondo.setBounds(0, 0, 884, 467);
 		lblFondo.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("fondoDia"))).getImage().getScaledInstance(lblFondo.getWidth(), lblFondo.getHeight(), DO_NOTHING_ON_CLOSE)));
 		panelDia.add(lblFondo);
@@ -168,9 +183,9 @@ public class Ventana extends JFrame{
 				botonPlanta2.setSelected(false);
 				botonPlanta3.setSelected(false);
 				if(botonPlanta1.isSelected())
-					miJuego.setPlantaEnEspera(null);
+					miJuego.setPlantaEnEspera(1);
 				else
-					miJuego.setPlantaEnEspera(null);
+					miJuego.setPlantaEnEspera(0);
 			}
 		});
 				
@@ -180,9 +195,9 @@ public class Ventana extends JFrame{
 				botonPlanta1.setSelected(false);
 				botonPlanta3.setSelected(false);
 				if(botonPlanta2.isSelected())
-					miJuego.setPlantaEnEspera(null);
+					miJuego.setPlantaEnEspera(2);
 				else
-					miJuego.setPlantaEnEspera(null);
+					miJuego.setPlantaEnEspera(0);
 			}
 		});
 				
@@ -192,9 +207,9 @@ public class Ventana extends JFrame{
 				botonPlanta2.setSelected(false);
 				botonPlanta1.setSelected(false);
 				if(botonPlanta3.isSelected())
-					miJuego.setPlantaEnEspera(null);
+					miJuego.setPlantaEnEspera(3);
 				else
-					miJuego.setPlantaEnEspera(null);
+					miJuego.setPlantaEnEspera(0);
 			}
 		});
 					
