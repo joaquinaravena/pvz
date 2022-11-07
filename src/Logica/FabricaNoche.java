@@ -4,44 +4,31 @@ import Entidades.Planta;
 import Entidades.Zombie;
 
 public class FabricaNoche extends AbstractFactory {
+	protected Juego miJuego;
 	
-	public FabricaNoche() {
-		
+	public FabricaNoche(Juego juego) {
+		miJuego = juego;
 	}
-	@Override
 	public Zombie crearZombieDebil() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Zombie(200,34,1,miJuego.getVentana());
 	}
-
-	@Override
 	public Zombie crearZombieMediano() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Zombie(400,70,2,miJuego.getVentana());
 	}
 
-	@Override
 	public Zombie crearZombieFuerte() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Zombie(800,150,3,miJuego.getVentana());
 	}
 
-	@Override
 	public Planta crearPlantaDebil() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Planta(25,100,50,miJuego.getVentana());
 	}
 
-	@Override
 	public Planta crearPlantaMedio() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Planta(75,200,75,miJuego.getVentana());
 	}
 
-	@Override
 	public Planta crearPlantaFuerte() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Planta(1000,600,200,miJuego.getVentana());
 	}
-
 }

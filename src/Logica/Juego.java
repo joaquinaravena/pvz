@@ -62,15 +62,18 @@ public class Juego {
 	}
 	
 	public void setFabricaDia() {
-		fabrica = new FabricaDia();
+		fabrica = new FabricaDia(this);
 	}
 	
 	public void setFabricaNoche() {
-		fabrica = new FabricaNoche();
+		fabrica = new FabricaNoche(this);
 	}
 	
 	public AbstractFactory getFactory() {
 		return fabrica;
+	}
+	public Ventana getVentana() {
+		return miVentana;
 	}
 	
 	public void agregarZombieActivo() {

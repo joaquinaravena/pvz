@@ -8,13 +8,9 @@ public class Planta extends Entidad {
 	protected int vida;
 	protected Proyectil miProyectil;
 	
-	//x e y representan la posicion, ancho y alto las dimensiones.
-	public Planta(int x, int y, int ancho, int alto,int precio, int vida, int daño, Ventana v) {
-		//todos estos setters pueden modelarse sin pasarlos por parametro, pq siempre van a ser los mismos, desp arreglamos que medidas exactamente
-		this.x = x;
-		this.y = y;
-		this.ancho = ancho;
-		this.alto = alto;
+	//ancho y alto representan las dimensiones.
+	//Las plantas se crean sin una posición establecida.
+	public Planta(int precio, int vida, int daño, Ventana v) {
 		this.precio = precio;
 		this.vida = vida;
 		miProyectil = new Proyectil(daño);
@@ -42,7 +38,7 @@ public class Planta extends Entidad {
 		return miProyectil;
 	}
 	public Planta clone(Ventana v) {
-		Planta p = new Planta(this.x, this.y, this.ancho, this.alto, this.precio, this.vida, this.getProyectil().getValorAccion() ,v);
+		Planta p = new Planta(this.precio, this.vida, this.getProyectil().getValorAccion() ,v);
 		return p;
 	}
 }
