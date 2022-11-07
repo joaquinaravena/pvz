@@ -3,6 +3,8 @@ import Logica.*;
 
 
 
+
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -23,11 +25,14 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.GridLayout;
+import java.awt.Dimension;
+import java.awt.Rectangle;
 
 @SuppressWarnings("serial")
 public class Ventana extends JFrame{
-	Juego miJuego;
-	Properties prop;
+	private Juego miJuego;
+	private Properties prop;
 	/**
 	 * Launch the application.
 	 */
@@ -63,8 +68,9 @@ public class Ventana extends JFrame{
 		setBounds(100, 100, 900, 506);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
-		//crearPanelMenu();
-		crearPanelDia();
+		crearPanelMenu();
+		
+		//crearPanelDia();
 		
 	}
 	private void crearPanelMenu() {
@@ -78,6 +84,7 @@ public class Ventana extends JFrame{
 		btnModoDia.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 20));
 		btnModoDia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				miJuego.setFabricaDia();
 				crearPanelDia();
 			}
 		});
@@ -89,7 +96,7 @@ public class Ventana extends JFrame{
 		btnModoNoche.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 20));
 		btnModoNoche.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//jugar noche
+				miJuego.setFabricaNoche();
 			}
 		});
 		btnModoNoche.setBounds(352, 308, 162, 50);
@@ -130,45 +137,19 @@ public class Ventana extends JFrame{
 		JPanel panelPlantas = new JPanel();
 		panelPlantas.setIgnoreRepaint(true);
 		panelPlantas.setBackground(new Color(205, 133, 63));
-		panelPlantas.setBounds(0, 0, 269, 62);
+		panelPlantas.setBounds(0, 0, 274, 62);
 		panelDia.add(panelPlantas);
-		
-		JLabel lblFondo = new JLabel();
-		lblFondo.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if(e.getX() > 210 && e.getX() < 810 && e.getY() >= 30) {
-					System.out.print("x: "+e.getX());
-					System.out.print(" y: "+ e.getY());
-					System.out.println();
-				}
-			}
-		});
-		lblFondo.setIgnoreRepaint(true);
-		lblFondo.setInheritsPopupMenu(false);
-		lblFondo.setBounds(0, 0, 884, 467);
-		lblFondo.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("fondoDia"))).getImage().getScaledInstance(lblFondo.getWidth(), lblFondo.getHeight(), DO_NOTHING_ON_CLOSE)));
-		panelDia.add(lblFondo);
 		
 		JToggleButton botonPlanta1 = new JToggleButton();
 		botonPlanta1.setBounds(61, 2, 45, 48);
-		/*botonPlanta1.setEnabled(false);
-		if(miJuego.getSoles() >= planta1.getPrecio())
-			botonPlanta1.setEnabled(true);*/
 		botonPlanta1.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("girasol"))).getImage().getScaledInstance(botonPlanta1.getWidth(), botonPlanta1.getHeight() , DO_NOTHING_ON_CLOSE)));
 		
 		JToggleButton botonPlanta2 = new JToggleButton();
 		botonPlanta2.setBounds(114, 2, 45, 48);
-		/*botonPlanta2.setEnabled(false);
-		if(miJuego.getSoles() >= planta1.getPrecio())
-			botonPlanta2.setEnabled(true);*/
 		botonPlanta2.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("lanzaGuisantes"))).getImage().getScaledInstance(botonPlanta2.getWidth(), botonPlanta2.getHeight() , DO_NOTHING_ON_CLOSE)));
 		
 		JToggleButton botonPlanta3 = new JToggleButton();
 		botonPlanta3.setBounds(169, 2, 45, 48);		
-		/*botonPlanta2.setEnabled(false);
-		if(miJuego.getSoles() >= planta1.getPrecio())
-			botonPlanta2.setEnabled(true);*/
 		//botonPlanta3.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("planta3"))).getImage().getScaledInstance(botonPlanta3.getWidth(), botonPlanta3.getHeight() , DO_NOTHING_ON_CLOSE)));
 
 		JToggleButton botonMusica = new JToggleButton();
@@ -177,42 +158,42 @@ public class Ventana extends JFrame{
 		botonMusica.setSelected(true);
 		botonMusica.setSelectedIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("stop"))).getImage().getScaledInstance(botonMusica.getWidth(), botonMusica.getHeight(), DO_NOTHING_ON_CLOSE)));
 		botonMusica.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("play"))).getImage().getScaledInstance(botonMusica.getWidth(), botonMusica.getHeight(), DO_NOTHING_ON_CLOSE)));
-				
+		
 		botonPlanta1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				botonPlanta2.setSelected(false);
-				botonPlanta3.setSelected(false);
-				if(botonPlanta1.isSelected())
-					miJuego.setPlantaEnEspera(1);
-				else
-					miJuego.setPlantaEnEspera(0);
+		botonPlanta2.setSelected(false);
+		botonPlanta3.setSelected(false);
+		if(botonPlanta1.isSelected())
+			miJuego.setPlantaEnEspera(1);
+		else
+			miJuego.setPlantaEnEspera(0);
 			}
 		});
-				
-				
+		
+		
 		botonPlanta2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				botonPlanta1.setSelected(false);
-				botonPlanta3.setSelected(false);
-				if(botonPlanta2.isSelected())
-					miJuego.setPlantaEnEspera(2);
-				else
-					miJuego.setPlantaEnEspera(0);
+		botonPlanta1.setSelected(false);
+		botonPlanta3.setSelected(false);
+		if(botonPlanta2.isSelected())
+			miJuego.setPlantaEnEspera(2);
+		else
+			miJuego.setPlantaEnEspera(0);
 			}
 		});
-				
-				
+		
+		
 		botonPlanta3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				botonPlanta2.setSelected(false);
-				botonPlanta1.setSelected(false);
-				if(botonPlanta3.isSelected())
-					miJuego.setPlantaEnEspera(3);
-				else
-					miJuego.setPlantaEnEspera(0);
+		botonPlanta2.setSelected(false);
+		botonPlanta1.setSelected(false);
+		if(botonPlanta3.isSelected())
+			miJuego.setPlantaEnEspera(3);
+		else
+			miJuego.setPlantaEnEspera(0);
 			}
 		});
-					
+		
 		botonMusica.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(botonMusica.isSelected()) 
@@ -221,8 +202,8 @@ public class Ventana extends JFrame{
 					miJuego.pararMusica();
 			}
 		});
-				
-				
+		
+		
 		JLabel lblSol = new JLabel();
 		lblSol.setBounds(6, 2, 45, 48);
 		lblSol.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("sol"))).getImage().getScaledInstance(lblSol.getWidth(), lblSol.getHeight(), DO_NOTHING_ON_CLOSE)));
@@ -256,14 +237,50 @@ public class Ventana extends JFrame{
 		lblSolesActuales.setBounds(6, 48, 46, 14);
 		panelPlantas.add(lblSolesActuales);
 		
+		JPanel panelTablero = new JPanel();
+		panelTablero.setBounds(178, 62, 706, 405);
+		panelTablero.setLayout(new GridLayout(6, 9, 0, 0));
+		for(int i = 0; i < ((GridLayout)panelTablero.getLayout()).getRows(); i++)
+			for(int j = 0; j < ((GridLayout)panelTablero.getLayout()).getColumns(); j++) {
+				int color = i+j;
+				JLabel lblCelda = new JLabel();
+				lblCelda.setBounds(lblCelda.getX(), lblCelda.getY(), 60, 60);
+				lblCelda.setOpaque(true);
+				if((color % 2) == 0 ) {
+					lblCelda.setBackground(new Color(0, 128, 0));
+				}
+				else
+					lblCelda.setBackground(new Color(50, 205, 50));
+				panelTablero.add(lblCelda);
+			}
+		panelDia.add(panelTablero);
 		
-		repaint();
-		//gameOver();
-	}
+		JLabel lblFondo = new JLabel();
+		lblFondo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {				
+			}
+		});
+		lblFondo.setIgnoreRepaint(true);
+		lblFondo.setBounds(0, 0, 884, 467);
+		lblFondo.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("fondoDia"))).getImage().getScaledInstance(lblFondo.getWidth(), lblFondo.getHeight(), DO_NOTHING_ON_CLOSE)));
+		panelDia.add(lblFondo);
+		/*botonPlanta1.setEnabled(false);
+		if(miJuego.getSoles() >= planta1.getPrecio())
+			botonPlanta1.setEnabled(true);*/
+		/*botonPlanta2.setEnabled(false);
+		if(miJuego.getSoles() >= planta1.getPrecio())
+			botonPlanta2.setEnabled(true);*/
+		/*botonPlanta2.setEnabled(false);
+		if(miJuego.getSoles() >= planta1.getPrecio())
+			botonPlanta2.setEnabled(true);*/
+		
 	
-	private void botonVolver() {
-		
+		repaint();
+		gameOver();
+	
 	}
+
 	public void actualizarGrafica(EntidadGrafica eg) {
 		getContentPane().add(eg.getGrafica());
 		getContentPane().repaint();
@@ -273,17 +290,14 @@ public class Ventana extends JFrame{
 		getContentPane().add(eg.getGrafica());
 		getContentPane().repaint();
 	}
-	private void gameOver() {
+	public void gameOver() {
 		JLabel lblGameOver = new JLabel();
 		lblGameOver.setBounds(321, 88, 357, 271);
 		lblGameOver.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("gameOver"))).getImage().getScaledInstance(lblGameOver.getWidth(), lblGameOver.getHeight(), DO_NOTHING_ON_CLOSE)));
-		getContentPane().add(lblGameOver);
-		getContentPane().repaint();
+		add(lblGameOver);
+		repaint();
 	}
 	private void ganarJuego() {
-		
-	}
-	private void salir() {
 		
 	}
 	
