@@ -19,7 +19,7 @@ public class RelojPlantas extends Thread{
 		try {
 			while (activo) {
 				Thread.sleep(1000);
-				miJuego.moverPlantas();
+				miJuego.accionPlantas();
 			}
 		}
 		catch(InterruptedException e) {

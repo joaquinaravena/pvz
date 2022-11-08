@@ -20,13 +20,14 @@ public class Planta extends Entidad {
 	public void restarVida(int i) {
 		vida -= i;
 	}
-	//if vida <= 0
 	public void morir() {
-		//borra la gráfica y lo elimina de todas las listas a las que pertenece
+		if(vida <= 0) {
+			entidadGrafica.borrarGrafica();
+			//eliminar de las listas
+		}
 	}
 	public void realizarAccion() {
-		//esto tiene q agregar un proyectil a la lista de proyectiles pero no tiene q moverlo
-		//miProyectil.mover();
+		miFila.agregarProyectiles(miProyectil);
 	}
 	//Se puede sacar si la colision la maneja únicamente el zombie
 	public void chocarZombie(Zombie z) {

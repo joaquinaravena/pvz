@@ -7,19 +7,25 @@ import Logica.*;
 public class RelojZombies extends Thread{
 	protected boolean activo;
 	protected Juego miJuego;
+	protected int contador;
 	protected boolean resetear;
 	
 	public RelojZombies(Juego j) {
 		activo = true;
 		miJuego = j;
+		contador = 0;
 	}
 	
 	public void run() {
 		try {
 			while (activo) {
-				Thread.sleep(500);
+				Thread.sleep(300);
 				miJuego.moverZombies();
-				miJuego.agregarZombieActivo();
+				contador++;
+				if(contador == 5) {
+					miJuego.agregarZombieActivo();
+					contador = 0;
+				}
 			}
 		}
 		catch(InterruptedException e) {

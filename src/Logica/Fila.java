@@ -10,7 +10,7 @@ public class Fila {
 	public Fila(Juego j) {
 		miJuego = j;
 		misZombies=new ArrayList<Zombie>();
-		misPlantas=new ArrayList<Planta>();
+		misPlantas=new ArrayList<Planta>(9);
 		misProyectiles=new ArrayList<Proyectil>();
 	}
 	
@@ -28,6 +28,7 @@ public class Fila {
 	
 	public void agregarZombie(Zombie z, int fila) {
 		z.setNumeroFila(fila);
+		z.setFila(this);
 		misZombies.add(z);
 	}
 	
@@ -43,9 +44,8 @@ public class Fila {
 		misProyectiles.remove(p);
 	}
 	
-	public boolean puedoPonerPlanta(int x,int y) {
-		//Preguntar a joaco como hacerlo.
-		return true;
+	public boolean puedoPonerPlanta(int pos) {
+		return misPlantas.get(pos-1) == null;
 	}
 	
 	public void chequearColisiones() {
@@ -66,17 +66,15 @@ public class Fila {
 					auxZombie.visitarProyectil(auxProyectil);
 			}
 			huboColision=false;
-				while(itPlanta.hasNext() && !huboColision) {//Itero lista de plantas y si detecto una colision freno.
-					auxPlanta=itPlanta.next();
-					huboColision=colisionan(auxZombie,auxPlanta);
-					if(huboColision)
-						auxZombie.visitarPlanta(auxPlanta);
-				}
+			while(itPlanta.hasNext() && !huboColision) {//Itero lista de plantas y si detecto una colision freno.
+				auxPlanta=itPlanta.next();
+				huboColision=colisionan(auxZombie,auxPlanta);
+				if(huboColision)
+					auxZombie.visitarPlanta(auxPlanta);
 			}
 		}
+	}
 		
-	
-	
 	private boolean colisionan(Entidad a,Entidad b) {
 		int inicioEntidadA,inicioEntidadB,finalEntidadA,finalEntidadB;
 		inicioEntidadA=a.getX();
@@ -96,6 +94,16 @@ public class Fila {
 	
 	public void resetearListas() {
 		
+	}
+	
+	public void moverZombies() {
+		for(Zombie z : misZombies) 
+			z.realizarAccion();
+	}
+	
+	public void accionPlantas() {
+		for(Planta p: misPlantas)
+			p.realizarAccion();
 	}
 	
 }

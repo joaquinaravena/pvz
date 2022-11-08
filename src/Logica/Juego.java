@@ -48,9 +48,9 @@ public class Juego {
 			filas[i].moverZombies();
 	}
 	
-	public void moverPlantas() {
+	public void accionPlantas() {
 		for (int i=0; i<6; i++)
-			filas[i].moverZombies();
+			filas[i].accionPlantas();
 	}
 	
 	public void jugar(){
@@ -95,7 +95,7 @@ public class Juego {
 		if (zombiesNivel.isEmpty() && nivelActual != 0)
 			cambiarNivel();
 		if(!zombiesNivel.isEmpty()){
-			if (contadorZombies % 3 == 0 && contadorZombies>0)
+			if (contadorZombies % 6 == 0 && contadorZombies>0)
 				Oleada();
 			else {
 				int filaRandom = (int)(Math.random()*6+1);
