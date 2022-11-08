@@ -72,7 +72,7 @@ public class Ventana extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 		crearPanelMenu();
-		//crearPanelDia();
+		//crearPanelModo();
 		
 	}
 	private void crearPanelMenu() {
@@ -262,29 +262,38 @@ public class Ventana extends JFrame{
 			for(int j = 0; j < 9; j++) {
 				int color = i+j;
 				JLabel lblCelda = new JLabel();
-				lblCelda.setBounds(182+74*j, 47+67*i, 74, 67);
+				lblCelda.setBounds(182+74*j, 62+65*i, 74, 65);
 				lblCelda.setOpaque(true);
 				if((color % 2) == 0 ) {
 					lblCelda.setBackground(new Color(0, 128, 0));
+					lblCelda.setForeground(new Color(0, 128, 0));
 				}
-				else
+				else {
 					lblCelda.setBackground(new Color(50, 205, 50));
+					lblCelda.setForeground(new Color(50, 205, 50));
+				}
 				
 				lblCelda.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						if(miJuego.getPlantaEnEspera() != null) {
-							lblCelda.add(miJuego.getPlantaEnEspera().getEntidadGrafica().getGrafica());
+							lblCelda.add(miJuego.getPlantaEnEspera().getEntidadGrafica().getGrafica(), 0);
 							controlarBotonesPlantas((JToggleButton)panelPlantas.getComponent(0), (JToggleButton)panelPlantas.getComponent(1), (JToggleButton)panelPlantas.getComponent(2));
 							miJuego.setPlantaEnEspera(0);
 						}
 					}
-					
+					public void mouseEntered(MouseEvent e) {
+						lblCelda.setBackground(lblCelda.getBackground().brighter());
+					}
+					public void mouseExited(MouseEvent e) {
+						lblCelda.setBackground(lblCelda.getForeground());
+					}
 				});
 				panelDia.add(lblCelda);
 			}
 		
 		JLabel lblFondo = new JLabel();
+		
 		
 		lblFondo.setIgnoreRepaint(true);
 		lblFondo.setBounds(0, 0, 884, 467);
@@ -297,7 +306,7 @@ public class Ventana extends JFrame{
 		return this.getWidth();
 	}
 	public int getLinea(int i) {
-		return i*67 -20;
+		return i*63;
 	}
 	public void actualizarGrafica(EntidadGrafica eg) {
 		getContentPane().add(eg.getGrafica(), 0);
@@ -315,7 +324,7 @@ public class Ventana extends JFrame{
 		getContentPane().add(lblGameOver);
 		repaint();
 	}
-	private void ganarJuego() {
+	public void ganarJuego() {
 		JLabel lblGanar= new JLabel();
 		lblGanar.setBounds(321, 88, 357, 271);
 		lblGanar.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("ganarJuego"))).getImage().getScaledInstance(lblGanar.getWidth(), lblGanar.getHeight(), DO_NOTHING_ON_CLOSE)));

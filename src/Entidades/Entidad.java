@@ -9,7 +9,7 @@ public abstract class Entidad {
 	protected int x;
 	protected int y;
 	protected final int ancho = 60;
-	protected final int alto = 60;
+	protected final int alto = 65;
 	protected String miRuta;
 	protected EntidadGrafica entidadGrafica;
 	protected int fila;
