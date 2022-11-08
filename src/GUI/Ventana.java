@@ -59,8 +59,8 @@ public class Ventana extends JFrame{
 			InputStream input = new FileInputStream(Ventana.class.getResource("/Archivos/configDia.properties").getFile());
 			prop = new Properties();
 			prop.load(input);
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
+		} catch (IOException ex) {
+			System.out.println(ex.getMessage());
 		}
 		setTitle("Plants Vs Zombies");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Ventana.class.getResource(prop.getProperty("logo"))));
@@ -84,9 +84,15 @@ public class Ventana extends JFrame{
 		JButton btnModoDia = new JButton();
 		btnModoDia.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 20));
 		btnModoDia.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {				
+				try {
+					InputStream input = new FileInputStream(Ventana.class.getResource("/Archivos/configDia.properties").getFile());
+					prop = new Properties();
+					prop.load(input);
+				} catch (IOException ex) {
+					System.out.println(ex.getMessage());
+				}
 				miJuego.setFabricaDia();
-				//set property dia
 				crearPanelDia();
 				miJuego.jugar();
 			}
@@ -172,7 +178,7 @@ public class Ventana extends JFrame{
 					miJuego.setPlantaEnEspera(1);
 				else
 					miJuego.setPlantaEnEspera(0);
-					}
+			}
 		});
 		
 		
@@ -184,7 +190,7 @@ public class Ventana extends JFrame{
 					miJuego.setPlantaEnEspera(2);
 				else
 					miJuego.setPlantaEnEspera(0);
-					}
+			}
 		});
 		
 		
@@ -196,7 +202,7 @@ public class Ventana extends JFrame{
 					miJuego.setPlantaEnEspera(3);
 				else
 					miJuego.setPlantaEnEspera(0);
-					}
+			}
 		});
 		
 		botonMusica.addActionListener(new ActionListener() {
@@ -246,13 +252,14 @@ public class Ventana extends JFrame{
 			for(int j = 0; j < 9; j++) {
 				int color = i+j;
 				JLabel lblCelda = new JLabel();
-				lblCelda.setBounds(183+74*j, 47+67*i, 74, 67);
+				lblCelda.setBounds(182+74*j, 47+67*i, 74, 67);
 				lblCelda.setOpaque(true);
 				if((color % 2) == 0 ) {
 					lblCelda.setBackground(new Color(0, 128, 0));
 				}
 				else
 					lblCelda.setBackground(new Color(50, 205, 50));
+				
 				lblCelda.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
@@ -283,7 +290,7 @@ public class Ventana extends JFrame{
 		if(miJuego.getSoles() >= planta1.getPrecio())
 			botonPlanta2.setEnabled(true);*/
 		
-	
+		controlarBotonesPlantas(botonPlanta1, botonPlanta2, botonPlanta3);
 		repaint();	
 	}
 
@@ -315,10 +322,26 @@ public class Ventana extends JFrame{
 		planta1.setSelected(false);
 		planta2.setSelected(false);
 		planta3.setSelected(false);
-		controlarPlantasAComprar();
+		if(miJuego.getSoles() >= Integer.parseInt(prop.getProperty("precio3"))) {
+			planta1.setEnabled(true);
+			planta2.setEnabled(true);
+			planta3.setEnabled(true);
+		}else if(miJuego.getSoles() >= Integer.parseInt(prop.getProperty("precio2"))) {
+			planta1.setEnabled(true);
+			planta2.setEnabled(true);
+			planta3.setEnabled(false);
+		}else if(miJuego.getSoles() >= Integer.parseInt(prop.getProperty("precio1"))) {
+			planta1.setEnabled(true);
+			planta2.setEnabled(false);
+			planta3.setEnabled(false);
+		}else {
+			planta1.setEnabled(false);
+			planta2.setEnabled(false);
+			planta3.setEnabled(false);
+		}
 
 	}
 	public void controlarPlantasAComprar() {
-		
+		//controlarBotonesPlantas()
 	}
 }
