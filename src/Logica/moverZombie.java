@@ -6,7 +6,8 @@ public class moverZombie implements ZombieStrategy {
 	}
 
 	public void realizarAccion(Zombie z){
-		z.setX(z.getX()+5);
-		z.getEntidadGrafica().getGrafica().setLocation(z.getX()+5, z.getY());
+		z.setX(z.getX()-100);
+		z.getEntidadGrafica().getGrafica().setBounds(z.getEntidadGrafica().getGrafica().getX()-20, z.getEntidadGrafica().getGrafica().getY(), z.getEntidadGrafica().getGrafica().getWidth(), z.getEntidadGrafica().getGrafica().getHeight());
+		z.getEntidadGrafica().actualizarGrafica();
 	}
 }

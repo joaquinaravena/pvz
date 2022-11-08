@@ -17,13 +17,12 @@ public class Zombie extends Entidad {
 		this.vida=vida;
 		this.velocidad=velocidad;
 		this.daño=daño;
-		entidadGrafica=new EntidadGrafica(v);
+		entidadGrafica=new EntidadGrafica(v, this);
 		miEstrategia=new moverZombie();
 		plantaAtacada=null;
 	}
 	
 	public void realizarAccion(){
-		System.out.println("Empezo acci0on");
 		miEstrategia.realizarAccion(this);
 	}
 	

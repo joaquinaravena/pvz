@@ -295,7 +295,7 @@ public class Ventana extends JFrame{
 	}
 
 	public void actualizarGrafica(EntidadGrafica eg) {
-		getContentPane().add(eg.getGrafica());
+		getContentPane().add(eg.getGrafica(), 0);
 		getContentPane().repaint();
 		
 	}
@@ -343,5 +343,8 @@ public class Ventana extends JFrame{
 	}
 	public void controlarPlantasAComprar() {
 		//controlarBotonesPlantas()
+	}
+	public Properties getProperties() {
+		return prop;
 	}
 }

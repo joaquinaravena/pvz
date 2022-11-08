@@ -89,7 +89,6 @@ public class Juego {
 				Oleada();
 			else {
 				int filaRandom = (int)(Math.random()*6);
-				System.out.println(zombiesNivel.size());
 				filas[filaRandom].agregarZombie(zombiesNivel.get(0));
 				miRelojZombies.agregarZombie(zombiesNivel.get(0));
 				zombiesNivel.remove(0);
