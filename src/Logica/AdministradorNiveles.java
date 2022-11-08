@@ -24,6 +24,7 @@ public class AdministradorNiveles {
 		for(int i=0;i<elegido.getCantidadZombiesFuertes();i++) {
 			juego.agregarZombieNivel(juego.getFactory().crearZombieFuerte());
 		}
+
 	}
 	       
 }

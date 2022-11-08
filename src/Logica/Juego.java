@@ -33,6 +33,9 @@ public class Juego {
 		nivelActual = 0;
 		administrador = new AdministradorNiveles(this);
 		filas = new Fila[6];
+		for(int i=0;i<6;i++) {
+			filas[i]=new Fila();
+		}
 		zombiesNivel = new ArrayList<Zombie>();
 		contadorZombies = 0;
 		zombiesAEliminar = new ArrayList<Zombie>();
@@ -45,6 +48,8 @@ public class Juego {
 		miRelojPlantas.start();
 		miRelojZombies.start();
 		miRelojProyectiles.start();
+		//Cambiar el administrador despues
+		administrador.nuevoNivel(0);
 	}
 	
 	public void gameOver() {
@@ -79,11 +84,12 @@ public class Juego {
 	public void agregarZombieActivo() {
 		if (zombiesNivel.isEmpty() && nivelActual != 0)
 			cambiarNivel();
-		else {
-			if (contadorZombies % 3 == 0)
+		if(!zombiesNivel.isEmpty()){
+			if (contadorZombies % 3 == 0 && contadorZombies>0)
 				Oleada();
 			else {
-				int filaRandom = (int)(Math.random()*6+1);
+				int filaRandom = (int)(Math.random()*6);
+				System.out.println(zombiesNivel.size());
 				filas[filaRandom].agregarZombie(zombiesNivel.get(0));
 				miRelojZombies.agregarZombie(zombiesNivel.get(0));
 				zombiesNivel.remove(0);

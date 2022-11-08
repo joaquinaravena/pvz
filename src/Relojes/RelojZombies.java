@@ -41,6 +41,7 @@ public class RelojZombies extends Thread{
 				else {
 					miJuego.removerZombies();
 				}
+				
 			}
 		}
 		catch(InterruptedException e) {

@@ -23,6 +23,7 @@ public class Zombie extends Entidad {
 	}
 	
 	public void realizarAccion(){
+		System.out.println("Empezo acci0on");
 		miEstrategia.realizarAccion(this);
 	}
 	
@@ -51,7 +52,8 @@ public class Zombie extends Entidad {
 	public void visitarPlanta(Planta p) {
 		p.realizarAccion();
 	}
-	//ARREGLAR ESTO PQ ES INSTANCE OF 
+	
+	 
 	public void visitarProyectil(Proyectil p) {
 		p.chocar(this);
 	}
