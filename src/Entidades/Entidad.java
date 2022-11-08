@@ -39,11 +39,14 @@ public abstract class Entidad {
 	public void setFila(Fila f) {
 		miFila = f;
 	}
+	public Fila getFila() {
+		return miFila;
+	}
 	public void setNumeroFila(int i) {
 		fila = i;
 		entidadGrafica.actualizarFilaGrafica(i);
 	}
-	public int getFila() {
+	public int getNumeroFila() {
 		return fila;
 	}
 
