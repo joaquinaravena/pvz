@@ -5,11 +5,17 @@ public class Fila {
 	private List<Zombie> misZombies;
 	private List<Planta> misPlantas;
 	private List<Proyectil> misProyectiles;
+	protected Juego miJuego;
 	
-	public Fila() {
+	public Fila(Juego j) {
+		miJuego = j;
 		misZombies=new ArrayList<Zombie>();
 		misPlantas=new ArrayList<Planta>();
 		misProyectiles=new ArrayList<Proyectil>();
+	}
+	
+	public Juego getJuego() {
+		return miJuego;
 	}
 	
 	public void agregarPlanta(Planta p) {
@@ -20,7 +26,8 @@ public class Fila {
 		misPlantas.remove(p);
 	}
 	
-	public void agregarZombie(Zombie z) {
+	public void agregarZombie(Zombie z, int fila) {
+		z.setNumeroFila(fila);
 		misZombies.add(z);
 	}
 	

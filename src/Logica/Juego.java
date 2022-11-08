@@ -34,7 +34,7 @@ public class Juego {
 		administrador = new AdministradorNiveles(this);
 		filas = new Fila[6];
 		for(int i=0;i<6;i++) {
-			filas[i]=new Fila();
+			filas[i]=new Fila(this);
 		}
 		zombiesNivel = new ArrayList<Zombie>();
 		contadorZombies = 0;
@@ -88,8 +88,9 @@ public class Juego {
 			if (contadorZombies % 3 == 0 && contadorZombies>0)
 				Oleada();
 			else {
-				int filaRandom = (int)(Math.random()*6);
-				filas[filaRandom].agregarZombie(zombiesNivel.get(0));
+				int filaRandom = (int)(Math.random()*6+1);
+				zombiesNivel.get(0).setFila(getFila(filaRandom));
+				filas[filaRandom-1].agregarZombie(zombiesNivel.get(0), filaRandom);
 				miRelojZombies.agregarZombie(zombiesNivel.get(0));
 				zombiesNivel.remove(0);
 				contadorZombies++;
@@ -98,9 +99,9 @@ public class Juego {
 	}
 	
 	public void Oleada() {
-		int i = 0;
-		while (i<6 && !zombiesNivel.isEmpty()) {
-			filas[i].agregarZombie(zombiesNivel.get(0));
+		int i = 1;
+		while (i<=6 && !zombiesNivel.isEmpty()) {
+			filas[i-1].agregarZombie(zombiesNivel.get(0), i);
 			zombiesNivel.remove(0);
 			contadorZombies++;
 			i++;
@@ -112,8 +113,8 @@ public class Juego {
 		if (nivelActual==2)
 			gameOver();
 		else {
-			for (int i=0; i<6; i++) 
-				filas[i].resetearListas();
+			for (int i=1; i<=6; i++) 
+				filas[i-1].resetearListas();
 				miRelojZombies.setearReseteo(true);
 				miRelojPlantas.setearReseteo(true);
 				miRelojProyectiles.setearReseteo(true);
@@ -157,7 +158,7 @@ public class Juego {
 	}
 	
 	public Fila getFila(int i) {
-		return filas[i];
+		return filas[i-1];
 	}
 	
 	public boolean puedeComprarPlanta() {

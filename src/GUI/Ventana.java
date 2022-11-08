@@ -153,15 +153,15 @@ public class Ventana extends JFrame{
 		
 		JToggleButton botonPlanta1 = new JToggleButton();
 		botonPlanta1.setBounds(61, 2, 45, 48);
-		botonPlanta1.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("planta1"))).getImage().getScaledInstance(botonPlanta1.getWidth(), botonPlanta1.getHeight() , DO_NOTHING_ON_CLOSE)));
+		botonPlanta1.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("plantaDebil"))).getImage().getScaledInstance(botonPlanta1.getWidth(), botonPlanta1.getHeight() , DO_NOTHING_ON_CLOSE)));
 		
 		JToggleButton botonPlanta2 = new JToggleButton();
 		botonPlanta2.setBounds(114, 2, 45, 48);
-		botonPlanta2.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("planta2"))).getImage().getScaledInstance(botonPlanta2.getWidth(), botonPlanta2.getHeight() , DO_NOTHING_ON_CLOSE)));
+		botonPlanta2.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("plantaMedio"))).getImage().getScaledInstance(botonPlanta2.getWidth(), botonPlanta2.getHeight() , DO_NOTHING_ON_CLOSE)));
 		
 		JToggleButton botonPlanta3 = new JToggleButton();
 		botonPlanta3.setBounds(169, 2, 45, 48);		
-		//botonPlanta3.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("planta3"))).getImage().getScaledInstance(botonPlanta3.getWidth(), botonPlanta3.getHeight() , DO_NOTHING_ON_CLOSE)));
+		//botonPlanta3.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("plantaFuerte"))).getImage().getScaledInstance(botonPlanta3.getWidth(), botonPlanta3.getHeight() , DO_NOTHING_ON_CLOSE)));
 
 		JToggleButton botonMusica = new JToggleButton();
 		botonMusica.setToolTipText("frena/reproduce la m\u00FAsica");
@@ -280,27 +280,22 @@ public class Ventana extends JFrame{
 		lblFondo.setBounds(0, 0, 884, 467);
 		lblFondo.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("fondo"))).getImage().getScaledInstance(lblFondo.getWidth(), lblFondo.getHeight(), DO_NOTHING_ON_CLOSE)));
 		panelDia.add(lblFondo);
-		/*botonPlanta1.setEnabled(false);
-		if(miJuego.getSoles() >= planta1.getPrecio())
-			botonPlanta1.setEnabled(true);*/
-		/*botonPlanta2.setEnabled(false);
-		if(miJuego.getSoles() >= planta1.getPrecio())
-			botonPlanta2.setEnabled(true);*/
-		/*botonPlanta2.setEnabled(false);
-		if(miJuego.getSoles() >= planta1.getPrecio())
-			botonPlanta2.setEnabled(true);*/
-		
 		controlarBotonesPlantas(botonPlanta1, botonPlanta2, botonPlanta3);
 		repaint();	
 	}
-
+	public int getBordeDerecho() {
+		return this.getWidth();
+	}
+	public int getLinea(int i) {
+		return i*67 -20;
+	}
 	public void actualizarGrafica(EntidadGrafica eg) {
 		getContentPane().add(eg.getGrafica(), 0);
 		getContentPane().repaint();
 		
 	}
 	public void borrarGrafica(EntidadGrafica eg) {
-		getContentPane().add(eg.getGrafica());
+		getContentPane().remove(eg.getGrafica());
 		getContentPane().repaint();
 	}
 	public void gameOver() {

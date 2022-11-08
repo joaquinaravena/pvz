@@ -7,12 +7,14 @@ import Entidades.Entidad;
 public class EntidadGrafica {
 	private JLabel miGrafica;
 	private Ventana ventana;
+	private String rutaG;
 	
-	public EntidadGrafica(Ventana v, Entidad e) {
+	public EntidadGrafica(Ventana v, Entidad e, String s) {
 		//la grafica deberia pasarse por parametro que clave de property tiene q asignar
 		miGrafica = new JLabel();
-		miGrafica.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(v.getProperties().getProperty("planta2"))).getImage().getScaledInstance(e.getAncho(), e.getAlto(), 0)));
-		miGrafica.setBounds(200, 50, miGrafica.getWidth()+100, miGrafica.getHeight()+100);
+		rutaG = s;
+		miGrafica.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(v.getProperties().getProperty("zombieDebil"))).getImage().getScaledInstance(e.getAncho(), e.getAlto(), 0)));
+		miGrafica.setBounds(v.getBordeDerecho(), v.getLinea(e.getFila()), miGrafica.getIcon().getIconWidth(), miGrafica.getIcon().getIconHeight());
 		ventana = v;
 		actualizarGrafica();
 	}
@@ -26,7 +28,14 @@ public class EntidadGrafica {
 	public JLabel getGrafica() {
 		return miGrafica;
 	}
+	public String getRutaGrafica() {
+		return rutaG;
+	}
 	public void setGrafica() {
+		//para cambiar de gif si esta comiendo/disparando
 		//ventana.setGrafica();
+	}
+	public void actualizarFilaGrafica(int i) {
+		miGrafica.setBounds(miGrafica.getX(), ventana.getLinea(i), miGrafica.getWidth(), miGrafica.getHeight());
 	}
 }

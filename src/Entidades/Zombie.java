@@ -12,12 +12,12 @@ public class Zombie extends Entidad {
 	protected Planta plantaAtacada;
 	
 	
-	public Zombie(int vida,int daño,int velocidad,Ventana v) {
+	public Zombie(int vida,int daño,int velocidad,Ventana v, String graf) {
 		comiendo=false;
 		this.vida=vida;
 		this.velocidad=velocidad;
 		this.daño=daño;
-		entidadGrafica=new EntidadGrafica(v, this);
+		entidadGrafica=new EntidadGrafica(v, this, graf);
 		miEstrategia=new moverZombie();
 		plantaAtacada=null;
 	}
@@ -44,8 +44,10 @@ public class Zombie extends Entidad {
 			morir();
 	}
 	
-	public void morir() {
-		//modificar con el metodo de eliminar grafica y ver como esta implementada la planta
+	public void morir(){
+	    miFila.getJuego().agregarZombieAEliminar(this);
+	    miFila.removerZombie(this);
+	    entidadGrafica.borrarGrafica();
 	}
 	
 	public void visitarPlanta(Planta p) {

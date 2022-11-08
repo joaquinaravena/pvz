@@ -10,11 +10,11 @@ public class Planta extends Entidad {
 	
 	//ancho y alto representan las dimensiones.
 	//Las plantas se crean sin una posición establecida.
-	public Planta(int precio, int vida, int daño, Ventana v) {
+	public Planta(int precio, int vida, int daño, Ventana v, String graf) {
 		this.precio = precio;
 		this.vida = vida;
 		miProyectil = new Proyectil(daño);
-		entidadGrafica = new EntidadGrafica(v, this);
+		entidadGrafica = new EntidadGrafica(v, this, graf);
 	}
 
 	public void restarVida(int i) {
@@ -39,7 +39,7 @@ public class Planta extends Entidad {
 		return miProyectil;
 	}
 	public Planta clone(Ventana v) {
-		Planta p = new Planta(this.precio, this.vida, this.getProyectil().getValorAccion() ,v);
+		Planta p = new Planta(this.precio, this.vida, this.getProyectil().getValorAccion() ,v, this.entidadGrafica.getRutaGrafica());
 		return p;
 	}
 }
