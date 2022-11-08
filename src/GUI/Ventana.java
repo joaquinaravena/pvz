@@ -88,6 +88,7 @@ public class Ventana extends JFrame{
 				miJuego.setFabricaDia();
 				//set property dia
 				crearPanelDia();
+				miJuego.jugar();
 			}
 		});
 				

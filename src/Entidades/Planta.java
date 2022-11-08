@@ -24,7 +24,7 @@ public class Planta extends Entidad {
 	public void morir() {
 		//borra la gráfica y lo elimina de todas las listas a las que pertenece
 	}
-	public void realizarAccion(Zombie z) {
+	public void realizarAccion() {
 		//esto tiene q agregar un proyectil a la lista de proyectiles pero no tiene q moverlo
 		//miProyectil.mover();
 	}

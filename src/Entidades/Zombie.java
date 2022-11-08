@@ -49,7 +49,7 @@ public class Zombie extends Entidad {
 	}
 	
 	public void visitarPlanta(Planta p) {
-		p.realizarAccion(this);
+		p.realizarAccion();
 	}
 	//ARREGLAR ESTO PQ ES INSTANCE OF 
 	public void visitarProyectil(Proyectil p) {

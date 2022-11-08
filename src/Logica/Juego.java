@@ -77,7 +77,7 @@ public class Juego {
 	}
 	
 	public void agregarZombieActivo() {
-		if (zombiesNivel.isEmpty())
+		if (zombiesNivel.isEmpty() && nivelActual != 0)
 			cambiarNivel();
 		else {
 			if (contadorZombies % 3 == 0)
@@ -109,10 +109,10 @@ public class Juego {
 		else {
 			for (int i=0; i<6; i++) 
 				filas[i].resetearListas();
-			miRelojZombies.setearReseteo(true);
-			miRelojPlantas.setearReseteo(true);
-			miRelojProyectiles.setearReseteo(true);
-			administrador.nuevoNivel(nivelActual);
+				miRelojZombies.setearReseteo(true);
+				miRelojPlantas.setearReseteo(true);
+				miRelojProyectiles.setearReseteo(true);
+				administrador.nuevoNivel(nivelActual);
 		}
 	}
 	
