@@ -56,7 +56,7 @@ public class Ventana extends JFrame{
 	 */
 	public Ventana() {
 		try {
-			InputStream input = new FileInputStream(Ventana.class.getResource("/Archivos/configVentana.properties").getFile());
+			InputStream input = new FileInputStream(Ventana.class.getResource("/Archivos/configDia.properties").getFile());
 			prop = new Properties();
 			prop.load(input);
 		} catch (IOException e) {
@@ -86,6 +86,7 @@ public class Ventana extends JFrame{
 		btnModoDia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				miJuego.setFabricaDia();
+				//set property dia
 				crearPanelDia();
 			}
 		});
@@ -145,11 +146,11 @@ public class Ventana extends JFrame{
 		
 		JToggleButton botonPlanta1 = new JToggleButton();
 		botonPlanta1.setBounds(61, 2, 45, 48);
-		botonPlanta1.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("girasol"))).getImage().getScaledInstance(botonPlanta1.getWidth(), botonPlanta1.getHeight() , DO_NOTHING_ON_CLOSE)));
+		botonPlanta1.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("planta1"))).getImage().getScaledInstance(botonPlanta1.getWidth(), botonPlanta1.getHeight() , DO_NOTHING_ON_CLOSE)));
 		
 		JToggleButton botonPlanta2 = new JToggleButton();
 		botonPlanta2.setBounds(114, 2, 45, 48);
-		botonPlanta2.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("lanzaGuisantes"))).getImage().getScaledInstance(botonPlanta2.getWidth(), botonPlanta2.getHeight() , DO_NOTHING_ON_CLOSE)));
+		botonPlanta2.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("planta2"))).getImage().getScaledInstance(botonPlanta2.getWidth(), botonPlanta2.getHeight() , DO_NOTHING_ON_CLOSE)));
 		
 		JToggleButton botonPlanta3 = new JToggleButton();
 		botonPlanta3.setBounds(169, 2, 45, 48);		
@@ -220,17 +221,17 @@ public class Ventana extends JFrame{
 		panelPlantas.add(botonMusica);
 		panelPlantas.add(lblSol);
 		
-		JLabel lblPrecioP1 = new JLabel("25");
+		JLabel lblPrecioP1 = new JLabel(prop.getProperty("precio1"));
 		lblPrecioP1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPrecioP1.setBounds(61, 48, 46, 14);
 		panelPlantas.add(lblPrecioP1);
 		
-		JLabel lblPrecioP2 = new JLabel("75");
+		JLabel lblPrecioP2 = new JLabel(prop.getProperty("precio2"));
 		lblPrecioP2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPrecioP2.setBounds(116, 48, 46, 14);
 		panelPlantas.add(lblPrecioP2);
 		
-		JLabel lblPrecioP3 = new JLabel("100");
+		JLabel lblPrecioP3 = new JLabel(prop.getProperty("precio3"));
 		lblPrecioP3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPrecioP3.setBounds(169, 48, 46, 14);
 		panelPlantas.add(lblPrecioP3);
@@ -243,7 +244,7 @@ public class Ventana extends JFrame{
 		for(int i = 0; i < 6; i++)
 			for(int j = 0; j < 9; j++) {
 				int color = i+j;
-				JLabel lblCelda = new JLabel(""+i+" "+j);
+				JLabel lblCelda = new JLabel();
 				lblCelda.setBounds(183+74*j, 47+67*i, 74, 67);
 				lblCelda.setOpaque(true);
 				if((color % 2) == 0 ) {
@@ -256,8 +257,7 @@ public class Ventana extends JFrame{
 					public void mouseClicked(MouseEvent e) {
 						if(miJuego.getPlantaEnEspera() != null) {
 							lblCelda.add(miJuego.getPlantaEnEspera().getEntidadGrafica().getGrafica());
-							System.out.println("listen");
-							controlarPlantasAComprar((JToggleButton)panelPlantas.getComponent(0), (JToggleButton)panelPlantas.getComponent(1), (JToggleButton)panelPlantas.getComponent(2));
+							controlarBotonesPlantas((JToggleButton)panelPlantas.getComponent(0), (JToggleButton)panelPlantas.getComponent(1), (JToggleButton)panelPlantas.getComponent(2));
 							miJuego.setPlantaEnEspera(0);
 						}
 					}
@@ -270,7 +270,7 @@ public class Ventana extends JFrame{
 		
 		lblFondo.setIgnoreRepaint(true);
 		lblFondo.setBounds(0, 0, 884, 467);
-		lblFondo.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("fondoDia"))).getImage().getScaledInstance(lblFondo.getWidth(), lblFondo.getHeight(), DO_NOTHING_ON_CLOSE)));
+		lblFondo.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("fondo"))).getImage().getScaledInstance(lblFondo.getWidth(), lblFondo.getHeight(), DO_NOTHING_ON_CLOSE)));
 		panelDia.add(lblFondo);
 		/*botonPlanta1.setEnabled(false);
 		if(miJuego.getSoles() >= planta1.getPrecio())
@@ -303,14 +303,21 @@ public class Ventana extends JFrame{
 		repaint();
 	}
 	private void ganarJuego() {
-		
+		JLabel lblGanar= new JLabel();
+		lblGanar.setBounds(321, 88, 357, 271);
+		lblGanar.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("ganarJuego"))).getImage().getScaledInstance(lblGanar.getWidth(), lblGanar.getHeight(), DO_NOTHING_ON_CLOSE)));
+		getContentPane().add(lblGanar);
+		repaint();
 	}
 	
-	private void controlarPlantasAComprar(JToggleButton planta1, JToggleButton planta2, JToggleButton planta3) {
+	private void controlarBotonesPlantas(JToggleButton planta1, JToggleButton planta2, JToggleButton planta3) {
 		planta1.setSelected(false);
 		planta2.setSelected(false);
 		planta3.setSelected(false);
-		//controlar si puede comprar
+		controlarPlantasAComprar();
 
+	}
+	public void controlarPlantasAComprar() {
+		
 	}
 }

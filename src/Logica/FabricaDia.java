@@ -5,9 +5,11 @@ import Entidades.Zombie;
 
 public class FabricaDia extends AbstractFactory {
 	protected Juego miJuego;
+	//atributo config
 	
 	public FabricaDia(Juego juego) {
 		miJuego = juego;
+		//set config en dia
 	}
 	
 	
