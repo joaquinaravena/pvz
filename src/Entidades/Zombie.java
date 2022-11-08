@@ -17,7 +17,7 @@ public class Zombie extends Entidad {
 		this.vida=vida;
 		this.velocidad=velocidad;
 		this.daño=daño;
-		grafica=new EntidadGrafica(v);
+		entidadGrafica=new EntidadGrafica(v);
 		miEstrategia=new moverZombie();
 		plantaAtacada=null;
 	}

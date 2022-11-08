@@ -14,7 +14,7 @@ public class Planta extends Entidad {
 		this.precio = precio;
 		this.vida = vida;
 		miProyectil = new Proyectil(daño);
-		grafica = new EntidadGrafica(v);
+		entidadGrafica = new EntidadGrafica(v);
 	}
 
 	public void restarVida(int i) {
@@ -25,7 +25,8 @@ public class Planta extends Entidad {
 		//borra la gráfica y lo elimina de todas las listas a las que pertenece
 	}
 	public void realizarAccion(Zombie z) {
-		miProyectil.mover();
+		//esto tiene q agregar un proyectil a la lista de proyectiles pero no tiene q moverlo
+		//miProyectil.mover();
 	}
 	//Se puede sacar si la colision la maneja únicamente el zombie
 	public void chocarZombie(Zombie z) {

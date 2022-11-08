@@ -9,7 +9,7 @@ public abstract class Entidad {
 	protected final int ancho = 10;
 	protected final int alto = 20;
 	protected String miRuta;
-	protected EntidadGrafica grafica;
+	protected EntidadGrafica entidadGrafica;
 
 	public void setX(int x) {
 		this.x = x;
@@ -29,8 +29,8 @@ public abstract class Entidad {
 	public int getAlto() {
 		return alto;
 	}
-	public EntidadGrafica getGrafica() {
-		return grafica;
+	public EntidadGrafica getEntidadGrafica() {
+		return entidadGrafica;
 	}
 
 }

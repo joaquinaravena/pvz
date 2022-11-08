@@ -10,6 +10,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JToggleButton;
@@ -69,7 +71,6 @@ public class Ventana extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 		crearPanelMenu();
-		
 		//crearPanelDia();
 		
 	}
@@ -88,6 +89,7 @@ public class Ventana extends JFrame{
 				crearPanelDia();
 			}
 		});
+				
 		btnModoDia.setText("Modo Dia");
 		btnModoDia.setBounds(352, 247, 162, 50);
 		panelMenu.add(btnModoDia);
@@ -125,6 +127,7 @@ public class Ventana extends JFrame{
 		lblLogoMenu.setIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("menu"))));
 		lblLogoMenu.setBounds(242, 11, 360, 229);
 		panelMenu.add(lblLogoMenu);
+		
 	}
 	
 	
@@ -161,37 +164,37 @@ public class Ventana extends JFrame{
 		
 		botonPlanta1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-		botonPlanta2.setSelected(false);
-		botonPlanta3.setSelected(false);
-		if(botonPlanta1.isSelected())
-			miJuego.setPlantaEnEspera(1);
-		else
-			miJuego.setPlantaEnEspera(0);
-			}
+				botonPlanta2.setSelected(false);
+				botonPlanta3.setSelected(false);
+				if(botonPlanta1.isSelected())
+					miJuego.setPlantaEnEspera(1);
+				else
+					miJuego.setPlantaEnEspera(0);
+					}
 		});
 		
 		
 		botonPlanta2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-		botonPlanta1.setSelected(false);
-		botonPlanta3.setSelected(false);
-		if(botonPlanta2.isSelected())
-			miJuego.setPlantaEnEspera(2);
-		else
-			miJuego.setPlantaEnEspera(0);
-			}
+				botonPlanta1.setSelected(false);
+				botonPlanta3.setSelected(false);
+				if(botonPlanta2.isSelected())
+					miJuego.setPlantaEnEspera(2);
+				else
+					miJuego.setPlantaEnEspera(0);
+					}
 		});
 		
 		
 		botonPlanta3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-		botonPlanta2.setSelected(false);
-		botonPlanta1.setSelected(false);
-		if(botonPlanta3.isSelected())
-			miJuego.setPlantaEnEspera(3);
-		else
-			miJuego.setPlantaEnEspera(0);
-			}
+				botonPlanta2.setSelected(false);
+				botonPlanta1.setSelected(false);
+				if(botonPlanta3.isSelected())
+					miJuego.setPlantaEnEspera(3);
+				else
+					miJuego.setPlantaEnEspera(0);
+					}
 		});
 		
 		botonMusica.addActionListener(new ActionListener() {
@@ -237,30 +240,34 @@ public class Ventana extends JFrame{
 		lblSolesActuales.setBounds(6, 48, 46, 14);
 		panelPlantas.add(lblSolesActuales);
 		
-		JPanel panelTablero = new JPanel();
-		panelTablero.setBounds(178, 62, 706, 405);
-		panelTablero.setLayout(new GridLayout(6, 9, 0, 0));
-		for(int i = 0; i < ((GridLayout)panelTablero.getLayout()).getRows(); i++)
-			for(int j = 0; j < ((GridLayout)panelTablero.getLayout()).getColumns(); j++) {
+		for(int i = 0; i < 6; i++)
+			for(int j = 0; j < 9; j++) {
 				int color = i+j;
-				JLabel lblCelda = new JLabel();
-				lblCelda.setBounds(lblCelda.getX(), lblCelda.getY(), 60, 60);
+				JLabel lblCelda = new JLabel(""+i+" "+j);
+				lblCelda.setBounds(183+74*j, 47+67*i, 74, 67);
 				lblCelda.setOpaque(true);
 				if((color % 2) == 0 ) {
 					lblCelda.setBackground(new Color(0, 128, 0));
 				}
 				else
 					lblCelda.setBackground(new Color(50, 205, 50));
-				panelTablero.add(lblCelda);
+				lblCelda.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						if(miJuego.getPlantaEnEspera() != null) {
+							lblCelda.add(miJuego.getPlantaEnEspera().getEntidadGrafica().getGrafica());
+							System.out.println("listen");
+							controlarPlantasAComprar((JToggleButton)panelPlantas.getComponent(0), (JToggleButton)panelPlantas.getComponent(1), (JToggleButton)panelPlantas.getComponent(2));
+							miJuego.setPlantaEnEspera(0);
+						}
+					}
+					
+				});
+				panelDia.add(lblCelda);
 			}
-		panelDia.add(panelTablero);
 		
 		JLabel lblFondo = new JLabel();
-		lblFondo.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {				
-			}
-		});
+		
 		lblFondo.setIgnoreRepaint(true);
 		lblFondo.setBounds(0, 0, 884, 467);
 		lblFondo.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("fondoDia"))).getImage().getScaledInstance(lblFondo.getWidth(), lblFondo.getHeight(), DO_NOTHING_ON_CLOSE)));
@@ -276,9 +283,7 @@ public class Ventana extends JFrame{
 			botonPlanta2.setEnabled(true);*/
 		
 	
-		repaint();
-		gameOver();
-	
+		repaint();	
 	}
 
 	public void actualizarGrafica(EntidadGrafica eg) {
@@ -294,14 +299,18 @@ public class Ventana extends JFrame{
 		JLabel lblGameOver = new JLabel();
 		lblGameOver.setBounds(321, 88, 357, 271);
 		lblGameOver.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(prop.getProperty("gameOver"))).getImage().getScaledInstance(lblGameOver.getWidth(), lblGameOver.getHeight(), DO_NOTHING_ON_CLOSE)));
-		add(lblGameOver);
+		getContentPane().add(lblGameOver);
 		repaint();
 	}
 	private void ganarJuego() {
 		
 	}
 	
-	public void controlarPlantasAComprar() {
-		
+	private void controlarPlantasAComprar(JToggleButton planta1, JToggleButton planta2, JToggleButton planta3) {
+		planta1.setSelected(false);
+		planta2.setSelected(false);
+		planta3.setSelected(false);
+		//controlar si puede comprar
+
 	}
 }
