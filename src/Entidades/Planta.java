@@ -15,7 +15,7 @@ public class Planta extends Entidad {
 	public Planta(int precio, int vida, int daño, Ventana v, String graf) {
 		this.precio = precio;
 		this.vida = vida;
-		miProyectil = new Proyectil(daño,v,"Recursos/pea.png",miFila);
+		miProyectil = new Proyectil(daño,v,"/Recursos/pea.png",miFila);
 		this.daño=daño;
 		entidadGrafica = new EntidadGrafica(v, this, graf);
 	}

@@ -1,5 +1,9 @@
 package Logica;
 import Entidades.*;
+
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.util.*;
 public class Fila {
 	private List<Zombie> misZombies;
@@ -56,16 +60,18 @@ public class Fila {
 		Iterator<Zombie> itZombie=misZombies.iterator();
 		
 		Zombie auxZombie;
-		Planta auxPlanta;
+		
 		Lanzable auxProyectil;
 		while (itZombie.hasNext()) {//Itero lista de zombies
 			auxZombie=itZombie.next();
 			huboColision=false;
 			while(itProyectiles.hasNext() && !huboColision) {//Itero lista de proyectiles y si detecto una colision freno.
 				auxProyectil=itProyectiles.next();
-				huboColision=colisionan(auxZombie,auxProyectil);
-				if(huboColision)
+				huboColision=verColisiones(auxZombie,auxProyectil);
+				if(huboColision) {
 					auxZombie.visitarProyectil(auxProyectil);
+				}
+					
 			}
 			huboColision=false;
 			/**
@@ -79,21 +85,27 @@ public class Fila {
 		}
 	}
 		
-	private boolean colisionan(Entidad a,Entidad b) {
-		int inicioEntidadA,inicioEntidadB,finalEntidadA,finalEntidadB;
-		inicioEntidadA=a.getX();
-		finalEntidadA=a.getX()+a.getAncho();
-		//Armo el intervalo de la entidad a
-		inicioEntidadB=b.getX();
-		finalEntidadB=b.getX()+b.getAncho();
-		//Armo el intervalo de la etidad b
-		boolean colisionan=false;
-		if(inicioEntidadA<=inicioEntidadB && inicioEntidadB<=finalEntidadA)
-			colisionan=true;
-		else if(inicioEntidadA<=finalEntidadB && finalEntidadB<=finalEntidadA)
-				colisionan=true;
+	private Rectangle armarHitboxEntidad(Entidad e) {
+		Dimension dimensionEntidad=new Dimension(e.getEntidadGrafica().getGrafica().getIcon().getIconWidth(),e.getEntidadGrafica().getGrafica().getIcon().getIconHeight());
+		Point ubicacionEntidad=new Point(e.getEntidadGrafica().getGrafica().getX(),e.getEntidadGrafica().getGrafica().getY());
+		Rectangle hitboxEntidad=new Rectangle(ubicacionEntidad,dimensionEntidad);
+		return hitboxEntidad;
+	}
+
+	/**
+	 * Calcula si hay colision entre dos entidades a y b.
+	 * @param a Entidad a
+	 * @param b Entidad b
+	 * @return true si hubo colision, false caso contrario.
+	 */
+	private boolean verColisiones(Entidad a,Entidad b) {
 		
-		return colisionan;
+		Rectangle hitboxEntidadA=armarHitboxEntidad(a);
+		Rectangle hitboxEntidadB=armarHitboxEntidad(b);
+		boolean colisiono=false;		
+		if(hitboxEntidadA.intersects(hitboxEntidadB))
+			colisiono=true;
+		return colisiono;
 	}
 	
 	public void resetearListaPlantas() {

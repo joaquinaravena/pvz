@@ -51,6 +51,7 @@ public class Juego {
 	public void moverZombies() {
 		for (int i=0; i<6; i++) {
 			filas[i].moverZombies();
+			filas[i].chequearColisiones();
 		}		
 	}
 	
@@ -151,10 +152,8 @@ public class Juego {
 	}
 	
 	public void agregarPlanta(int x,int y) {
-		int posicionArreglo= x % 9;
+		int posicionArreglo= (x / 74)-2;
 		int posicionFila=(y / 65);
-		System.out.println(posicionFila);
-		System.out.println(posicionArreglo);
 		filas[posicionFila].agregarPlanta(plantaEnEspera, posicionArreglo);
 		
 	}
