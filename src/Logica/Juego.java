@@ -98,19 +98,11 @@ public class Juego {
 	}
 	
 	public void agregarZombieActivo() {
-		boolean hayZombie=false;
-		int cont=1;
-		while(!hayZombie && cont<=6) {
-			hayZombie= filas[cont-1].hayZombies();
-			cont++;
-		}
-			
-		if (!hayZombie) {
-			System.out.println("Entro cambiar nivel");
-			cambiarNivel();
-			
-		}
-		else {
+
+		boolean hayZombies = false;
+		for (int i=1; i<=6 && !hayZombies; i++) 
+			hayZombies = filas[i-1].hayZombies();
+
 		if(!zombiesNivel.isEmpty()){
 			if (contadorZombies % 6 == 0 && contadorZombies>0)
 				Oleada();
@@ -122,6 +114,10 @@ public class Juego {
 				contadorZombies++;
 				}
 			}
+		
+		else {
+			if (hayZombies==false)
+				cambiarNivel();
 		}
 	}
 	
@@ -144,10 +140,12 @@ public class Juego {
 		if (nivelActual==2)
 			gameOver();
 		else {
+			System.out.println("cambio");
+			for (int i=1; i<=6; i++) 
+				System.out.println(filas[i-1].hayZombies());
+			System.out.println(zombiesNivel.isEmpty());
 			reseteoPlantas = true;
 			reseteoProyectiles = true;
-			for (int i=1; i<=6; i++) 
-				filas[i-1].resetearListaZombies();
 			administrador.nuevoNivel(nivelActual);
 		}
 	}

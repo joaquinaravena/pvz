@@ -6,21 +6,16 @@ import Entidades.*;
 import Logica.Juego;
 
 public class RelojProyectiles extends Thread{
-	protected List<Proyectil> misProyectiles;
 	protected boolean activo;
 	protected boolean resetear;
 	protected Juego miJuego;
 	
 	public RelojProyectiles(Juego j) {
-		misProyectiles = new ArrayList<Proyectil>();
 		activo = true;
 		miJuego = j;
 	}
 	
-	public void resetearListaProyectiles() {
-		misProyectiles.clear();
-	}
-	
+
 	public void run() {
 		try {
 			while (activo) {
