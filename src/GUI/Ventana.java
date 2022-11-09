@@ -287,7 +287,9 @@ public class Ventana extends JFrame{
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						if(miJuego.getPlantaEnEspera() != null) {
-							lblCelda.add(miJuego.getPlantaEnEspera().getEntidadGrafica().getGrafica());
+							JLabel lblPlanta = miJuego.getPlantaEnEspera().getEntidadGrafica().getGrafica();
+							lblPlanta.setBounds(0, 0, lblPlanta.getWidth(), lblPlanta.getHeight());
+							lblCelda.add(lblPlanta);
 							controlarBotonesPlantas((JToggleButton)panelPlantas.getComponent(0), (JToggleButton)panelPlantas.getComponent(1), (JToggleButton)panelPlantas.getComponent(2));
 							miJuego.setPlantaEnEspera(0);
 						}
