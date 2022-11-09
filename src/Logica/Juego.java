@@ -102,10 +102,14 @@ public class Juego {
 	
 	public void Oleada() {
 		int i = 1;
-		while (i<=6 && !zombiesNivel.isEmpty()) {
-			filas[i-1].agregarZombie(zombiesNivel.get(0), i);
+		int aleatorio = 0;
+		while (i<=3 && !zombiesNivel.isEmpty()) {
+			int filaRandom = (int)(Math.random()*2+1+aleatorio);
+			zombiesNivel.get(0).setFila(getFila(filaRandom));
+			filas[filaRandom-1].agregarZombie(zombiesNivel.get(0), filaRandom);
 			zombiesNivel.remove(0);
 			i++;
+			aleatorio = aleatorio + 2;
 		}
 		contadorZombies = 0;
 	}
@@ -115,13 +119,11 @@ public class Juego {
 		if (nivelActual==2)
 			gameOver();
 		else {
-			miRelojZombies.setearActivo(false);
 			miRelojPlantas.setearActivo(false);
 			miRelojProyectiles.setearActivo(false);
 			for (int i=1; i<=6; i++) 
 				filas[i-1].resetearListas();
 			administrador.nuevoNivel(nivelActual);
-			miRelojZombies.setearActivo(true);
 			miRelojPlantas.setearActivo(true);
 			miRelojProyectiles.setearActivo(true);
 		}
@@ -195,18 +197,21 @@ public class Juego {
 	public void removerZombies() {
 		for (Zombie z: zombiesAEliminar) {
 			z.getFila().removerZombie(z);
+			z.getEntidadGrafica().borrarGrafica();
 		}
 	}
 	
 	public void removerPlantas() {
 		for (Planta p: plantasAEliminar) {
 			p.getFila().removerPlanta(p);
+			p.getEntidadGrafica().borrarGrafica();
 		}
 	}
 	
 	public void removerProyectiles() {
 		for (Proyectil p: proyectilesAEliminar) {
 			p.getFila().removerProyectil(p);
+			p.getEntidadGrafica().borrarGrafica();
 		}
 	}
 }

@@ -26,6 +26,7 @@ public class RelojZombies extends Thread{
 					miJuego.agregarZombieActivo();
 					contador = 0;
 				}
+				miJuego.removerZombies();
 			}
 		}
 		catch(InterruptedException e) {
