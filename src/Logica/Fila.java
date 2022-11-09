@@ -126,7 +126,7 @@ public class Fila {
 	
 	public void moverZombies() {
 		for(Zombie z : misZombies) 
-			z.realizarAccion();i
+			z.realizarAccion();
 	}
 	
 	public void accionPlantas() {
