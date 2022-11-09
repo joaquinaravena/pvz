@@ -21,6 +21,8 @@ public class Juego {
 	protected List<Zombie> zombiesAEliminar;
 	protected List<Planta> plantasAEliminar;
 	protected List<Proyectil> proyectilesAEliminar;
+	protected boolean reseteoPlantas;
+	protected boolean reseteoProyectiles;
 	
 	public Juego(Ventana v) {
 		miRelojMusica = new RelojMusica();
@@ -42,17 +44,26 @@ public class Juego {
 		plantasAEliminar = new ArrayList<Planta>();
 		proyectilesAEliminar = new ArrayList<Proyectil>();
 		builder=new Builder(this);
+		reseteoPlantas = false;
+		reseteoProyectiles = false;
 	}
 	
 	public void moverZombies() {
-		for (int i=0; i<6; i++)
+		for (int i=0; i<6; i++) {
 			filas[i].moverZombies();
+		}		
 	}
 	
 	public void accionPlantas() {
 		for (int i=0; i<6; i++)
-			filas[i].accionPlantas();
+			if (reseteoPlantas==true) {
+				filas[i].resetearListaPlantas();
+				reseteoPlantas = false;
+			}
+			else
+				filas[i].accionPlantas();
 	}
+	
 	
 	public void jugar(){
 		miRelojMusica.start();
@@ -119,13 +130,11 @@ public class Juego {
 		if (nivelActual==2)
 			gameOver();
 		else {
-			miRelojPlantas.setearActivo(false);
-			miRelojProyectiles.setearActivo(false);
+			reseteoPlantas = true;
+			reseteoProyectiles = true;
 			for (int i=1; i<=6; i++) 
-				filas[i-1].resetearListas();
+				filas[i-1].resetearListaZombies();
 			administrador.nuevoNivel(nivelActual);
-			miRelojPlantas.setearActivo(true);
-			miRelojProyectiles.setearActivo(true);
 		}
 	}
 	

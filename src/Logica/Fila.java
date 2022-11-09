@@ -92,8 +92,25 @@ public class Fila {
 		return colisionan;
 	}
 	
-	public void resetearListas() {
-		
+	public void resetearListaZombies() {
+		for (Zombie z: misZombies) {
+			z.getEntidadGrafica().borrarGrafica();
+			misZombies.remove(z);
+		}
+	}
+	
+	public void resetearListaPlantas() {
+		for (Planta p: misPlantas) {
+			p.getEntidadGrafica().borrarGrafica();
+			misPlantas.remove(p);
+		}
+	}
+	
+	public void resetearListaProyectiles() {
+		for (Lanzable p: misProyectiles) {
+			p.getEntidadGrafica().borrarGrafica();
+			misProyectiles.remove(p);
+		}
 	}
 	
 	public void moverZombies() {
@@ -109,6 +126,10 @@ public class Fila {
 	public void moverProyectiles() {
 		for(Lanzable p: misProyectiles)
 			p.mover();
+	}
+	
+	public boolean hayZombies() {
+		return misZombies.isEmpty();
 	}
 	
 }

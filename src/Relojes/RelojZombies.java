@@ -8,7 +8,6 @@ public class RelojZombies extends Thread{
 	protected boolean activo;
 	protected Juego miJuego;
 	protected int contador;
-	protected boolean resetear;
 	
 	public RelojZombies(Juego j) {
 		activo = true;
