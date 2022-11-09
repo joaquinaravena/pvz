@@ -96,8 +96,9 @@ public class Juego {
 	}
 	
 	public void agregarZombieActivo() {
-		if (zombiesNivel.isEmpty() && nivelActual != 0)
-			cambiarNivel();
+		boolean hayZombies = false;
+		for (int i=1; i<=6 && !hayZombies; i++) 
+			hayZombies = filas[i-1].hayZombies();
 		if(!zombiesNivel.isEmpty()){
 			if (contadorZombies % 6 == 0 && contadorZombies>0)
 				Oleada();
@@ -108,6 +109,10 @@ public class Juego {
 				zombiesNivel.remove(0);
 				contadorZombies++;
 			}
+		}
+		else {
+			if (hayZombies==false)
+				cambiarNivel();
 		}
 	}
 	
@@ -130,10 +135,12 @@ public class Juego {
 		if (nivelActual==2)
 			gameOver();
 		else {
+			System.out.println("cambio");
+			for (int i=1; i<=6; i++) 
+				System.out.println(filas[i-1].hayZombies());
+			System.out.println(zombiesNivel.isEmpty());
 			reseteoPlantas = true;
 			reseteoProyectiles = true;
-			for (int i=1; i<=6; i++) 
-				filas[i-1].resetearListaZombies();
 			administrador.nuevoNivel(nivelActual);
 		}
 	}

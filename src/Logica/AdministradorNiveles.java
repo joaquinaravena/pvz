@@ -9,8 +9,8 @@ public class AdministradorNiveles {
 		niveles=new Nivel[2];
 		this.juego=juego;
 		
-		niveles[0]=new Nivel(10,5,7);
-		niveles[1]=new Nivel(20,15,8);
+		niveles[0]=new Nivel(5,5,5);
+		niveles[1]=new Nivel(5,5,8);
 	}
 	
 	public void nuevoNivel(int nivelElegido) {

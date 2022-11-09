@@ -92,13 +92,6 @@ public class Fila {
 		return colisionan;
 	}
 	
-	public void resetearListaZombies() {
-		for (Zombie z: misZombies) {
-			z.getEntidadGrafica().borrarGrafica();
-			misZombies.remove(z);
-		}
-	}
-	
 	public void resetearListaPlantas() {
 		for (Planta p: misPlantas) {
 			p.getEntidadGrafica().borrarGrafica();
