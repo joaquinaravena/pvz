@@ -72,6 +72,7 @@ public class Ventana extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 		crearPanelMenu();
+		//miJuego.reproducirMusica();
 		//crearPanelModo();
 		
 	}
@@ -185,6 +186,7 @@ public class Ventana extends JFrame{
 		botonMusica.setToolTipText("frena/reproduce la m\u00FAsica");
 		botonMusica.setBounds(220, 2, 45, 48);
 		botonMusica.setSelected(true);
+		//miJuego.reproducirMusica();
 		botonMusica.setSelectedIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("stop"))).getImage().getScaledInstance(botonMusica.getWidth(), botonMusica.getHeight(), DO_NOTHING_ON_CLOSE)));
 		botonMusica.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("play"))).getImage().getScaledInstance(botonMusica.getWidth(), botonMusica.getHeight(), DO_NOTHING_ON_CLOSE)));
 		
@@ -285,7 +287,7 @@ public class Ventana extends JFrame{
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						if(miJuego.getPlantaEnEspera() != null) {
-							lblCelda.add(miJuego.getPlantaEnEspera().getEntidadGrafica().getGrafica(), 0);
+							lblCelda.add(miJuego.getPlantaEnEspera().getEntidadGrafica().getGrafica());
 							controlarBotonesPlantas((JToggleButton)panelPlantas.getComponent(0), (JToggleButton)panelPlantas.getComponent(1), (JToggleButton)panelPlantas.getComponent(2));
 							miJuego.setPlantaEnEspera(0);
 						}

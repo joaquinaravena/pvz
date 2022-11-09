@@ -18,11 +18,15 @@ public class FabricaDia extends AbstractFactory {
 		return z;
 	}
 	public Zombie crearZombieMediano() {
-		return new Zombie(400,70,2,miJuego.getVentana(), "zombieMedio");
+		Zombie z = new Zombie(400,70,2,miJuego.getVentana(), "zombieMedio");
+		z.setX(z.getEntidadGrafica().getGrafica().getX());
+		return z;
 	}
 
 	public Zombie crearZombieFuerte() {
-		return new Zombie(800,150,3,miJuego.getVentana(), "zombieFuerte");
+		Zombie z = new Zombie(800,150,3,miJuego.getVentana(), "zombieFuerte");
+		z.setX(z.getEntidadGrafica().getGrafica().getX());
+		return z;
 	}
 
 	public Planta crearPlantaDebil() {
