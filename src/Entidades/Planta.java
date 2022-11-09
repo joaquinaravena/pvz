@@ -15,7 +15,7 @@ public class Planta extends Entidad {
 	public Planta(int precio, int vida, int daño, Ventana v, String graf) {
 		this.precio = precio;
 		this.vida = vida;
-		miProyectil = new Proyectil(daño,v,"/Recursos/pea.png",miFila);
+		miProyectil = new Proyectil(daño,v,"/Recursos/pea.png",null);
 		this.daño=daño;
 		entidadGrafica = new EntidadGrafica(v, this, graf);
 	}
@@ -33,10 +33,9 @@ public class Planta extends Entidad {
 
 	public void realizarAccion(Ventana v) {
 			Lanzable aDisparar=miProyectil.clone(v);
-			aDisparar.setX(this.getX());
-			aDisparar.setY(this.getY());
-			aDisparar.getEntidadGrafica().getGrafica().setIcon(new ImageIcon("/Recursos/pea.png"));
-			aDisparar.getEntidadGrafica().actualizarFilaGrafica(getNumeroFila());
+			aDisparar.setX(x);
+			aDisparar.setY(y);
+			aDisparar.getEntidadGrafica().getGrafica().setLocation(x, y);
 			miFila.agregarProyectiles(aDisparar);
 	}
 	

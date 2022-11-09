@@ -154,7 +154,13 @@ public class Juego {
 	public void agregarPlanta(int x,int y) {
 		int posicionArreglo= (x / 74)-2;
 		int posicionFila=(y / 65);
-		filas[posicionFila].agregarPlanta(plantaEnEspera, posicionArreglo);
+		if(filas[posicionFila].puedoPonerPlanta(posicionArreglo)) {
+			filas[posicionFila].agregarPlanta(plantaEnEspera, posicionArreglo);
+			filas[posicionFila].getPlanta(posicionArreglo).setX(x);
+			filas[posicionFila].getPlanta(posicionArreglo).setY(y);
+			filas[posicionFila].getPlanta(posicionArreglo).setFila(filas[posicionFila]);
+			filas[posicionFila].getPlanta(posicionArreglo).getProyectil().setFila(filas[posicionFila]);
+		}
 		
 	}
 	

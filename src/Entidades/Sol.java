@@ -20,4 +20,10 @@ public class Sol extends Lanzable{
 	@Override
 	public void chocar(Zombie z) {
 	}
+
+	@Override
+	public void morir() {
+		// TODO Auto-generated method stub
+		
+	}
 }

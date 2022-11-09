@@ -49,7 +49,6 @@ public class Zombie extends Entidad {
 	}
 	
 	public void visitarPlanta(Planta p,Ventana v) {
-		
 		p.realizarAccion(v);
 	}
 	

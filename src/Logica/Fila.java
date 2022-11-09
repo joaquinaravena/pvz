@@ -51,7 +51,7 @@ public class Fila {
 	}
 	
 	public boolean puedoPonerPlanta(int pos) {
-		return misPlantas[pos-1] == null;
+		return misPlantas[pos] == null;
 	}
 	
 	public void chequearColisiones() {
@@ -126,7 +126,7 @@ public class Fila {
 	
 	public void moverZombies() {
 		for(Zombie z : misZombies) 
-			z.realizarAccion();
+			z.realizarAccion();i
 	}
 	
 	public void accionPlantas() {
@@ -137,12 +137,24 @@ public class Fila {
 	}
 	
 	public void moverProyectiles() {
-		for(Lanzable p: misProyectiles)
+		List<Lanzable> aRemover=new ArrayList<Lanzable>();
+		for(Lanzable p: misProyectiles) {
 			p.mover();
+			if(p.getX()>880)
+				aRemover.add(p);
+		}
+		for(Lanzable p:aRemover)
+			misProyectiles.remove(p);
+			
 	}
 	
 	public boolean hayZombies() {
 		return misZombies.isEmpty();
 	}
+	
+	public Planta getPlanta(int i) {
+		return misPlantas[i];
+	}
+	
 	
 }
