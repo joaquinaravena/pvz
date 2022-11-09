@@ -201,13 +201,20 @@ public class Juego {
 	}
 	
 	public void reproducirMusica() {
-		miRelojMusica.start();
+		if(miRelojMusica.isAlive())
+			miRelojMusica.start();
 		miRelojMusica.reproducirMusica();
 	}
 	
 	public void pararMusica() {
-		miRelojMusica.pararMusica();
-		miRelojMusica.stop();
+		miRelojMusica.pararMusica();		
+	}
+	
+	public boolean reproduciendoMusica() {
+		if(miRelojMusica.isAlive())
+			return true;
+		else
+			return false;
 	}
 	
 	public void agregarZombieAEliminar(Zombie z) {

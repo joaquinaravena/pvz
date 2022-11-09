@@ -72,7 +72,7 @@ public class Ventana extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 		crearPanelMenu();
-		//miJuego.reproducirMusica();
+		miJuego.reproducirMusica();
 		//crearPanelModo();
 		
 	}
@@ -183,8 +183,10 @@ public class Ventana extends JFrame{
 		JToggleButton botonMusica = new JToggleButton();
 		botonMusica.setToolTipText("frena/reproduce la m\u00FAsica");
 		botonMusica.setBounds(220, 2, 45, 48);
-		botonMusica.setSelected(true);
-		//miJuego.reproducirMusica();
+		if(miJuego.reproduciendoMusica())
+			botonMusica.setSelected(true);
+		else
+			botonMusica.setSelected(false);
 		botonMusica.setSelectedIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("stop"))).getImage().getScaledInstance(botonMusica.getWidth(), botonMusica.getHeight(), DO_NOTHING_ON_CLOSE)));
 		botonMusica.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("play"))).getImage().getScaledInstance(botonMusica.getWidth(), botonMusica.getHeight(), DO_NOTHING_ON_CLOSE)));
 		
