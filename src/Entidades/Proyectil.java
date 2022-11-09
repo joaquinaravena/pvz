@@ -16,4 +16,10 @@ public class Proyectil extends Entidad{
 	public int getValorAccion() {
 		return valorAccion;
 	}
+	
+	public Proyectil clone() {
+		Proyectil aRetornar=new Proyectil(this.valorAccion);
+		aRetornar.setFila(this.miFila);
+		return aRetornar;
+	}
 }
