@@ -60,8 +60,10 @@ public class Juego {
 				filas[i].resetearListaPlantas();
 				reseteoPlantas = false;
 			}
-			else
+			else {
 				filas[i].accionPlantas();
+			}
+				
 	}
 	
 	
@@ -96,8 +98,19 @@ public class Juego {
 	}
 	
 	public void agregarZombieActivo() {
-		if (zombiesNivel.isEmpty() && nivelActual != 0)
+		boolean hayZombie=false;
+		int cont=1;
+		while(!hayZombie && cont<=6) {
+			hayZombie= filas[cont-1].hayZombies();
+			cont++;
+		}
+			
+		if (!hayZombie) {
+			System.out.println("Entro cambiar nivel");
 			cambiarNivel();
+			
+		}
+		else {
 		if(!zombiesNivel.isEmpty()){
 			if (contadorZombies % 6 == 0 && contadorZombies>0)
 				Oleada();
@@ -107,6 +120,7 @@ public class Juego {
 				filas[filaRandom-1].agregarZombie(zombiesNivel.get(0), filaRandom);
 				zombiesNivel.remove(0);
 				contadorZombies++;
+				}
 			}
 		}
 	}
@@ -138,13 +152,15 @@ public class Juego {
 		}
 	}
 	
-	public void agregarPlanta() {
-		//preguntar como hacerlo segun la posicion que clickea el usuario en la ventana de joaco
+	public void agregarPlanta(int x,int y) {
+		int posicionArreglo= x % 9;
+		int posicionFila=(y / 65);
+		System.out.println(posicionFila);
+		System.out.println(posicionArreglo);
+		filas[posicionFila].agregarPlanta(plantaEnEspera, posicionArreglo);
+		
 	}
 	
-	public void agregarProyectil(Proyectil p) {
-		miRelojProyectiles.agregarProyectil(p);
-	}
 	
 	public int getSoles() {
 		return soles;
@@ -211,9 +227,11 @@ public class Juego {
 	}
 	
 	public void removerPlantas() {
+		int cont=0;
 		for (Planta p: plantasAEliminar) {
-			p.getFila().removerPlanta(p);
+			p.getFila().removerPlanta(p,cont);
 			p.getEntidadGrafica().borrarGrafica();
+			cont++;
 		}
 	}
 	

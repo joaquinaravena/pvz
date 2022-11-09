@@ -10,17 +10,14 @@ public class Planta extends Entidad {
 	protected int vida;
 	protected int daño;
 	protected Lanzable miProyectil;
-	boolean hayZombie;
 	//ancho y alto representan las dimensiones.
 	//Las plantas se crean sin una posición establecida.
 	public Planta(int precio, int vida, int daño, Ventana v, String graf) {
 		this.precio = precio;
 		this.vida = vida;
-		miProyectil = new Proyectil(daño);
-		miProyectil.getEntidadGrafica().getGrafica().setIcon(new ImageIcon("/Recursos/pea.png"));
+		miProyectil = new Proyectil(daño,v,"Recursos/pea.png",miFila);
 		this.daño=daño;
 		entidadGrafica = new EntidadGrafica(v, this, graf);
-		hayZombie=false;
 	}
 
 	public void restarVida(int i) {
@@ -32,11 +29,15 @@ public class Planta extends Entidad {
 			//eliminar de las listas
 		}
 	}
-	public void realizarAccion() {
-		if(hayZombie) {
-			Lanzable aDisparar=miProyectil.clone();
+	
+
+	public void realizarAccion(Ventana v) {
+			Lanzable aDisparar=miProyectil.clone(v);
+			aDisparar.setX(this.getX());
+			aDisparar.setY(this.getY());
+			aDisparar.getEntidadGrafica().getGrafica().setIcon(new ImageIcon("/Recursos/pea.png"));
+			aDisparar.getEntidadGrafica().actualizarFilaGrafica(getNumeroFila());
 			miFila.agregarProyectiles(aDisparar);
-		}
 	}
 	
 	public int getDaño() {

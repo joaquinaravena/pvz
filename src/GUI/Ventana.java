@@ -288,6 +288,7 @@ public class Ventana extends JFrame{
 							JLabel lblPlanta = miJuego.getPlantaEnEspera().getEntidadGrafica().getGrafica();
 							lblPlanta.setBounds(0, 0, lblPlanta.getWidth(), lblPlanta.getHeight());
 							lblCelda.add(lblPlanta);
+							miJuego.agregarPlanta(lblCelda.getX(),lblCelda.getY());
 							controlarBotonesPlantas((JToggleButton)panelPlantas.getComponent(0), (JToggleButton)panelPlantas.getComponent(1), (JToggleButton)panelPlantas.getComponent(2));
 							miJuego.setPlantaEnEspera(0);
 						}

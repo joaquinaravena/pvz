@@ -3,14 +3,14 @@ import Entidades.*;
 import java.util.*;
 public class Fila {
 	private List<Zombie> misZombies;
-	private List<Planta> misPlantas;
+	private Planta[] misPlantas;
 	private List<Lanzable> misProyectiles;
 	protected Juego miJuego;
 	
 	public Fila(Juego j) {
 		miJuego = j;
 		misZombies=new ArrayList<Zombie>();
-		misPlantas=new ArrayList<Planta>(9);
+		misPlantas=new Planta[9];
 		misProyectiles=new ArrayList<Lanzable>();
 	}
 	
@@ -18,12 +18,13 @@ public class Fila {
 		return miJuego;
 	}
 	
-	public void agregarPlanta(Planta p) {
-		misPlantas.add(p);
+	public void agregarPlanta(Planta p,int pos) {
+		misPlantas[pos]=p;
+		misPlantas[pos].setFila(this);
 	}
 	
-	public void removerPlanta(Planta p) {
-		misPlantas.remove(p);
+	public void removerPlanta(Planta p,int pos) {
+		misPlantas[pos]=null;
 	}
 	
 	public void agregarZombie(Zombie z, int fila) {
@@ -38,6 +39,7 @@ public class Fila {
 	
 	public void agregarProyectiles(Lanzable p) {
 		misProyectiles.add(p);
+		System.out.println("Proyectiles = "+misProyectiles.size());
 	}
 	
 	public void removerProyectil(Lanzable p) {
@@ -45,14 +47,14 @@ public class Fila {
 	}
 	
 	public boolean puedoPonerPlanta(int pos) {
-		return misPlantas.get(pos-1) == null;
+		return misPlantas[pos-1] == null;
 	}
 	
 	public void chequearColisiones() {
 		boolean huboColision=false;
 		Iterator<Lanzable> itProyectiles=misProyectiles.iterator();
 		Iterator<Zombie> itZombie=misZombies.iterator();
-		Iterator<Planta> itPlanta=misPlantas.iterator();
+		
 		Zombie auxZombie;
 		Planta auxPlanta;
 		Lanzable auxProyectil;
@@ -66,12 +68,14 @@ public class Fila {
 					auxZombie.visitarProyectil(auxProyectil);
 			}
 			huboColision=false;
+			/**
 			while(itPlanta.hasNext() && !huboColision) {//Itero lista de plantas y si detecto una colision freno.
 				auxPlanta=itPlanta.next();
 				huboColision=colisionan(auxZombie,auxPlanta);
 				if(huboColision)
-					auxZombie.visitarPlanta(auxPlanta);
+					auxZombie.visitarPlanta(auxPlanta,miJuego.getVentana());
 			}
+			**/
 		}
 	}
 		
@@ -100,9 +104,11 @@ public class Fila {
 	}
 	
 	public void resetearListaPlantas() {
+		int cont=0;
 		for (Planta p: misPlantas) {
 			p.getEntidadGrafica().borrarGrafica();
-			misPlantas.remove(p);
+			misPlantas[cont]=null;
+			cont++;
 		}
 	}
 	
@@ -119,8 +125,10 @@ public class Fila {
 	}
 	
 	public void accionPlantas() {
-		for(Planta p: misPlantas)
-			p.realizarAccion();
+		for(int i=0;i<misPlantas.length;i++) {
+			if(misPlantas[i]!=null)
+				misPlantas[i].realizarAccion(miJuego.getVentana());
+		}
 	}
 	
 	public void moverProyectiles() {

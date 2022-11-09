@@ -1,5 +1,7 @@
 package Entidades;
 
+import GUI.Ventana;
+
 public class Sol extends Lanzable{
 	
 	public Sol() {
@@ -10,7 +12,7 @@ public class Sol extends Lanzable{
 		y=y-10;
 	}
 	
-	public Sol clone() {
+	public Sol clone(Ventana v) {
 		Sol aRetornar=new Sol();
 		return aRetornar;
 	}

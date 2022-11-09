@@ -21,29 +21,14 @@ public class RelojProyectiles extends Thread{
 		misProyectiles.clear();
 	}
 	
-	public void removerProyectil(Proyectil p) {
-		misProyectiles.remove(p);
-	}
-	
-	public void agregarProyectil(Proyectil p) {
-		misProyectiles.add(p);
-	}
-	
 	public void run() {
 		try {
 			while (activo) {
-				Thread.sleep(200);
+				
+				Thread.sleep(300);
 				for(int i=1;i<=6;i++) {
 					miJuego.getFila(i).moverProyectiles();
 				}
-				
-				 // if (resetear==true)
-				//	resetearListaProyectiles();
-				//else {
-					//miJuego.removerProyectiles();
-				
-				
-				
 			}
 		}
 		catch(InterruptedException e) {
