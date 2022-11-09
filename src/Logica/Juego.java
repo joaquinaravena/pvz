@@ -27,7 +27,7 @@ public class Juego {
 		miRelojPlantas = new RelojPlantas(this);
 		miRelojZombies = new RelojZombies(this);
 		miRelojProyectiles = new RelojProyectiles(this);
-		soles = 75;
+		soles = 100;
 		plantaEnEspera = null;
 		miVentana = v;
 		nivelActual = 0;
@@ -112,9 +112,9 @@ public class Juego {
 		while (i<=6 && !zombiesNivel.isEmpty()) {
 			filas[i-1].agregarZombie(zombiesNivel.get(0), i);
 			zombiesNivel.remove(0);
-			contadorZombies++;
 			i++;
 		}
+		contadorZombies = 0;
 	}
 	
 	public void cambiarNivel() {

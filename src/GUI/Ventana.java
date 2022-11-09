@@ -140,6 +140,14 @@ public class Ventana extends JFrame{
 		btnMusica.setSelectedIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("stop"))).getImage().getScaledInstance(btnMusica.getWidth(), btnMusica.getHeight(), DO_NOTHING_ON_CLOSE)));
 		btnMusica.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("play"))).getImage().getScaledInstance(btnMusica.getWidth(), btnMusica.getHeight(), DO_NOTHING_ON_CLOSE)));
 		panelMenu.add(btnMusica);
+		btnMusica.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(btnMusica.isSelected()) 
+					miJuego.reproducirMusica();
+				else 
+					miJuego.pararMusica();
+			}
+		});
 		
 		JLabel lblLogoMenu = new JLabel();
 		lblLogoMenu.setIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("menu"))));

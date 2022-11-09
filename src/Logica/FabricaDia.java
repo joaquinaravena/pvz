@@ -5,8 +5,7 @@ import Entidades.Zombie;
 
 public class FabricaDia extends AbstractFactory {
 	protected Juego miJuego;
-	//atributo config
-	
+	//atributo properties??
 	public FabricaDia(Juego juego) {
 		miJuego = juego;
 		//set config en dia
@@ -27,15 +26,15 @@ public class FabricaDia extends AbstractFactory {
 	}
 
 	public Planta crearPlantaDebil() {
-		return new Planta(25,100,50,miJuego.getVentana(), "plantaDebil");
+		return new Planta(50,100,50,miJuego.getVentana(), "plantaDebil");
 	}
 
 	public Planta crearPlantaMedio() {
-		return new Planta(75,200,75,miJuego.getVentana(), "plantaMedio");
+		return new Planta(100,200,75,miJuego.getVentana(), "plantaMedio");
 	}
 
 	public Planta crearPlantaFuerte() {
-		return new Planta(1000,600,200,miJuego.getVentana(), "plantaFuerte");
+		return new Planta(150,600,200,miJuego.getVentana(), "plantaFuerte");
 	}
 
 }
