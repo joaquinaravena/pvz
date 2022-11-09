@@ -33,14 +33,17 @@ public class RelojProyectiles extends Thread{
 		try {
 			while (activo) {
 				Thread.sleep(200);
-				for (Proyectil p: misProyectiles) {
-					p.mover();
+				for(int i=1;i<=6;i++) {
+					miJuego.getFila(i).moverProyectiles();
 				}
-				if (resetear==true)
-					resetearListaProyectiles();
-				else {
-					miJuego.removerProyectiles();
-				}
+				
+				 // if (resetear==true)
+				//	resetearListaProyectiles();
+				//else {
+					//miJuego.removerProyectiles();
+				
+				
+				
 			}
 		}
 		catch(InterruptedException e) {

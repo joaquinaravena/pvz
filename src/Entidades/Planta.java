@@ -1,20 +1,26 @@
 package Entidades;
 
+import javax.swing.ImageIcon;
+
 import GUI.EntidadGrafica;
 import GUI.Ventana;
 
 public class Planta extends Entidad {
 	protected int precio;
 	protected int vida;
-	protected Proyectil miProyectil;
-	
+	protected int daño;
+	protected Lanzable miProyectil;
+	boolean hayZombie;
 	//ancho y alto representan las dimensiones.
 	//Las plantas se crean sin una posición establecida.
 	public Planta(int precio, int vida, int daño, Ventana v, String graf) {
 		this.precio = precio;
 		this.vida = vida;
 		miProyectil = new Proyectil(daño);
+		miProyectil.getEntidadGrafica().getGrafica().setIcon(new ImageIcon("/Recursos/pea.png"));
+		this.daño=daño;
 		entidadGrafica = new EntidadGrafica(v, this, graf);
+		hayZombie=false;
 	}
 
 	public void restarVida(int i) {
@@ -27,20 +33,23 @@ public class Planta extends Entidad {
 		}
 	}
 	public void realizarAccion() {
-		miFila.agregarProyectiles(miProyectil);
+		if(hayZombie) {
+			Lanzable aDisparar=miProyectil.clone();
+			miFila.agregarProyectiles(aDisparar);
+		}
 	}
-	//Se puede sacar si la colision la maneja únicamente el zombie
-	public void chocarZombie(Zombie z) {
-		
+	
+	public int getDaño() {
+		return daño;
 	}
 	public int getPrecio() {
 		return precio;
 	}
-	public Proyectil getProyectil() {
+	public Lanzable getProyectil() {
 		return miProyectil;
 	}
 	public Planta clone(Ventana v) {
-		Planta p = new Planta(this.precio, this.vida, this.getProyectil().getValorAccion() ,v, this.entidadGrafica.getRutaGrafica());
+		Planta p = new Planta(this.precio, this.vida, this.daño ,v, this.entidadGrafica.getRutaGrafica());
 		return p;
 	}
 }

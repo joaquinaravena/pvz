@@ -94,7 +94,6 @@ public class Ventana extends JFrame{
 				} catch (IOException ex) {
 					System.out.println(ex.getMessage());
 				}
-				miJuego.setFabricaDia();
 				crearPanelModo();
 				miJuego.jugar();
 			}
@@ -115,7 +114,6 @@ public class Ventana extends JFrame{
 				} catch (IOException ex) {
 					System.out.println(ex.getMessage());
 				}
-				miJuego.setFabricaNoche();
 				crearPanelModo();
 				miJuego.jugar();
 			}

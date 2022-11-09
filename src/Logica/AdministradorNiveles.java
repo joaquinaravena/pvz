@@ -16,13 +16,13 @@ public class AdministradorNiveles {
 	public void nuevoNivel(int nivelElegido) {
 		Nivel elegido=niveles[nivelElegido];
 		for(int i=0;i<elegido.getCantidadZombiesDebiles();i++) {
-			juego.agregarZombieNivel(juego.getFactory().crearZombieDebil());
+			juego.agregarZombieNivel(juego.getBuilder().crearZombieDebil());
 		}
 		for(int i=0;i<elegido.getCantidadZombiesMedianos();i++) {
-			juego.agregarZombieNivel(juego.getFactory().crearZombieMediano());
+			juego.agregarZombieNivel(juego.getBuilder().crearZombieMediano());
 		}
 		for(int i=0;i<elegido.getCantidadZombiesFuertes();i++) {
-			juego.agregarZombieNivel(juego.getFactory().crearZombieFuerte());
+			juego.agregarZombieNivel(juego.getBuilder().crearZombieFuerte());
 		}
 
 	}

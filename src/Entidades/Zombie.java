@@ -55,7 +55,7 @@ public class Zombie extends Entidad {
 	}
 	
 	 
-	public void visitarProyectil(Proyectil p) {
+	public void visitarProyectil(Lanzable p) {
 		p.chocar(this);
 	}
 	

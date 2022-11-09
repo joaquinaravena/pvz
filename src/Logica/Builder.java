@@ -1,17 +1,12 @@
 package Logica;
-
-import Entidades.Planta;
 import Entidades.Zombie;
-
-public class FabricaDia extends AbstractFactory {
-	protected Juego miJuego;
-	//atributo properties??
-	public FabricaDia(Juego juego) {
+import Entidades.Planta;
+public class Builder{
+protected Juego miJuego;
+	//Ver como hacen el properties
+	public Builder(Juego juego) {
 		miJuego = juego;
-		//set config en dia
 	}
-	
-	
 	public Zombie crearZombieDebil() {
 		Zombie z = new Zombie(200,34,1,miJuego.getVentana(), "zombieDebil");
 		z.setX(z.getEntidadGrafica().getGrafica().getX());
@@ -38,7 +33,6 @@ public class FabricaDia extends AbstractFactory {
 	}
 
 	public Planta crearPlantaFuerte() {
-		return new Planta(150,600,200,miJuego.getVentana(), "plantaFuerte");
+		return new Planta(150,600,200,miJuego.getVentana(), "planaFuerte");
 	}
-
 }

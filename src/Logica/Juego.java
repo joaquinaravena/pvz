@@ -16,7 +16,7 @@ public class Juego {
 	protected AdministradorNiveles administrador;
 	protected Fila[] filas;
 	protected List<Zombie> zombiesNivel;
-	protected AbstractFactory fabrica; 
+	protected Builder builder; 
 	protected int contadorZombies;
 	protected List<Zombie> zombiesAEliminar;
 	protected List<Planta> plantasAEliminar;
@@ -41,6 +41,7 @@ public class Juego {
 		zombiesAEliminar = new ArrayList<Zombie>();
 		plantasAEliminar = new ArrayList<Planta>();
 		proyectilesAEliminar = new ArrayList<Proyectil>();
+		builder=new Builder(this);
 	}
 	
 	public void moverZombies() {
@@ -76,16 +77,8 @@ public class Juego {
 		zombiesNivel.add(z);
 	}
 	
-	public void setFabricaDia() {
-		fabrica = new FabricaDia(this);
-	}
-	
-	public void setFabricaNoche() {
-		fabrica = new FabricaNoche(this);
-	}
-	
-	public AbstractFactory getFactory() {
-		return fabrica;
+	public Builder getBuilder() {
+		return builder;
 	}
 	public Ventana getVentana() {
 		return miVentana;
@@ -159,9 +152,9 @@ public class Juego {
 	public void setPlantaEnEspera(int i) {
 		switch(i) {
 			case 0: plantaEnEspera = null;break;
-			case 1: plantaEnEspera = fabrica.crearPlantaDebil();break;
-			case 2: plantaEnEspera = fabrica.crearPlantaMedio();break;
-			case 3: plantaEnEspera = fabrica.crearPlantaFuerte();break;
+			case 1: plantaEnEspera = builder.crearPlantaDebil();break;
+			case 2: plantaEnEspera = builder.crearPlantaMedio();break;
+			case 3: plantaEnEspera = builder.crearPlantaFuerte();break;
 		}
 	}
 	

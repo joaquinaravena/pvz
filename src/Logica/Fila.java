@@ -4,14 +4,14 @@ import java.util.*;
 public class Fila {
 	private List<Zombie> misZombies;
 	private List<Planta> misPlantas;
-	private List<Proyectil> misProyectiles;
+	private List<Lanzable> misProyectiles;
 	protected Juego miJuego;
 	
 	public Fila(Juego j) {
 		miJuego = j;
 		misZombies=new ArrayList<Zombie>();
 		misPlantas=new ArrayList<Planta>(9);
-		misProyectiles=new ArrayList<Proyectil>();
+		misProyectiles=new ArrayList<Lanzable>();
 	}
 	
 	public Juego getJuego() {
@@ -36,11 +36,11 @@ public class Fila {
 		misZombies.remove(z);
 	}
 	
-	public void agregarProyectiles(Proyectil p) {
+	public void agregarProyectiles(Lanzable p) {
 		misProyectiles.add(p);
 	}
 	
-	public void removerProyectil(Proyectil p) {
+	public void removerProyectil(Lanzable p) {
 		misProyectiles.remove(p);
 	}
 	
@@ -50,12 +50,12 @@ public class Fila {
 	
 	public void chequearColisiones() {
 		boolean huboColision=false;
-		Iterator<Proyectil> itProyectiles=misProyectiles.iterator();
+		Iterator<Lanzable> itProyectiles=misProyectiles.iterator();
 		Iterator<Zombie> itZombie=misZombies.iterator();
 		Iterator<Planta> itPlanta=misPlantas.iterator();
 		Zombie auxZombie;
 		Planta auxPlanta;
-		Proyectil auxProyectil;
+		Lanzable auxProyectil;
 		while (itZombie.hasNext()) {//Itero lista de zombies
 			auxZombie=itZombie.next();
 			huboColision=false;
@@ -104,6 +104,11 @@ public class Fila {
 	public void accionPlantas() {
 		for(Planta p: misPlantas)
 			p.realizarAccion();
+	}
+	
+	public void moverProyectiles() {
+		for(Lanzable p: misProyectiles)
+			p.mover();
 	}
 	
 }
