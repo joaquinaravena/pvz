@@ -14,7 +14,7 @@ public class Proyectil extends Lanzable{
 		this.valorAccion = valorAccion;
 		entidadGrafica=new EntidadGrafica(v,this,graf);
 		entidadGrafica.getGrafica().setBounds(0, 20, this.ancho, this.alto);
-		v.borrarGrafica(entidadGrafica);
+		entidadGrafica.borrarGrafica();
 		miFila=f;
 	}
 	

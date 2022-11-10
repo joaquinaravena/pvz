@@ -8,8 +8,11 @@ public class Sol extends Lanzable{
 	public Sol(Ventana v,String graf) {
 		super();
 		contador=0;
+		this.alto = 45;
+		this.ancho = 45;
 		entidadGrafica=new EntidadGrafica(v,this,graf);
-		entidadGrafica.getGrafica().setBounds(v.getBordeDerecho(), v.getLinea(getNumeroFila()), entidadGrafica.getGrafica().getIcon().getIconWidth(), entidadGrafica.getGrafica().getIcon().getIconHeight());
+		entidadGrafica.getGrafica().setBounds(30, 0, alto, ancho);
+		entidadGrafica.borrarGrafica();
 	}
 	
 	public void mover() {
