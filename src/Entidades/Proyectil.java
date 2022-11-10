@@ -12,7 +12,6 @@ public class Proyectil extends Lanzable{
 	public Proyectil(int valorAccion,Ventana v,String graf,Fila f) {
 		this.valorAccion = valorAccion;
 		entidadGrafica=new EntidadGrafica(v,this,graf);
-		entidadGrafica.getGrafica().setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(v.getPropertiesModo().getProperty("guisante"))).getImage().getScaledInstance(getAncho(), getAlto(), 0)));
 		entidadGrafica.getGrafica().setBounds(v.getBordeDerecho(), v.getLinea(getNumeroFila()), entidadGrafica.getGrafica().getIcon().getIconWidth(), entidadGrafica.getGrafica().getIcon().getIconHeight());
 		miFila=f;
 	}
@@ -24,7 +23,6 @@ public class Proyectil extends Lanzable{
 		getEntidadGrafica().actualizarGrafica();
 	}
 	public void chocar(Zombie z) {
-		System.out.println("Choco");
 		z.restarVida(valorAccion);
 	}
 	public int getValorAccion() {

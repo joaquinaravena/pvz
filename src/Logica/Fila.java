@@ -43,7 +43,6 @@ public class Fila {
 	
 	public void agregarProyectiles(Lanzable p) {
 		misProyectiles.add(p);
-		System.out.println("Proyectiles = "+misProyectiles.size());
 	}
 	
 	public void removerProyectil(Lanzable p) {

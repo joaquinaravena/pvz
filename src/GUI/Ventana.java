@@ -125,7 +125,7 @@ public class Ventana extends JFrame{
 		btnSalir.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 20));
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				miJuego.salir();
 			}
 		});
 		btnSalir.setBounds(352, 369, 162, 50);
@@ -170,23 +170,24 @@ public class Ventana extends JFrame{
 		
 		JToggleButton botonPlanta1 = new JToggleButton();
 		botonPlanta1.setBounds(61, 2, 45, 48);
-		botonPlanta1.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propModo.getProperty("plantaDebil"))).getImage().getScaledInstance(botonPlanta1.getWidth(), botonPlanta1.getHeight() , DO_NOTHING_ON_CLOSE)));
+		botonPlanta1.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propModo.getProperty("plantaDebilBoton"))).getImage().getScaledInstance(botonPlanta1.getWidth(), botonPlanta1.getHeight() , DO_NOTHING_ON_CLOSE)));
 		
 		JToggleButton botonPlanta2 = new JToggleButton();
 		botonPlanta2.setBounds(114, 2, 45, 48);
-		botonPlanta2.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propModo.getProperty("plantaMedio"))).getImage().getScaledInstance(botonPlanta2.getWidth(), botonPlanta2.getHeight() , DO_NOTHING_ON_CLOSE)));
+		botonPlanta2.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propModo.getProperty("plantaMedioBoton"))).getImage().getScaledInstance(botonPlanta2.getWidth(), botonPlanta2.getHeight() , DO_NOTHING_ON_CLOSE)));
 		
 		JToggleButton botonPlanta3 = new JToggleButton();
 		botonPlanta3.setBounds(169, 2, 45, 48);		
-		//botonPlanta3.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propModo.getProperty("plantaFuerte"))).getImage().getScaledInstance(botonPlanta3.getWidth(), botonPlanta3.getHeight() , DO_NOTHING_ON_CLOSE)));
+		botonPlanta3.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propModo.getProperty("plantaFuerteBoton"))).getImage().getScaledInstance(botonPlanta3.getWidth(), botonPlanta3.getHeight() , DO_NOTHING_ON_CLOSE)));
 
 		JToggleButton botonMusica = new JToggleButton();
 		botonMusica.setToolTipText("frena/reproduce la m\u00FAsica");
 		botonMusica.setBounds(220, 2, 45, 48);
-		if(miJuego.reproduciendoMusica())
+		if(!miJuego.reproduciendoMusica())
 			botonMusica.setSelected(true);
 		else
 			botonMusica.setSelected(false);
+			
 		botonMusica.setSelectedIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("stop"))).getImage().getScaledInstance(botonMusica.getWidth(), botonMusica.getHeight(), DO_NOTHING_ON_CLOSE)));
 		botonMusica.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("play"))).getImage().getScaledInstance(botonMusica.getWidth(), botonMusica.getHeight(), DO_NOTHING_ON_CLOSE)));
 		
@@ -297,9 +298,11 @@ public class Ventana extends JFrame{
 					}
 					public void mouseEntered(MouseEvent e) {
 						lblCelda.setBackground(lblCelda.getBackground().brighter());
+						lblCelda.repaint();
 					}
 					public void mouseExited(MouseEvent e) {
 						lblCelda.setBackground(lblCelda.getForeground());
+						lblCelda.repaint();
 					}
 				});
 				panelDia.add(lblCelda);

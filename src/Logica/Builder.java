@@ -33,6 +33,6 @@ protected Juego miJuego;
 	}
 
 	public Planta crearPlantaFuerte() {
-		return new Planta(150,600,200,miJuego.getVentana(), "planaFuerte");
+		return new Planta(150,600,200,miJuego.getVentana(), "plantaFuerte");
 	}
 }

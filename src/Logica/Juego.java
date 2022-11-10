@@ -81,12 +81,15 @@ public class Juego {
 		miRelojPlantas.setearActivo(false);
 		miRelojZombies.setearActivo(false);
 		miRelojProyectiles.setearActivo(false);
-		miRelojMusica.stop();
-		miRelojPlantas.stop();
-		miRelojZombies.stop();
-		miRelojProyectiles.stop();
 	}
 	
+	public void salir() {
+		miRelojPlantas.stop();
+		miRelojZombies.stop();
+		miRelojMusica.stop();
+		miRelojProyectiles.stop();
+		System.exit(0);
+	}
 	public void agregarZombieNivel(Zombie z) {
 		zombiesNivel.add(z);
 	}
@@ -106,7 +109,7 @@ public class Juego {
 
 		if(!zombiesNivel.isEmpty()){
 			if (contadorZombies % 6 == 0 && contadorZombies>0)
-				Oleada();
+				oleada();
 			else {
 				int filaRandom = (int)(Math.random()*6+1);
 				zombiesNivel.get(0).setFila(getFila(filaRandom));
@@ -122,7 +125,7 @@ public class Juego {
 		}
 	}
 	
-	public void Oleada() {
+	public void oleada() {
 		int i = 1;
 		int aleatorio = 0;
 		while (i<=3 && !zombiesNivel.isEmpty()) {

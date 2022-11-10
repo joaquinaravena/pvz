@@ -13,7 +13,7 @@ public class EntidadGrafica {
 		//la grafica deberia pasarse por parametro que clave de property tiene q asignar
 		miGrafica = new JLabel();
 		rutaG = s;
-		miGrafica.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(v.getPropertiesModo().getProperty("zombieDebil"))).getImage().getScaledInstance(e.getAncho(), e.getAlto(), 0)));
+		miGrafica.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(v.getPropertiesModo().getProperty(rutaG))).getImage().getScaledInstance(e.getAncho(), e.getAlto(), 0)));
 		miGrafica.setBounds(v.getBordeDerecho(), v.getLinea(e.getNumeroFila()), miGrafica.getIcon().getIconWidth(), miGrafica.getIcon().getIconHeight());
 		ventana = v;
 		actualizarGrafica();
