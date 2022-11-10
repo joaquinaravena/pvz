@@ -145,7 +145,7 @@ public class Fila {
 		List<Lanzable> aRemover=new ArrayList<Lanzable>();
 		for(Lanzable p: misProyectiles) {
 			p.mover();
-			if(p.getX()>=miJuego.getVentana().getBordeDerecho())
+			if(p.getX()>=miJuego.getVentana().getBordeDerecho() || p.getY()>=miJuego.getVentana().getBordeInferior())
 				aRemover.add(p);
 		}
 		for(Lanzable p:aRemover)

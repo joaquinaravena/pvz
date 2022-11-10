@@ -16,7 +16,6 @@ public class RelojProyectiles extends Thread{
 	public void run() {
 		try {
 			while (activo) {
-				
 				Thread.sleep(100);
 				for(int i=1;i<=6;i++) {
 					miJuego.getFila(i).moverProyectiles();

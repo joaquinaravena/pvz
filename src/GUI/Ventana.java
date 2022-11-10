@@ -377,4 +377,9 @@ public class Ventana extends JFrame{
 	public Properties getPropertiesModo() {
 		return propModo;
 	}
+	
+	public int getBordeInferior() {
+		return this.getHeight();
+	}
+	
 }
