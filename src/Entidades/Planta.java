@@ -1,6 +1,10 @@
 package Entidades;
+import java.util.ArrayList;
+import java.util.List;
+
 import GUI.EntidadGrafica;
 import GUI.Ventana;
+import Logica.moverZombie;
 
 public class Planta extends Entidad {
 	protected int precio;
@@ -8,6 +12,7 @@ public class Planta extends Entidad {
 	protected int daño;
 	protected Lanzable miProyectil;
 	protected boolean tieneProyectil;
+	protected List<Zombie> zombiesQueMeAtacan;
 	//ancho y alto representan las dimensiones.
 	//Las plantas se crean sin una posición establecida.
 	public Planta(int precio, int vida, int daño, Ventana v, String graf,Lanzable proyectil) {
@@ -16,6 +21,7 @@ public class Planta extends Entidad {
 		this.daño=daño;
 		entidadGrafica = new EntidadGrafica(v, this, graf);
 		miProyectil = proyectil;
+		zombiesQueMeAtacan=new ArrayList<Zombie>();
 		if(miProyectil==null)
 			tieneProyectil=false;
 		else 
@@ -24,12 +30,19 @@ public class Planta extends Entidad {
 
 	public void restarVida(int i) {
 		vida -= i;
+		if(vida <= 0)
+			morir();
 	}
 	public void morir() {
-		if(vida <= 0) {
-			entidadGrafica.borrarGrafica();
-			//eliminar de las listas
-		}
+			Planta p=miFila.getPlanta((this.x / 74)-2);
+			miProyectil.morir();
+			miFila.getJuego().agregarPlantaAEliminar(p);
+			p.getEntidadGrafica().borrarGrafica();
+			for(Zombie z:zombiesQueMeAtacan) {
+				z.setPlantaAtacada(null);
+				z.setEstrategia(new moverZombie());
+			}
+		
 	}
 	
 
@@ -53,5 +66,10 @@ public class Planta extends Entidad {
 	public Planta clone(Ventana v) {
 		Planta p = new Planta(this.precio, this.vida, this.daño ,v, this.entidadGrafica.getRutaGrafica(),miProyectil);
 		return p;
+	}
+	
+	public void chocar(Zombie z) {
+		zombiesQueMeAtacan.add(z);
+		z.setPlantaAtacada(this);
 	}
 }

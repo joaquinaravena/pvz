@@ -6,7 +6,7 @@ public class moverZombie implements ZombieStrategy {
 	}
 
 	public void realizarAccion(Zombie z){
-		if (z.getX() <= 300) 
+		if (z.getX() <= 100) 
 			z.morir();
 		else {
 			z.setX(z.getX()-10);

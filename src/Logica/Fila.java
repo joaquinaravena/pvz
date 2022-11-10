@@ -27,13 +27,17 @@ public class Fila {
 		misPlantas[pos].setFila(this);
 	}
 	
-	public void removerPlanta(Planta p,int pos) {
+	public void removerPlanta(int pos) {
 		misPlantas[pos]=null;
 	}
 	
 	public void agregarZombie(Zombie z, int fila) {
 		z.setNumeroFila(fila);
 		z.setFila(this);
+		z.setX(z.getEntidadGrafica().getGrafica().getX());
+		z.setY(z.getEntidadGrafica().getGrafica().getY());
+		z.setAncho(z.getEntidadGrafica().getGrafica().getWidth());
+		z.setAlto(z.getEntidadGrafica().getGrafica().getHeight());
 		misZombies.add(z);
 	}
 	
@@ -57,12 +61,12 @@ public class Fila {
 		boolean huboColision=false;
 		Iterator<Lanzable> itProyectiles=misProyectiles.iterator();
 		Iterator<Zombie> itZombie=misZombies.iterator();
-		
 		Zombie auxZombie;
-		
+		int cont=0;
 		Lanzable auxProyectil;
+		List<Lanzable> aRemover;
 		while (itZombie.hasNext()) {//Itero lista de zombies
-			List<Lanzable> aRemover=new ArrayList<Lanzable>();
+			aRemover=new ArrayList<Lanzable>();
 			auxZombie=itZombie.next();
 			huboColision=false;
 			while(itProyectiles.hasNext() && !huboColision) {//Itero lista de proyectiles y si detecto una colision freno.
@@ -74,25 +78,27 @@ public class Fila {
 				}
 					
 			}
-			for(Lanzable p:aRemover){
-				misProyectiles.remove(p);
-				p.getEntidadGrafica().borrarGrafica();
-			}
+				cont=0;
 				huboColision=false;
-			/**
-			while(itPlanta.hasNext() && !huboColision) {//Itero lista de plantas y si detecto una colision freno.
-				auxPlanta=itPlanta.next();
-				huboColision=colisionan(auxZombie,auxPlanta);
-				if(huboColision)
-					auxZombie.visitarPlanta(auxPlanta,miJuego.getVentana());
+			while(!huboColision && cont<9) {//Itero lista de plantas y si detecto una colision freno.
+				if(misPlantas[cont]!= null) {
+						huboColision=verColisiones(auxZombie,misPlantas[cont]);
+						if(huboColision) {
+							auxZombie.visitarPlanta(misPlantas[cont]);
+							auxZombie.setEstrategia(new atacarZombie());
+						}
+					}
+				
+				cont++;
 			}
-			**/
+		
 		}
 	}
 		
 	private Rectangle armarHitboxEntidad(Entidad e) {
-		Dimension dimensionEntidad=new Dimension(e.getEntidadGrafica().getGrafica().getIcon().getIconWidth(),e.getEntidadGrafica().getGrafica().getIcon().getIconHeight());
-		Point ubicacionEntidad=new Point(e.getEntidadGrafica().getGrafica().getX(),e.getEntidadGrafica().getGrafica().getY());
+		Dimension dimensionEntidad=new Dimension(e.getAncho(),e.getAlto());
+		Point ubicacionEntidad=new Point(e.getX(),e.getY());
+		
 		Rectangle hitboxEntidad=new Rectangle(ubicacionEntidad,dimensionEntidad);
 		return hitboxEntidad;
 	}
@@ -104,7 +110,6 @@ public class Fila {
 	 * @return true si hubo colision, false caso contrario.
 	 */
 	private boolean verColisiones(Entidad a,Entidad b) {
-		
 		Rectangle hitboxEntidadA=armarHitboxEntidad(a);
 		Rectangle hitboxEntidadB=armarHitboxEntidad(b);
 		boolean colisiono=false;		

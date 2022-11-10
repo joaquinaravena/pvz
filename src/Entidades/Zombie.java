@@ -48,8 +48,8 @@ public class Zombie extends Entidad {
 	    miFila.getJuego().agregarZombieAEliminar(this);
 	}
 	
-	public void visitarPlanta(Planta p,Ventana v) {
-		p.realizarAccion(v);
+	public void visitarPlanta(Planta p) {
+		p.chocar(this);
 	}
 	
 	 

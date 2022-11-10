@@ -21,6 +21,13 @@ public abstract class Entidad {
 	public void setY(int y) {
 		this.y = y;
 	}
+	public void setAncho(int ancho) {
+		this.ancho = ancho;
+	}
+	public void setAlto(int alto) {
+		this.alto = alto;
+	}
+	
 	public int getX() {
 		return x;
 	}

@@ -5,11 +5,9 @@ import Entidades.Zombie;
 public class atacarZombie implements ZombieStrategy{
 
 	
-	public atacarZombie() {
-		
+	public atacarZombie() {		
 	}
 	public void realizarAccion(Zombie z){
-		// TODO Auto-generated method stub
-		
+			z.getPlantaAtacada().restarVida(z.getDaño());
 	}
 }

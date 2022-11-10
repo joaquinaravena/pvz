@@ -159,10 +159,13 @@ public class Juego {
 		int posicionFila=(y / 65);
 		if(filas[posicionFila].puedoPonerPlanta(posicionArreglo)) {
 			filas[posicionFila].agregarPlanta(plantaEnEspera, posicionArreglo);
+			filas[posicionFila].getPlanta(posicionArreglo).setAncho(plantaEnEspera.getEntidadGrafica().getGrafica().getWidth());
+			filas[posicionFila].getPlanta(posicionArreglo).setAlto(plantaEnEspera.getEntidadGrafica().getGrafica().getHeight());
 			filas[posicionFila].getPlanta(posicionArreglo).setX(x);
 			filas[posicionFila].getPlanta(posicionArreglo).setY(y);
 			filas[posicionFila].getPlanta(posicionArreglo).setFila(filas[posicionFila]);
 			filas[posicionFila].getPlanta(posicionArreglo).getProyectil().setFila(filas[posicionFila]);
+			filas[posicionFila].getPlanta(posicionArreglo).getProyectil().setY(y);
 		}
 		
 	}
@@ -240,11 +243,8 @@ public class Juego {
 	}
 	
 	public void removerPlantas() {
-		int cont=0;
 		for (Planta p: plantasAEliminar) {
-			p.getFila().removerPlanta(p,cont);
-			p.getEntidadGrafica().borrarGrafica();
-			cont++;
+			p.morir();
 		}
 	}
 	
