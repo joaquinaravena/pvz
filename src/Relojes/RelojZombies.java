@@ -19,7 +19,7 @@ public class RelojZombies extends Thread{
 				Thread.sleep(300);
 				miJuego.moverZombies();
 				contador++;
-				if(contador == 5) {
+				if(contador == 18) {
 					miJuego.agregarZombieActivo();
 					contador = 0;
 				}
