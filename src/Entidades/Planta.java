@@ -1,7 +1,4 @@
 package Entidades;
-
-import javax.swing.ImageIcon;
-
 import GUI.EntidadGrafica;
 import GUI.Ventana;
 
@@ -10,14 +7,19 @@ public class Planta extends Entidad {
 	protected int vida;
 	protected int daño;
 	protected Lanzable miProyectil;
+	protected boolean tieneProyectil;
 	//ancho y alto representan las dimensiones.
 	//Las plantas se crean sin una posición establecida.
-	public Planta(int precio, int vida, int daño, Ventana v, String graf) {
+	public Planta(int precio, int vida, int daño, Ventana v, String graf,Lanzable proyectil) {
 		this.precio = precio;
 		this.vida = vida;
 		this.daño=daño;
 		entidadGrafica = new EntidadGrafica(v, this, graf);
-		miProyectil = new Proyectil(daño,v,"guisante",null);
+		miProyectil = proyectil;
+		if(miProyectil==null)
+			tieneProyectil=false;
+		else 
+			tieneProyectil=true;
 	}
 
 	public void restarVida(int i) {
@@ -49,7 +51,7 @@ public class Planta extends Entidad {
 		return miProyectil;
 	}
 	public Planta clone(Ventana v) {
-		Planta p = new Planta(this.precio, this.vida, this.daño ,v, this.entidadGrafica.getRutaGrafica());
+		Planta p = new Planta(this.precio, this.vida, this.daño ,v, this.entidadGrafica.getRutaGrafica(),miProyectil);
 		return p;
 	}
 }

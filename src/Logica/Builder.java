@@ -1,6 +1,8 @@
 package Logica;
 import Entidades.Zombie;
 import Entidades.Planta;
+import Entidades.Proyectil;
+import Entidades.Sol;
 public class Builder{
 protected Juego miJuego;
 	//Ver como hacen el properties
@@ -25,14 +27,14 @@ protected Juego miJuego;
 	}
 
 	public Planta crearPlantaDebil() {
-		return new Planta(50,100,50,miJuego.getVentana(), "plantaDebil");
+		return new Planta(50,100,50,miJuego.getVentana(), "plantaDebil" , new Sol(miJuego.getVentana(),"sol"));
 	}
 
 	public Planta crearPlantaMedio() {
-		return new Planta(100,200,75,miJuego.getVentana(), "plantaMedio");
+		return new Planta(100,200,75,miJuego.getVentana(), "plantaMedio" , new Proyectil(75,miJuego.getVentana(),"guisante",null));
 	}
 
 	public Planta crearPlantaFuerte() {
-		return new Planta(150,600,200,miJuego.getVentana(), "plantaFuerte");
+		return new Planta(150,600,200,miJuego.getVentana(), "plantaFuerte",null);
 	}
 }

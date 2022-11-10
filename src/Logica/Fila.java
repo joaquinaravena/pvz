@@ -62,6 +62,7 @@ public class Fila {
 		
 		Lanzable auxProyectil;
 		while (itZombie.hasNext()) {//Itero lista de zombies
+			List<Lanzable> aRemover=new ArrayList<Lanzable>();
 			auxZombie=itZombie.next();
 			huboColision=false;
 			while(itProyectiles.hasNext() && !huboColision) {//Itero lista de proyectiles y si detecto una colision freno.
@@ -69,10 +70,15 @@ public class Fila {
 				huboColision=verColisiones(auxZombie,auxProyectil);
 				if(huboColision) {
 					auxZombie.visitarProyectil(auxProyectil);
+					aRemover.add(auxProyectil);
 				}
 					
 			}
-			huboColision=false;
+			for(Lanzable p:aRemover){
+				misProyectiles.remove(p);
+				p.getEntidadGrafica().borrarGrafica();
+			}
+				huboColision=false;
 			/**
 			while(itPlanta.hasNext() && !huboColision) {//Itero lista de plantas y si detecto una colision freno.
 				auxPlanta=itPlanta.next();
