@@ -29,15 +29,17 @@ public class Planta extends Entidad {
 	}
 
 	public void restarVida(int i) {
-		vida -= i;
 		if(vida <= 0)
 			morir();
+		else
+			vida -= i;		
 	}
 	public void morir() {
-			Planta p=miFila.getPlanta((this.x / 74)-2);
+			miFila.borrarPlanta((this.x / 74)-2);
 			miProyectil.morir();
-			miFila.getJuego().agregarPlantaAEliminar(p);
-			p.getEntidadGrafica().borrarGrafica();
+			miFila.getJuego().agregarPlantaAEliminar(this);
+			getEntidadGrafica().borrarGrafica();
+			System.out.println(zombiesQueMeAtacan.size());
 			for(Zombie z:zombiesQueMeAtacan) {
 				z.setPlantaAtacada(null);
 				z.setEstrategia(new moverZombie());
@@ -69,7 +71,9 @@ public class Planta extends Entidad {
 	}
 	
 	public void chocar(Zombie z) {
-		zombiesQueMeAtacan.add(z);
-		z.setPlantaAtacada(this);
+		if(z.getPlantaAtacada()==null) {
+			zombiesQueMeAtacan.add(z);
+			z.setPlantaAtacada(this);
+		}
 	}
 }
