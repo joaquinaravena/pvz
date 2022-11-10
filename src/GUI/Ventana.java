@@ -30,6 +30,8 @@ import java.awt.event.MouseEvent;
 import java.awt.GridLayout;
 import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.awt.event.ContainerAdapter;
+import java.awt.event.ContainerEvent;
 
 @SuppressWarnings("serial")
 public class Ventana extends JFrame{
@@ -283,7 +285,6 @@ public class Ventana extends JFrame{
 					lblCelda.setBackground(new Color(50, 205, 50));
 					lblCelda.setForeground(new Color(50, 205, 50));
 				}
-				
 				lblCelda.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
@@ -309,8 +310,6 @@ public class Ventana extends JFrame{
 			}
 		
 		JLabel lblFondo = new JLabel();
-		
-		
 		lblFondo.setIgnoreRepaint(true);
 		lblFondo.setBounds(0, 0, 884, 467);
 		lblFondo.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propModo.getProperty("fondo"))).getImage().getScaledInstance(lblFondo.getWidth(), lblFondo.getHeight(), DO_NOTHING_ON_CLOSE)));
@@ -324,12 +323,16 @@ public class Ventana extends JFrame{
 	public int getLinea(int i) {
 		return i*63;
 	}
+	public int getBordeInferior() {
+		return this.getHeight();
+	}
 	public void actualizarGrafica(EntidadGrafica eg) {
 		getContentPane().add(eg.getGrafica(), 0);
 		getContentPane().repaint();
 		
 	}
 	public void borrarGrafica(EntidadGrafica eg) {
+		eg.getGrafica().setVisible(false);
 		getContentPane().remove(eg.getGrafica());
 		getContentPane().repaint();
 	}
@@ -376,10 +379,6 @@ public class Ventana extends JFrame{
 	}
 	public Properties getPropertiesModo() {
 		return propModo;
-	}
-	
-	public int getBordeInferior() {
-		return this.getHeight();
 	}
 	
 }
