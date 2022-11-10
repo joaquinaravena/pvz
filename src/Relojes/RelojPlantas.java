@@ -1,8 +1,5 @@
 package Relojes;
 
-import java.util.*;
-
-import Entidades.*;
 import Logica.Juego;
 
 public class RelojPlantas extends Thread{
@@ -18,7 +15,7 @@ public class RelojPlantas extends Thread{
 	public void run() {
 		try {
 			while (activo) {
-				Thread.sleep(2000);
+				Thread.sleep(2500);
 				miJuego.accionPlantas();
 			}
 		}

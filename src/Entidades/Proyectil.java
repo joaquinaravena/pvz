@@ -1,6 +1,5 @@
 package Entidades;
 
-import javax.swing.ImageIcon;
 
 import GUI.EntidadGrafica;
 import GUI.Ventana;
@@ -10,9 +9,12 @@ public class Proyectil extends Lanzable{
 	protected int valorAccion;
 	
 	public Proyectil(int valorAccion,Ventana v,String graf,Fila f) {
+		this.ancho = 30;
+		this.alto = 30;
 		this.valorAccion = valorAccion;
 		entidadGrafica=new EntidadGrafica(v,this,graf);
-		entidadGrafica.getGrafica().setBounds(v.getBordeDerecho(), v.getLinea(getNumeroFila()), entidadGrafica.getGrafica().getIcon().getIconWidth(), entidadGrafica.getGrafica().getIcon().getIconHeight());
+		entidadGrafica.getGrafica().setBounds(0, 20, this.ancho, this.alto);
+		v.borrarGrafica(entidadGrafica);
 		miFila=f;
 	}
 	

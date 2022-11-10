@@ -1,8 +1,5 @@
 package Relojes;
 
-import java.util.*;
-
-import Entidades.*;
 import Logica.Juego;
 
 public class RelojProyectiles extends Thread{
@@ -20,7 +17,7 @@ public class RelojProyectiles extends Thread{
 		try {
 			while (activo) {
 				
-				Thread.sleep(400);
+				Thread.sleep(100);
 				for(int i=1;i<=6;i++) {
 					miJuego.getFila(i).moverProyectiles();
 				}

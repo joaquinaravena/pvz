@@ -1,7 +1,5 @@
 package Relojes;
-import java.util.*;
 
-import Entidades.*;
 import Logica.*;
 
 public class RelojZombies extends Thread{

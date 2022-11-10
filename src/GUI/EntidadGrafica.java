@@ -10,7 +10,6 @@ public class EntidadGrafica {
 	private String rutaG;
 	
 	public EntidadGrafica(Ventana v, Entidad e, String s) {
-		//la grafica deberia pasarse por parametro que clave de property tiene q asignar
 		miGrafica = new JLabel();
 		rutaG = s;
 		miGrafica.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(v.getPropertiesModo().getProperty(rutaG))).getImage().getScaledInstance(e.getAncho(), e.getAlto(), 0)));
