@@ -22,8 +22,7 @@ public class Juego {
 	protected List<Zombie> zombiesAEliminar;
 	protected List<Planta> plantasAEliminar;
 	protected List<Lanzable> lanzablesAEliminar;
-	protected boolean reseteoPlantas;
-	protected boolean reseteoProyectiles;
+	
 	
 	public Juego(Ventana v) {
 		miRelojMusica = new RelojMusica();
@@ -45,31 +44,17 @@ public class Juego {
 		plantasAEliminar = new ArrayList<Planta>();
 		lanzablesAEliminar = new ArrayList<Lanzable>();
 		builder=new Builder(this);
-		reseteoPlantas = false;
-		reseteoProyectiles = false;
 	}
 	
 	public void accionPlantas() {
 		removerPlantas();
 		for (int i=0; i<6; i++)
-			if (reseteoPlantas==true) {
-				filas[i].resetearListaPlantas();
-				reseteoPlantas = false;
-			}
-			else {
 				filas[i].accionPlantas();
-			}
 	}
 	
 	public void accionLanzables() {
 		for (int i=0; i<6; i++)
-			if (reseteoPlantas==true) {
-				filas[i].resetearListaLanzables();
-				reseteoProyectiles = false;
-			}
-			else {
 				filas[i].moverLanzables();
-			}
 	}
 	
 	public void jugar(){
@@ -82,6 +67,10 @@ public class Juego {
 	}
 		
 	public void terminarJuego(boolean gane) {
+		if(gane)
+			miVentana.ganarJuego();
+		else
+			miVentana.gameOver();
 		miRelojPlantas.setearActivo(false);
 		miRelojZombies.setearActivo(false);
 		miRelojProyectiles.setearActivo(false);
@@ -97,12 +86,7 @@ public class Juego {
 		plantasAEliminar = new ArrayList<Planta>();
 		lanzablesAEliminar = new ArrayList<Lanzable>();
 		contadorZombies = 0;
-		reseteoPlantas = false;
-		reseteoProyectiles = false; 
-		if(gane)
-			miVentana.ganarJuego();
-		else
-			miVentana.gameOver();
+		
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -115,6 +99,7 @@ public class Juego {
 	}
 	
 	public void oleada() {
+		System.out.println("oleada");
 		int i = 1;
 		int aleatorio = 0;
 		while (i<=3 && !zombiesNivel.isEmpty()) {
@@ -125,7 +110,6 @@ public class Juego {
 			i++;
 			aleatorio = aleatorio + 2;
 		}
-		contadorZombies = 0;
 	}
 	
 	public void cambiarNivel() {
@@ -133,12 +117,17 @@ public class Juego {
 		if (nivelActual==2)
 			terminarJuego(true);
 		else {
-			System.out.println("cambio");
-			for (int i=1; i<=6; i++) 
-				System.out.println(filas[i-1].hayZombies());
-			System.out.println(zombiesNivel.isEmpty());
-			reseteoPlantas = true;
-			reseteoProyectiles = true;
+			miRelojPlantas.setearActivo(false);
+			miRelojZombies.setearActivo(false);
+			miRelojProyectiles.setearActivo(false);
+			for(int i=0;i<6;i++) {
+				filas[i].resetearListaLanzables();
+				filas[i].resetearListaPlantas();
+			}
+			miRelojPlantas.setearActivo(true);
+			miRelojZombies.setearActivo(true);
+			miRelojProyectiles.setearActivo(true);
+			//llamar a ventana metodo de joaco
 			administrador.nuevoNivel(nivelActual);
 		}
 	}
@@ -154,15 +143,17 @@ public class Juego {
 		zombiesNivel.add(z);
 	}
 	
-	public void agregarZombieActivo() {
-
+	public void agregarZombieActivo() { 
 		boolean hayZombies = false;
 		for (int i=1; i<=6 && !hayZombies; i++) 
 			hayZombies = filas[i-1].hayZombies();
-
-		if(!zombiesNivel.isEmpty()){
-			if (contadorZombies % 6 == 0 && contadorZombies>0)
+		if (!hayZombies && zombiesNivel.isEmpty())
+			cambiarNivel();
+		if (!zombiesNivel.isEmpty()) {
+			if (contadorZombies % 6 == 0 && contadorZombies>0) {
 				oleada();
+				contadorZombies++;
+			}
 			else {
 				int filaRandom = (int)(Math.random()*6+1);
 				zombiesNivel.get(0).setFila(getFila(filaRandom));
@@ -172,11 +163,8 @@ public class Juego {
 				}
 			}
 		
-		else {
-			if (hayZombies==false)
-				cambiarNivel();
-		}
 	}
+	
 	
 	public void agregarPlanta(int x,int y) {
 		int posicionArreglo= (x / 74)-2;

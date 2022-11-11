@@ -122,14 +122,19 @@ public class Fila {
 	public void resetearListaPlantas() {
 		int cont=0;
 		for (Planta p: misPlantas) {
-			p.getEntidadGrafica().borrarGrafica();
+			if (p!=null) {
+				p.getEntidadGrafica().borrarGrafica();
+			}
 			misPlantas[cont]=null;
 			cont++;
 		}
 	}
 	
 	public void resetearListaLanzables() {
-		for (Lanzable p: misLanzables) {
+		List<Lanzable> lanzablesClone = new CopyOnWriteArrayList<Lanzable>(misLanzables);
+		Iterator<Lanzable> itLanzables = lanzablesClone.iterator();
+		while(itLanzables.hasNext()) {
+			Lanzable p = itLanzables.next();
 			p.getEntidadGrafica().borrarGrafica();
 			misLanzables.remove(p);
 		}
@@ -160,7 +165,7 @@ public class Fila {
 	}
 	
 	public boolean hayZombies() {
-		return misZombies.isEmpty();
+		return !misZombies.isEmpty();
 	}
 	
 	public Planta getPlanta(int i) {

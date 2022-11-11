@@ -48,6 +48,7 @@ public class Zombie extends Entidad {
 	
 	public void morir(){
 		miFila.getJuego().agregarZombieAEliminar(this);
+		//miFila.getJuego().chequearCambioDeNivel();
 	}
 	
 	public void visitarPlanta(Planta p) {
