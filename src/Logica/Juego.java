@@ -224,8 +224,7 @@ public class Juego {
 	
 	public void removerLanzables() {
 		for (Lanzable p: lanzablesAEliminar) {
-			p.getFila().removerLanzable(p);
-			p.getEntidadGrafica().borrarGrafica();
+			p.morir();
 		}
 	}
 	
