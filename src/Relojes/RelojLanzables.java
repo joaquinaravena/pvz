@@ -17,9 +17,8 @@ public class RelojLanzables extends Thread{
 		try {
 			while (activo) {
 				Thread.sleep(100);
-				for(int i=1;i<=6;i++) {
-					miJuego.getFila(i).moverLanzables();
-				}
+				miJuego.removerLanzables();
+				miJuego.accionLanzables();
 			}
 		}
 		catch(InterruptedException e) {

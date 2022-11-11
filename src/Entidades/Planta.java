@@ -51,6 +51,7 @@ public class Planta extends Entidad {
 			aDisparar.setX(x);
 			aDisparar.setY(y);
 			aDisparar.getEntidadGrafica().getGrafica().setLocation(x, y);
+			aDisparar.setFila(miFila);
 			miFila.agregarLanzable(aDisparar);
 	}
 	

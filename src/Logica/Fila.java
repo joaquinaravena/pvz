@@ -147,15 +147,12 @@ public class Fila {
 	}
 	
 	public void moverLanzables() {
-		List<Lanzable> aRemover=new ArrayList<Lanzable>();
 		for(Lanzable p: misLanzables) {
 			p.mover();
-			if(p.getX()>=miJuego.getVentana().getBordeDerecho() || p.getY()>=miJuego.getVentana().getBordeInferior())
-				aRemover.add(p);
+			if(p.getX()>=miJuego.getVentana().getBordeDerecho() || p.getY()>=miJuego.getVentana().getBordeInferior()) {
+				miJuego.agregarLanzableAEliminar(p);
+			}
 		}
-		for(Lanzable p:aRemover)
-			misLanzables.remove(p);
-			
 	}
 	
 	public boolean hayZombies() {

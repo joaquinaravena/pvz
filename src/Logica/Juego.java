@@ -61,16 +61,14 @@ public class Juego {
 	}
 	
 	public void accionLanzables() {
-		removerLanzables();
 		for (int i=0; i<6; i++)
 			if (reseteoPlantas==true) {
 				filas[i].resetearListaLanzables();
+				reseteoProyectiles = false;
 			}
 			else {
 				filas[i].moverLanzables();
 			}
-		if (reseteoProyectiles==true)
-			reseteoProyectiles = false;
 	}
 	
 	public void jugar(){
