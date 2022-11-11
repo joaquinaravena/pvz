@@ -35,13 +35,7 @@ public class Planta extends Entidad {
 			vida -= i;		
 	}
 	public void morir() {
-			miFila.borrarPlanta((this.x/74)-2);
-			miFila.getJuego().agregarLanzableAEliminar(miLanzable);
-			getEntidadGrafica().borrarGrafica();
-			for(Zombie z:zombiesQueMeAtacan) {
-				z.setPlantaAtacada(null);
-				z.setEstrategia(new moverZombie());
-			}
+			miFila.getJuego().agregarPlantaAEliminar(this);
 		
 	}
 	
@@ -74,5 +68,9 @@ public class Planta extends Entidad {
 			zombiesQueMeAtacan.add(z);
 			z.setPlantaAtacada(this);
 		}
+	}
+	
+	public List<Zombie> getZombiesAtacan(){
+		return zombiesQueMeAtacan;
 	}
 }

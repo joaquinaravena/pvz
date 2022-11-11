@@ -37,7 +37,6 @@ public class Proyectil extends Lanzable{
 	}
 	
 	public void morir() {
-		miFila.removerLanzable(this);
-		entidadGrafica.borrarGrafica();
+		miFila.getJuego().agregarLanzableAEliminar(this);
 	}
 }

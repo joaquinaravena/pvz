@@ -214,18 +214,28 @@ public class Juego {
 			z.getFila().removerZombie(z);
 			z.getEntidadGrafica().borrarGrafica();
 		}
+		zombiesAEliminar.clear();
 	}
 	
 	public void removerPlantas() {
 		for (Planta p: plantasAEliminar) {
-			p.morir();
+			p.getFila().borrarPlanta((p.getX()/74)-2);
+			p.getFila().getJuego().agregarLanzableAEliminar(p.getLanzable());
+			p.getEntidadGrafica().borrarGrafica();
+			for(Zombie z: p.getZombiesAtacan()) {
+				z.setPlantaAtacada(null);
+				z.setEstrategia(new moverZombie());
+			}
 		}
+		plantasAEliminar.clear();
 	}
 	
 	public void removerLanzables() {
 		for (Lanzable p: lanzablesAEliminar) {
-			p.morir();
+			p.getFila().removerLanzable(p);
+			p.getEntidadGrafica().borrarGrafica();
 		}
+		lanzablesAEliminar.clear();
 	}
 	
 	//musica
