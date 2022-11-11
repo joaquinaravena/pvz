@@ -38,6 +38,7 @@ public class Ventana extends JFrame{
 	private Juego miJuego;
 	private Properties propMenu;
 	private Properties propModo;
+	private JPanel panelPlantas;
 	/**
 	 * Launch the application.
 	 */
@@ -164,7 +165,7 @@ public class Ventana extends JFrame{
 		setContentPane(panelDia);
 		panelDia.setLayout(null);
 		
-		JPanel panelPlantas = new JPanel();
+		panelPlantas = new JPanel();
 		panelPlantas.setIgnoreRepaint(true);
 		panelPlantas.setBackground(new Color(205, 133, 63));
 		panelPlantas.setBounds(0, 0, 274, 62);
@@ -186,7 +187,7 @@ public class Ventana extends JFrame{
 		botonMusica.setToolTipText("frena/reproduce la m\u00FAsica");
 		botonMusica.setBounds(220, 2, 45, 48);
 		botonMusica.setSelected(true);
-		if(miJuego.reproduciendoMusica())
+		if(!miJuego.reproduciendoMusica())
 			botonMusica.setSelected(false);
 			
 		botonMusica.setSelectedIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("stop"))).getImage().getScaledInstance(botonMusica.getWidth(), botonMusica.getHeight(), DO_NOTHING_ON_CLOSE)));
@@ -287,22 +288,24 @@ public class Ventana extends JFrame{
 				lblCelda.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						if(miJuego.getPlantaEnEspera() != null && lblCelda.getComponentCount() == 0) {
+						if(miJuego.getPlantaEnEspera() != null && (lblCelda.getComponentCount() == 0 || !lblCelda.getComponent(0).isVisible())) { 
+							if(lblCelda.getComponentCount() == 1) 
+								lblCelda.remove(0);
 							JLabel lblPlanta = miJuego.getPlantaEnEspera().getEntidadGrafica().getGrafica();
 							lblPlanta.setBounds(0, 0, lblPlanta.getWidth(), lblPlanta.getHeight());
 							lblCelda.add(lblPlanta);
 							miJuego.agregarPlanta(lblCelda.getX(),lblCelda.getY());
-							controlarBotonesPlantas((JToggleButton)panelPlantas.getComponent(0), (JToggleButton)panelPlantas.getComponent(1), (JToggleButton)panelPlantas.getComponent(2));
+							controlarPlantasAComprar();
 							miJuego.setPlantaEnEspera(0);
 						}
 					}
 					public void mouseEntered(MouseEvent e) {
 						lblCelda.setBackground(lblCelda.getBackground().brighter());
-						lblCelda.repaint();
+						//lblCelda.repaint();
 					}
 					public void mouseExited(MouseEvent e) {
 						lblCelda.setBackground(lblCelda.getForeground());
-						lblCelda.repaint();
+						//lblCelda.repaint();
 					}
 				});
 				panelDia.add(lblCelda);
@@ -313,21 +316,10 @@ public class Ventana extends JFrame{
 		lblFondo.setBounds(0, 0, 884, 467);
 		lblFondo.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propModo.getProperty("fondo"))).getImage().getScaledInstance(lblFondo.getWidth(), lblFondo.getHeight(), DO_NOTHING_ON_CLOSE)));
 		panelDia.add(lblFondo);
-		controlarBotonesPlantas(botonPlanta1, botonPlanta2, botonPlanta3);
+		controlarPlantasAComprar();
 		repaint();	
 	}
-	public int getBordeDerecho() {
-		return this.getWidth();
-	}
-	public int getLinea(int i) {
-		return i*63;
-	}
-	public int getBordeInferior() {
-		return this.getHeight();
-	}
-	public int getFinTablero() {
-		return 150;
-	}
+	
 	public void actualizarGrafica(EntidadGrafica eg) {
 		eg.getGrafica().setVisible(true);
 		getContentPane().add(eg.getGrafica(), 0);
@@ -354,7 +346,10 @@ public class Ventana extends JFrame{
 		repaint();
 	}
 	
-	private void controlarBotonesPlantas(JToggleButton planta1, JToggleButton planta2, JToggleButton planta3) {
+	public void controlarPlantasAComprar() {
+		JToggleButton planta1 = (JToggleButton)panelPlantas.getComponent(0);
+		JToggleButton planta2 = (JToggleButton)panelPlantas.getComponent(1);
+		JToggleButton planta3 = (JToggleButton)panelPlantas.getComponent(2);
 		planta1.setSelected(false);
 		planta2.setSelected(false);
 		planta3.setSelected(false);
@@ -375,12 +370,23 @@ public class Ventana extends JFrame{
 			planta2.setEnabled(false);
 			planta3.setEnabled(false);
 		}
-
 	}
-	public void controlarPlantasAComprar() {
-		//controlarBotonesPlantas()
-	}
+	
+	//getters
+	
 	public Properties getPropertiesModo() {
 		return propModo;
+	}
+	public int getBordeDerecho() {
+		return this.getWidth();
+	}
+	public int getLinea(int i) {
+		return i*64;
+	}
+	public int getBordeInferior() {
+		return this.getHeight();
+	}
+	public int getFinTablero() {
+		return 150;
 	}
 }

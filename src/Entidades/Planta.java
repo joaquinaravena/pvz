@@ -35,9 +35,8 @@ public class Planta extends Entidad {
 			vida -= i;		
 	}
 	public void morir() {
-			miFila.borrarPlanta((this.x / 74)-2);
+			miFila.borrarPlanta((this.x/74)-2);
 			miProyectil.morir();
-			miFila.getJuego().agregarPlantaAEliminar(this);
 			getEntidadGrafica().borrarGrafica();
 			for(Zombie z:zombiesQueMeAtacan) {
 				z.setPlantaAtacada(null);

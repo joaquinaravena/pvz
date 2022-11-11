@@ -17,13 +17,14 @@ public class RelojZombies extends Thread{
 		try {
 			while (activo) {
 				Thread.sleep(300);
+				miJuego.removerZombies();
 				miJuego.moverZombies();
 				contador++;
-				if(contador == 18) {
+				if(contador == 20) {
 					miJuego.agregarZombieActivo();
 					contador = 0;
 				}
-				miJuego.removerZombies();
+				
 			}
 		}
 		catch(InterruptedException e) {

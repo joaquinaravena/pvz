@@ -2,12 +2,12 @@ package Relojes;
 
 import Logica.Juego;
 
-public class RelojProyectiles extends Thread{
+public class RelojLanzables extends Thread{
 	protected boolean activo;
 	protected boolean resetear;
 	protected Juego miJuego;
 	
-	public RelojProyectiles(Juego j) {
+	public RelojLanzables(Juego j) {
 		activo = true;
 		miJuego = j;
 	}
@@ -18,7 +18,7 @@ public class RelojProyectiles extends Thread{
 			while (activo) {
 				Thread.sleep(100);
 				for(int i=1;i<=6;i++) {
-					miJuego.getFila(i).moverProyectiles();
+					miJuego.getFila(i).moverLanzables();
 				}
 			}
 		}

@@ -8,14 +8,14 @@ import java.util.*;
 public class Fila {
 	private List<Zombie> misZombies;
 	private Planta[] misPlantas;
-	private List<Lanzable> misProyectiles;
+	private List<Lanzable> misLanzables;
 	protected Juego miJuego;
 	
 	public Fila(Juego j) {
 		miJuego = j;
 		misZombies=new ArrayList<Zombie>();
 		misPlantas=new Planta[9];
-		misProyectiles=new ArrayList<Lanzable>();
+		misLanzables=new ArrayList<Lanzable>();
 	}
 	
 	public Juego getJuego() {
@@ -46,11 +46,11 @@ public class Fila {
 	}
 	
 	public void agregarProyectiles(Lanzable p) {
-		misProyectiles.add(p);
+		misLanzables.add(p);
 	}
 	
 	public void removerProyectil(Lanzable p) {
-		misProyectiles.remove(p);
+		misLanzables.remove(p);
 	}
 	
 	public boolean puedoPonerPlanta(int pos) {
@@ -59,22 +59,22 @@ public class Fila {
 	
 	public void chequearColisiones() {
 		boolean huboColision=false;
-		Iterator<Lanzable> itProyectiles=misProyectiles.iterator();
+		Iterator<Lanzable> itLanzables=misLanzables.iterator();
 		Iterator<Zombie> itZombie=misZombies.iterator();
 		Zombie auxZombie;
 		int cont=0;
-		Lanzable auxProyectil;
+		Lanzable auxLanzable;
 		List<Lanzable> aRemover;
 		while (itZombie.hasNext()) {//Itero lista de zombies
 			aRemover=new ArrayList<Lanzable>();
 			auxZombie=itZombie.next();
 			huboColision=false;
-			while(itProyectiles.hasNext() && !huboColision) {//Itero lista de proyectiles y si detecto una colision freno.
-				auxProyectil=itProyectiles.next();
-				huboColision=verColisiones(auxZombie,auxProyectil);
+			while(itLanzables.hasNext() && !huboColision) {//Itero lista de lanzables y si detecto una colision freno.
+				auxLanzable=itLanzables.next();
+				huboColision=verColisiones(auxZombie,auxLanzable);
 				if(huboColision) {
-					auxZombie.visitarProyectil(auxProyectil);
-					aRemover.add(auxProyectil);
+					auxZombie.visitarProyectil(auxLanzable);
+					aRemover.add(auxLanzable);
 				}
 					
 			}
@@ -127,10 +127,10 @@ public class Fila {
 		}
 	}
 	
-	public void resetearListaProyectiles() {
-		for (Lanzable p: misProyectiles) {
+	public void resetearListaLanzables() {
+		for (Lanzable p: misLanzables) {
 			p.getEntidadGrafica().borrarGrafica();
-			misProyectiles.remove(p);
+			misLanzables.remove(p);
 		}
 	}
 	
@@ -146,15 +146,15 @@ public class Fila {
 		}
 	}
 	
-	public void moverProyectiles() {
+	public void moverLanzables() {
 		List<Lanzable> aRemover=new ArrayList<Lanzable>();
-		for(Lanzable p: misProyectiles) {
+		for(Lanzable p: misLanzables) {
 			p.mover();
 			if(p.getX()>=miJuego.getVentana().getBordeDerecho() || p.getY()>=miJuego.getVentana().getBordeInferior())
 				aRemover.add(p);
 		}
 		for(Lanzable p:aRemover)
-			misProyectiles.remove(p);
+			misLanzables.remove(p);
 			
 	}
 	

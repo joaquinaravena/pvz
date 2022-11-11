@@ -8,7 +8,7 @@ public class Juego {
 	protected RelojMusica miRelojMusica;
 	protected RelojPlantas miRelojPlantas;
 	protected RelojZombies miRelojZombies;
-	protected RelojProyectiles miRelojProyectiles;
+	protected RelojLanzables miRelojProyectiles;
 	protected int soles;
 	protected Planta plantaEnEspera;
 	protected Ventana miVentana;
@@ -28,7 +28,7 @@ public class Juego {
 		miRelojMusica = new RelojMusica();
 		miRelojPlantas = new RelojPlantas(this);
 		miRelojZombies = new RelojZombies(this);
-		miRelojProyectiles = new RelojProyectiles(this);
+		miRelojProyectiles = new RelojLanzables(this);
 		soles = 100;
 		plantaEnEspera = null;
 		miVentana = v;
@@ -48,7 +48,8 @@ public class Juego {
 		reseteoProyectiles = false;
 	}
 	
-	/*public void accionPlantas() {
+	public void accionPlantas() {
+		removerPlantas();
 		for (int i=0; i<6; i++)
 			if (reseteoPlantas==true) {
 				filas[i].resetearListaPlantas();
@@ -57,28 +58,15 @@ public class Juego {
 			else {
 				filas[i].accionPlantas();
 			}
-				
-	}*/
-	public void accionPlantas() {
-		for (int i=0; i<6; i++)
-			if (reseteoPlantas==true) {
-				filas[i].resetearListaPlantas();
-			}
-			else {
-				filas[i].accionPlantas();
-			}
-		removerPlantas();
-		if (reseteoPlantas==true)
-			reseteoPlantas = false;
 	}
 	
 	public void accionLanzables() {
 		for (int i=0; i<6; i++)
 			if (reseteoPlantas==true) {
-				filas[i].resetearListaProyectiles();
+				filas[i].resetearListaLanzables();
 			}
 			else {
-				filas[i].moverProyectiles();
+				filas[i].moverLanzables();
 			}
 		removerProyectiles();
 		if (reseteoProyectiles==true)
@@ -241,7 +229,9 @@ public class Juego {
 			p.getEntidadGrafica().borrarGrafica();
 		}
 	}
+	
 	//musica
+	
 	public void reproducirMusica() {
 		if(miRelojMusica.isAlive())
 			miRelojMusica.start();
@@ -253,13 +243,14 @@ public class Juego {
 	}
 	
 	public boolean reproduciendoMusica() {
-		if(miRelojMusica.isAlive())
+		if(miRelojMusica.reproduciendoMusica())
 			return true;
 		else
 			return false;
 	}
 	
 	//getters
+	
 	public Builder getBuilder() {
 		return builder;
 	}
@@ -276,7 +267,8 @@ public class Juego {
 		return soles;
 	}
 	
-	//setters
+	//setters/cambios basicos en atributos
+	
 	public void setPlantaEnEspera(int i) {
 		switch(i) {
 			case 0: plantaEnEspera = null;break;

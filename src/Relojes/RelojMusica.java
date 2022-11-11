@@ -39,5 +39,8 @@ public class RelojMusica extends Thread {
 		clip.stop();
 	}
 	
+	public boolean reproduciendoMusica() {
+		return clip.isRunning();
+	}
 	
 }
