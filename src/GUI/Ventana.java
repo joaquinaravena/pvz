@@ -71,7 +71,6 @@ public class Ventana extends JFrame{
 		getContentPane().setLayout(null);
 		crearPanelMenu();
 		miJuego.reproducirMusica();
-		//crearPanelModo();
 		
 	}
 	private void crearPanelMenu() {
@@ -323,23 +322,19 @@ public class Ventana extends JFrame{
 		getContentPane().repaint();
 		
 	}
-	public void borrarGrafica(EntidadGrafica eg) {
-		eg.getGrafica().setVisible(false);
-		getContentPane().remove(eg.getGrafica());
+	public void borrarGrafica(JLabel label) {
+		label.setVisible(false);
+		getContentPane().remove(label);
 		getContentPane().repaint();
 	}
 	public void gameOver() {
 		JLabel lblGameOver = new JLabel();
 		lblGameOver.setBounds(321, 88, 357, 271);
 		lblGameOver.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("gameOver"))).getImage().getScaledInstance(lblGameOver.getWidth(), lblGameOver.getHeight(), DO_NOTHING_ON_CLOSE)));
-		
-		for(int x =lblGameOver.getX(); x < lblGameOver.getX()+lblGameOver.getWidth(); x += 60) 
-			for(int y =lblGameOver.getY(); y < lblGameOver.getY()+lblGameOver.getHeight(); y += 60)
-				this.getComponentAt(x, y).setVisible(false);
-		repaint();	
-		this.setFocusable(false);
+		this.repaint();
+		this.getContentPane().add(lblGameOver,0);
 		lblGameOver.setVisible(true);
-		this.add(lblGameOver, 0);
+		this.setFocusable(false);
 		repaint();
 		
 	}
@@ -372,6 +367,12 @@ public class Ventana extends JFrame{
 			planta1.setEnabled(true);
 	}
 	
+	public void cambiarOleada(int i) {
+		
+	}
+	public void cambiarNivel(int i) {
+		
+	}
 	//getters
 	
 	public Properties getPropertiesModo() {

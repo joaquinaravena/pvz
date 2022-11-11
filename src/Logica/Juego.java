@@ -71,6 +71,8 @@ public class Juego {
 			miVentana.ganarJuego();
 		else
 			miVentana.gameOver();
+		for(int i = 1; i <=6; i++)
+			getFila(i).resetearListaPlantas();
 		miRelojPlantas.setearActivo(false);
 		miRelojZombies.setearActivo(false);
 		miRelojProyectiles.setearActivo(false);

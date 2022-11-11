@@ -22,7 +22,7 @@ public class EntidadGrafica {
 		ventana.actualizarGrafica(this);
 	}
 	public void borrarGrafica() {
-		ventana.borrarGrafica(this);
+		ventana.borrarGrafica(miGrafica);
 	}
 	public JLabel getGrafica() {
 		return miGrafica;
