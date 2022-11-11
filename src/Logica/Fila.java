@@ -188,8 +188,12 @@ public class Fila {
 	}
 	
 	public void moverZombies() {
-		for(Zombie z : misZombies) 
+		List<Zombie> zombiesClone = new CopyOnWriteArrayList<Zombie>(misZombies);
+		Iterator<Zombie> itZombies = zombiesClone.iterator();
+		while(itZombies.hasNext()) {
+			Zombie z = itZombies.next();
 			z.realizarAccion();
+		}
 	}
 	
 	public void accionPlantas() {

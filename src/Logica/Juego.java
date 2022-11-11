@@ -52,8 +52,14 @@ public class Juego {
 			miRelojZombies.notify();
 		else
 			miRelojZombies.start();
-		miRelojPlantas.start();
-		miRelojProyectiles.start();
+		if (miRelojPlantas.isAlive())
+			miRelojPlantas.notify();
+		else
+			miRelojPlantas.start();
+		if (miRelojProyectiles.isAlive())
+			miRelojProyectiles.notify();
+		else
+			miRelojProyectiles.start();
 		//Cambiar el administrador despues
 		administrador.nuevoNivel(0);
 	}
