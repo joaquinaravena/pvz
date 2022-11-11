@@ -150,7 +150,7 @@ public class Fila {
 		for(Lanzable p: misLanzables) {
 			p.mover();
 			if(p.getX()>=miJuego.getVentana().getBordeDerecho() || p.getY()>=miJuego.getVentana().getBordeInferior()) {
-				miJuego.agregarLanzableAEliminar(p);
+				p.morir();
 			}
 		}
 	}
