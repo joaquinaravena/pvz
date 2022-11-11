@@ -39,7 +39,6 @@ public class Planta extends Entidad {
 			miProyectil.morir();
 			miFila.getJuego().agregarPlantaAEliminar(this);
 			getEntidadGrafica().borrarGrafica();
-			System.out.println(zombiesQueMeAtacan.size());
 			for(Zombie z:zombiesQueMeAtacan) {
 				z.setPlantaAtacada(null);
 				z.setEstrategia(new moverZombie());

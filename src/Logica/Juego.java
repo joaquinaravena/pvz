@@ -48,14 +48,7 @@ public class Juego {
 		reseteoProyectiles = false;
 	}
 	
-	public void moverZombies() {
-		for (int i=0; i<6; i++) {
-			filas[i].moverZombies();
-			filas[i].chequearColisiones();
-		}		
-	}
-	
-	public void accionPlantas() {
+	/*public void accionPlantas() {
 		for (int i=0; i<6; i++)
 			if (reseteoPlantas==true) {
 				filas[i].resetearListaPlantas();
@@ -65,8 +58,32 @@ public class Juego {
 				filas[i].accionPlantas();
 			}
 				
+	}*/
+	public void accionPlantas() {
+		for (int i=0; i<6; i++)
+			if (reseteoPlantas==true) {
+				filas[i].resetearListaPlantas();
+			}
+			else {
+				filas[i].accionPlantas();
+			}
+		removerPlantas();
+		if (reseteoPlantas==true)
+			reseteoPlantas = false;
 	}
 	
+	public void accionLanzables() {
+		for (int i=0; i<6; i++)
+			if (reseteoPlantas==true) {
+				filas[i].resetearListaProyectiles();
+			}
+			else {
+				filas[i].moverProyectiles();
+			}
+		removerProyectiles();
+		if (reseteoProyectiles==true)
+			reseteoProyectiles = false;
+	}
 	
 	public void jugar(){
 		miRelojMusica.start();
@@ -76,11 +93,29 @@ public class Juego {
 		//Cambiar el administrador despues
 		administrador.nuevoNivel(0);
 	}
-	
-	public void gameOver() {
+		
+	public void terminarJuego(boolean gane) {
 		miRelojPlantas.setearActivo(false);
 		miRelojZombies.setearActivo(false);
 		miRelojProyectiles.setearActivo(false);
+		soles = 100;
+		plantaEnEspera = null;
+		nivelActual = 0;
+		filas = new Fila[6];
+		for(int i=0;i<6;i++) {
+			filas[i]=new Fila(this);
+		}
+		zombiesNivel = new ArrayList<Zombie>();
+		zombiesAEliminar = new ArrayList<Zombie>();
+		plantasAEliminar = new ArrayList<Planta>();
+		proyectilesAEliminar = new ArrayList<Proyectil>();
+		contadorZombies = 0;
+		reseteoPlantas = false;
+		reseteoProyectiles = false; 
+		if(gane)
+			miVentana.ganarJuego();
+		else
+			miVentana.gameOver();
 	}
 	
 	public void salir() {
@@ -90,15 +125,45 @@ public class Juego {
 		miRelojProyectiles.stop();
 		System.exit(0);
 	}
-	public void agregarZombieNivel(Zombie z) {
-		zombiesNivel.add(z);
+	
+	public void oleada() {
+		int i = 1;
+		int aleatorio = 0;
+		while (i<=3 && !zombiesNivel.isEmpty()) {
+			int filaRandom = (int)(Math.random()*2+1+aleatorio);
+			zombiesNivel.get(0).setFila(getFila(filaRandom));
+			filas[filaRandom-1].agregarZombie(zombiesNivel.get(0), filaRandom);
+			zombiesNivel.remove(0);
+			i++;
+			aleatorio = aleatorio + 2;
+		}
+		contadorZombies = 0;
 	}
 	
-	public Builder getBuilder() {
-		return builder;
+	public void cambiarNivel() {
+		nivelActual++;
+		if (nivelActual==2)
+			terminarJuego(true);
+		else {
+			System.out.println("cambio");
+			for (int i=1; i<=6; i++) 
+				System.out.println(filas[i-1].hayZombies());
+			System.out.println(zombiesNivel.isEmpty());
+			reseteoPlantas = true;
+			reseteoProyectiles = true;
+			administrador.nuevoNivel(nivelActual);
+		}
 	}
-	public Ventana getVentana() {
-		return miVentana;
+	
+	public void moverZombies() {
+		for (int i=0; i<6; i++) {
+			filas[i].moverZombies();
+			filas[i].chequearColisiones();
+		}		
+	}
+	
+	public void agregarZombieNivel(Zombie z) {
+		zombiesNivel.add(z);
 	}
 	
 	public void agregarZombieActivo() {
@@ -125,35 +190,6 @@ public class Juego {
 		}
 	}
 	
-	public void oleada() {
-		int i = 1;
-		int aleatorio = 0;
-		while (i<=3 && !zombiesNivel.isEmpty()) {
-			int filaRandom = (int)(Math.random()*2+1+aleatorio);
-			zombiesNivel.get(0).setFila(getFila(filaRandom));
-			filas[filaRandom-1].agregarZombie(zombiesNivel.get(0), filaRandom);
-			zombiesNivel.remove(0);
-			i++;
-			aleatorio = aleatorio + 2;
-		}
-		contadorZombies = 0;
-	}
-	
-	public void cambiarNivel() {
-		nivelActual++;
-		if (nivelActual==2)
-			gameOver();
-		else {
-			System.out.println("cambio");
-			for (int i=1; i<=6; i++) 
-				System.out.println(filas[i-1].hayZombies());
-			System.out.println(zombiesNivel.isEmpty());
-			reseteoPlantas = true;
-			reseteoProyectiles = true;
-			administrador.nuevoNivel(nivelActual);
-		}
-	}
-	
 	public void agregarPlanta(int x,int y) {
 		int posicionArreglo= (x / 74)-2;
 		int posicionFila=(y / 65);
@@ -170,57 +206,8 @@ public class Juego {
 		
 	}
 	
-	
-	public int getSoles() {
-		return soles;
-	}
-	
-	public void agregarSoles(int s) {
-		soles += s;
-		miVentana.controlarPlantasAComprar();
-	}
-	
-	public void restarSoles(int s) {
-		soles -= s;
-		miVentana.controlarPlantasAComprar();
-	}
-	
-	public void setPlantaEnEspera(int i) {
-		switch(i) {
-			case 0: plantaEnEspera = null;break;
-			case 1: plantaEnEspera = builder.crearPlantaDebil();break;
-			case 2: plantaEnEspera = builder.crearPlantaMedio();break;
-			case 3: plantaEnEspera = builder.crearPlantaFuerte();break;
-		}
-	}
-	
-	public Planta getPlantaEnEspera() {
-		return plantaEnEspera;
-	}
-	
-	public Fila getFila(int i) {
-		return filas[i-1];
-	}
-	
 	public boolean puedeComprarPlanta() {
 		return soles-plantaEnEspera.getPrecio()>=0;
-	}
-	
-	public void reproducirMusica() {
-		if(miRelojMusica.isAlive())
-			miRelojMusica.start();
-		miRelojMusica.reproducirMusica();
-	}
-	
-	public void pararMusica() {
-		miRelojMusica.pararMusica();		
-	}
-	
-	public boolean reproduciendoMusica() {
-		if(miRelojMusica.isAlive())
-			return true;
-		else
-			return false;
 	}
 	
 	public void agregarZombieAEliminar(Zombie z) {
@@ -253,5 +240,59 @@ public class Juego {
 			p.getFila().removerProyectil(p);
 			p.getEntidadGrafica().borrarGrafica();
 		}
+	}
+	//musica
+	public void reproducirMusica() {
+		if(miRelojMusica.isAlive())
+			miRelojMusica.start();
+		miRelojMusica.reproducirMusica();
+	}
+	
+	public void pararMusica() {
+		miRelojMusica.pararMusica();		
+	}
+	
+	public boolean reproduciendoMusica() {
+		if(miRelojMusica.isAlive())
+			return true;
+		else
+			return false;
+	}
+	
+	//getters
+	public Builder getBuilder() {
+		return builder;
+	}
+	public Ventana getVentana() {
+		return miVentana;
+	}
+	public Planta getPlantaEnEspera() {
+		return plantaEnEspera;
+	}
+	public Fila getFila(int i) {
+		return filas[i-1];
+	}
+	public int getSoles() {
+		return soles;
+	}
+	
+	//setters
+	public void setPlantaEnEspera(int i) {
+		switch(i) {
+			case 0: plantaEnEspera = null;break;
+			case 1: plantaEnEspera = builder.crearPlantaDebil();break;
+			case 2: plantaEnEspera = builder.crearPlantaMedio();break;
+			case 3: plantaEnEspera = builder.crearPlantaFuerte();break;
+		}
+	}
+	
+	public void agregarSoles(int s) {
+		soles += s;
+		miVentana.controlarPlantasAComprar();
+	}
+	
+	public void restarSoles(int s) {
+		soles -= s;
+		miVentana.controlarPlantasAComprar();
 	}
 }

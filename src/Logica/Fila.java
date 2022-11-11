@@ -84,7 +84,6 @@ public class Fila {
 				if(misPlantas[cont]!= null) {
 						huboColision=verColisiones(auxZombie,misPlantas[cont]);
 						if(huboColision) {
-							System.out.println("Hubo colision");
 							auxZombie.visitarPlanta(misPlantas[cont]);
 							auxZombie.setEstrategia(new atacarZombie());
 						}

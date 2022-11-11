@@ -185,9 +185,8 @@ public class Ventana extends JFrame{
 		JToggleButton botonMusica = new JToggleButton();
 		botonMusica.setToolTipText("frena/reproduce la m\u00FAsica");
 		botonMusica.setBounds(220, 2, 45, 48);
-		if(!miJuego.reproduciendoMusica())
-			botonMusica.setSelected(true);
-		else
+		botonMusica.setSelected(true);
+		if(miJuego.reproduciendoMusica())
 			botonMusica.setSelected(false);
 			
 		botonMusica.setSelectedIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("stop"))).getImage().getScaledInstance(botonMusica.getWidth(), botonMusica.getHeight(), DO_NOTHING_ON_CLOSE)));
@@ -288,7 +287,7 @@ public class Ventana extends JFrame{
 				lblCelda.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						if(miJuego.getPlantaEnEspera() != null) {
+						if(miJuego.getPlantaEnEspera() != null && lblCelda.getComponentCount() == 0) {
 							JLabel lblPlanta = miJuego.getPlantaEnEspera().getEntidadGrafica().getGrafica();
 							lblPlanta.setBounds(0, 0, lblPlanta.getWidth(), lblPlanta.getHeight());
 							lblCelda.add(lblPlanta);
@@ -326,7 +325,11 @@ public class Ventana extends JFrame{
 	public int getBordeInferior() {
 		return this.getHeight();
 	}
+	public int getFinTablero() {
+		return 150;
+	}
 	public void actualizarGrafica(EntidadGrafica eg) {
+		eg.getGrafica().setVisible(true);
 		getContentPane().add(eg.getGrafica(), 0);
 		getContentPane().repaint();
 		
@@ -380,5 +383,4 @@ public class Ventana extends JFrame{
 	public Properties getPropertiesModo() {
 		return propModo;
 	}
-	
 }
