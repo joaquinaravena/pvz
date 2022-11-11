@@ -37,7 +37,9 @@ public class Zombie extends Entidad {
 	public int getVida() {
 		return vida;
 	}
-	
+	public int getVelocidad() {
+		return velocidad;
+	}
 	public void restarVida(int i) {
 		vida-=i;
 		if(vida<=0)

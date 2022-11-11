@@ -10,31 +10,31 @@ protected Juego miJuego;
 		miJuego = juego;
 	}
 	public Zombie crearZombieDebil() {
-		Zombie z = new Zombie(200,50,1,miJuego.getVentana(), "zombieDebil");
+		Zombie z = new Zombie(300,50,10,miJuego.getVentana(), "zombieDebil");
 		z.setX(z.getEntidadGrafica().getGrafica().getX());
 		return z;
 	}
 	public Zombie crearZombieMediano() {
-		Zombie z = new Zombie(400,100,2,miJuego.getVentana(), "zombieMedio");
+		Zombie z = new Zombie(500,75,10,miJuego.getVentana(), "zombieMedio");
 		z.setX(z.getEntidadGrafica().getGrafica().getX());
 		return z;
 	}
 
 	public Zombie crearZombieFuerte() {
-		Zombie z = new Zombie(800,150,3,miJuego.getVentana(), "zombieFuerte");
+		Zombie z = new Zombie(600,100,10,miJuego.getVentana(), "zombieFuerte");
 		z.setX(z.getEntidadGrafica().getGrafica().getX());
 		return z;
 	}
 
 	public Planta crearPlantaDebil() {
-		return new Planta(50,100,50,miJuego.getVentana(), "plantaDebil" , new Sol(miJuego.getVentana(),"sol"));
+		return new Planta(100,100,0,miJuego.getVentana(), "plantaDebil" , new Sol(miJuego.getVentana(),"sol"));
 	}
 
 	public Planta crearPlantaMedio() {
-		return new Planta(100,200,75,miJuego.getVentana(), "plantaMedio" , new Proyectil(75,miJuego.getVentana(),"guisante",null));
+		return new Planta(150,200,100,miJuego.getVentana(), "plantaMedio" , new Proyectil(100,miJuego.getVentana(),"guisanteVerde",null));
 	}
 
 	public Planta crearPlantaFuerte() {
-		return new Planta(150,600,200,miJuego.getVentana(), "plantaFuerte",null);
+		return new Planta(250,300,200,miJuego.getVentana(), "plantaFuerte", new Proyectil(100,miJuego.getVentana(),"guisanteHielo",null));
 	}
 }

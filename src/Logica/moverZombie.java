@@ -6,11 +6,11 @@ public class moverZombie implements ZombieStrategy {
 	}
 
 	public void realizarAccion(Zombie z){
-		if (z.getX() <= 100) 
+		if (z.getX() <= z.getFila().getJuego().getVentana().getFinTablero()) 
 			z.morir();
 		else {
-			z.setX(z.getX()-10);
-			z.getEntidadGrafica().getGrafica().setBounds(z.getEntidadGrafica().getGrafica().getX()-10, z.getEntidadGrafica().getGrafica().getY(), z.getEntidadGrafica().getGrafica().getWidth(), z.getEntidadGrafica().getGrafica().getHeight());
+			z.setX(z.getX()-z.getVelocidad());
+			z.getEntidadGrafica().getGrafica().setBounds(z.getEntidadGrafica().getGrafica().getX()- z.getVelocidad(), z.getEntidadGrafica().getGrafica().getY(), z.getEntidadGrafica().getGrafica().getWidth(), z.getEntidadGrafica().getGrafica().getHeight());
 			z.getEntidadGrafica().actualizarGrafica();
 		}
 	}

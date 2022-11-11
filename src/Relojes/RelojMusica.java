@@ -16,6 +16,7 @@ public class RelojMusica extends Thread {
 			audio = AudioSystem.getAudioInputStream(archivoMusica);
 			clip = AudioSystem.getClip();
 			clip.open(audio);
+			clip.loop(clip.LOOP_CONTINUOUSLY);
 		}
 		catch(IOException e) {
 			System.out.print("Archivo no encontrado");
