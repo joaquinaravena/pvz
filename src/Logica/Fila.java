@@ -76,6 +76,7 @@ public class Fila {
 				if(huboColision) {
 					auxZombie.visitarProyectil(auxLanzable);
 					aRemover.add(auxLanzable);
+					//probar agregar auxLanzable a juego.agregarLanzablesAEliminar() para que se borre la grafica
 				}
 					
 			}

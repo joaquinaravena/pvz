@@ -46,17 +46,6 @@ public class Juego {
 		builder=new Builder(this);
 	}
 	
-	public void accionPlantas() {
-		removerPlantas();
-		for (int i=0; i<6; i++)
-				filas[i].accionPlantas();
-	}
-	
-	public void accionLanzables() {
-		for (int i=0; i<6; i++)
-				filas[i].moverLanzables();
-	}
-	
 	public void jugar(){
 		miRelojMusica.start();
 		miRelojPlantas.start();
@@ -126,12 +115,26 @@ public class Juego {
 				filas[i].resetearListaLanzables();
 				filas[i].resetearListaPlantas();
 			}
+			miVentana.cambiarNivel(nivelActual);
 			miRelojPlantas.setearActivo(true);
 			miRelojZombies.setearActivo(true);
 			miRelojProyectiles.setearActivo(true);
-			//llamar a ventana metodo de joaco
+			
 			administrador.nuevoNivel(nivelActual);
 		}
+	}
+	
+	//METODOS PARA REALIZAR ACCION DE ENTIDADES
+	
+	public void accionPlantas() {
+		removerPlantas();
+		for (int i=0; i<6; i++)
+				filas[i].accionPlantas();
+	}
+	
+	public void accionLanzables() {
+		for (int i=0; i<6; i++)
+				filas[i].moverLanzables();
 	}
 	
 	public void moverZombies() {
@@ -140,6 +143,9 @@ public class Juego {
 			filas[i].chequearColisiones();
 		}		
 	}
+
+	
+	//METODOS PARA AGREGAR PLANTAS Y ZOMBIES
 	
 	public void agregarZombieNivel(Zombie z) {
 		zombiesNivel.add(z);
@@ -184,9 +190,7 @@ public class Juego {
 		
 	}
 	
-	public boolean puedeComprarPlanta() {
-		return soles-plantaEnEspera.getPrecio()>=0;
-	}
+	//METODOS PARA BORRAR ENTIDADES
 	
 	public void agregarZombieAEliminar(Zombie z) {
 		zombiesAEliminar.add(z);
@@ -232,10 +236,10 @@ public class Juego {
 		lanzablesAEliminar.clear();
 	}
 	
-	//musica
+	//MUSICA
 	
 	public void reproducirMusica() {
-		if(miRelojMusica.isAlive())
+		if(miRelojMusica.isAlive()) //estas dos lineas se pueden sacar
 			miRelojMusica.start();
 		miRelojMusica.reproducirMusica();
 	}
@@ -267,6 +271,10 @@ public class Juego {
 	}
 	public int getSoles() {
 		return soles;
+	}
+	
+	public boolean puedeComprarPlanta() {
+		return soles-plantaEnEspera.getPrecio()>=0;
 	}
 	
 	//setters/cambios basicos en atributos
