@@ -5,12 +5,12 @@ import Logica.*;
 
 
 
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Color;
-import java.awt.Component;
 
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -27,11 +27,6 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.GridLayout;
-import java.awt.Dimension;
-import java.awt.Rectangle;
-import java.awt.event.ContainerAdapter;
-import java.awt.event.ContainerEvent;
 
 @SuppressWarnings("serial")
 public class Ventana extends JFrame{
@@ -160,6 +155,7 @@ public class Ventana extends JFrame{
 	
 	
 	private void crearPanelModo() {
+		this.setFocusable(true);
 		JPanel panelDia = new JPanel();
 		panelDia.setBounds(0, 0, this.getWidth(), this.getHeight());
 		setContentPane(panelDia);
@@ -288,7 +284,7 @@ public class Ventana extends JFrame{
 				lblCelda.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						if(miJuego.getPlantaEnEspera() != null && (lblCelda.getComponentCount() == 0 || !lblCelda.getComponent(0).isVisible())) { 
+						if(Ventana.this.isFocusable() && miJuego.getPlantaEnEspera() != null && (lblCelda.getComponentCount() == 0 || !lblCelda.getComponent(0).isVisible())) { 
 							if(lblCelda.getComponentCount() == 1) 
 								lblCelda.remove(0);
 							JLabel lblPlanta = miJuego.getPlantaEnEspera().getEntidadGrafica().getGrafica();
@@ -300,12 +296,13 @@ public class Ventana extends JFrame{
 						}
 					}
 					public void mouseEntered(MouseEvent e) {
-						lblCelda.setBackground(lblCelda.getBackground().brighter());
-						//lblCelda.repaint();
+						if(Ventana.this.isFocusable())
+							lblCelda.setBackground(lblCelda.getBackground().brighter());
+						
 					}
 					public void mouseExited(MouseEvent e) {
-						lblCelda.setBackground(lblCelda.getForeground());
-						//lblCelda.repaint();
+						if(Ventana.this.isFocusable())
+							lblCelda.setBackground(lblCelda.getForeground());
 					}
 				});
 				panelDia.add(lblCelda);
@@ -322,7 +319,7 @@ public class Ventana extends JFrame{
 	
 	public void actualizarGrafica(EntidadGrafica eg) {
 		eg.getGrafica().setVisible(true);
-		getContentPane().add(eg.getGrafica(), 0);
+		getContentPane().add(eg.getGrafica(),1);
 		getContentPane().repaint();
 		
 	}
@@ -334,8 +331,9 @@ public class Ventana extends JFrame{
 	public void gameOver() {
 		JLabel lblGameOver = new JLabel();
 		lblGameOver.setBounds(321, 88, 357, 271);
+		this.add(lblGameOver, 0);
 		lblGameOver.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("gameOver"))).getImage().getScaledInstance(lblGameOver.getWidth(), lblGameOver.getHeight(), DO_NOTHING_ON_CLOSE)));
-		getContentPane().add(lblGameOver);
+		this.setFocusable(false);
 		repaint();
 	}
 	public void ganarJuego() {
@@ -353,6 +351,9 @@ public class Ventana extends JFrame{
 		planta1.setSelected(false);
 		planta2.setSelected(false);
 		planta3.setSelected(false);
+		planta1.setEnabled(false);
+		planta2.setEnabled(false);
+		planta3.setEnabled(false);
 		if(miJuego.getSoles() >= Integer.parseInt(propModo.getProperty("precio3"))) {
 			planta1.setEnabled(true);
 			planta2.setEnabled(true);
@@ -360,16 +361,8 @@ public class Ventana extends JFrame{
 		}else if(miJuego.getSoles() >= Integer.parseInt(propModo.getProperty("precio2"))) {
 			planta1.setEnabled(true);
 			planta2.setEnabled(true);
-			planta3.setEnabled(false);
-		}else if(miJuego.getSoles() >= Integer.parseInt(propModo.getProperty("precio1"))) {
+		}else if(miJuego.getSoles() >= Integer.parseInt(propModo.getProperty("precio1")))
 			planta1.setEnabled(true);
-			planta2.setEnabled(false);
-			planta3.setEnabled(false);
-		}else {
-			planta1.setEnabled(false);
-			planta2.setEnabled(false);
-			planta3.setEnabled(false);
-		}
 	}
 	
 	//getters
@@ -387,6 +380,6 @@ public class Ventana extends JFrame{
 		return this.getHeight();
 	}
 	public int getFinTablero() {
-		return 150;
+		return 130;
 	}
 }

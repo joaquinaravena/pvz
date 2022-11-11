@@ -1,7 +1,6 @@
 package Entidades;
 
 import GUI.Ventana;
-import Logica.Fila;
 
 public abstract class Lanzable extends Entidad {
 	public abstract Lanzable clone(Ventana v);

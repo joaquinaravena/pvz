@@ -106,6 +106,7 @@ public class Juego {
 			miVentana.gameOver();
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void salir() {
 		miRelojPlantas.stop();
 		miRelojZombies.stop();
