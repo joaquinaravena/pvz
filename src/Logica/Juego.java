@@ -29,7 +29,7 @@ public class Juego {
 		miRelojPlantas = new RelojPlantas(this);
 		miRelojZombies = new RelojZombies(this);
 		miRelojProyectiles = new RelojLanzables(this);
-		soles = 100;
+		soles = 150;
 		plantaEnEspera = null;
 		miVentana = v;
 		nivelActual = 0;
@@ -44,13 +44,15 @@ public class Juego {
 		plantasAEliminar = new ArrayList<Planta>();
 		lanzablesAEliminar = new ArrayList<Lanzable>();
 		builder=new Builder(this);
-	}
-	
-	public void jugar(){
-		miRelojMusica.start();
 		miRelojPlantas.start();
 		miRelojZombies.start();
 		miRelojProyectiles.start();
+	}
+	
+	public void jugar(){
+		miRelojPlantas.setearActivo(true);
+		miRelojZombies.setearActivo(true);
+		miRelojProyectiles.setearActivo(true);
 		//Cambiar el administrador despues
 		administrador.nuevoNivel(0);
 	}
@@ -60,12 +62,14 @@ public class Juego {
 			miVentana.ganarJuego();
 		else
 			miVentana.gameOver();
-		for(int i = 1; i <=6; i++)
+		for(int i = 1; i <=6; i++) {
 			getFila(i).resetearListaPlantas();
+			getFila(i).resetearListaLanzables();
+		}
 		miRelojPlantas.setearActivo(false);
 		miRelojZombies.setearActivo(false);
 		miRelojProyectiles.setearActivo(false);
-		soles = 100;
+		soles = 150;
 		plantaEnEspera = null;
 		nivelActual = 0;
 		filas = new Fila[6];
@@ -239,8 +243,6 @@ public class Juego {
 	//MUSICA
 	
 	public void reproducirMusica() {
-		if(miRelojMusica.isAlive()) //estas dos lineas se pueden sacar
-			miRelojMusica.start();
 		miRelojMusica.reproducirMusica();
 	}
 	

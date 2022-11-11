@@ -18,14 +18,15 @@ public class Sol extends Lanzable{
 	public void mover() {
 		if(contador<4) {
 			y=y-10;
-			x=x-1;
-			getEntidadGrafica().getGrafica().setBounds(getEntidadGrafica().getGrafica().getX()-1, getEntidadGrafica().getGrafica().getY()-10, getEntidadGrafica().getGrafica().getWidth(), getEntidadGrafica().getGrafica().getHeight());
+			x=x-2;
+			getEntidadGrafica().getGrafica().setBounds(getEntidadGrafica().getGrafica().getX()-2, getEntidadGrafica().getGrafica().getY()-10, getEntidadGrafica().getGrafica().getWidth(), getEntidadGrafica().getGrafica().getHeight());
 			contador++;
 		}
-		else {
+		else if(contador <11) {
 			y=y+10;
-			x=x-1;
-			getEntidadGrafica().getGrafica().setBounds(getEntidadGrafica().getGrafica().getX()-1, getEntidadGrafica().getGrafica().getY()+10, getEntidadGrafica().getGrafica().getWidth(), getEntidadGrafica().getGrafica().getHeight());
+			x=x-2;
+			contador++;
+			getEntidadGrafica().getGrafica().setBounds(getEntidadGrafica().getGrafica().getX()-2, getEntidadGrafica().getGrafica().getY()+10, getEntidadGrafica().getGrafica().getWidth(), getEntidadGrafica().getGrafica().getHeight());
 		}
 		getEntidadGrafica().actualizarGrafica();
 	}

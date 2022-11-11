@@ -216,7 +216,7 @@ public class Ventana extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				botonPlanta2.setSelected(false);
 				botonPlanta1.setSelected(false);
-				if(botonPlanta3.isSelected())
+				if(botonPlanta3.isSelected()) 
 					miJuego.setPlantaEnEspera(3);
 				else
 					miJuego.setPlantaEnEspera(0);
@@ -318,7 +318,7 @@ public class Ventana extends JFrame{
 	
 	public void actualizarGrafica(EntidadGrafica eg) {
 		eg.getGrafica().setVisible(true);
-		getContentPane().add(eg.getGrafica(),1);
+		getContentPane().add(eg.getGrafica(),0);
 		getContentPane().repaint();
 		
 	}
@@ -329,23 +329,39 @@ public class Ventana extends JFrame{
 	}
 	public void gameOver() {
 		JLabel lblGameOver = new JLabel();
-		lblGameOver.setBounds(321, 88, 357, 271);
+		lblGameOver.setBounds((this.getWidth()-357)/2, 88, 357, 271);
 		lblGameOver.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("gameOver"))).getImage().getScaledInstance(lblGameOver.getWidth(), lblGameOver.getHeight(), DO_NOTHING_ON_CLOSE)));
-		this.repaint();
-		this.getContentPane().add(lblGameOver,0);
-		lblGameOver.setVisible(true);
+		
+		getContentPane().add(lblGameOver,0);
 		this.setFocusable(false);
+		botonVolver();
 		repaint();
 		
 	}
 	public void ganarJuego() {
 		JLabel lblGanar= new JLabel();
-		lblGanar.setBounds(321, 88, 357, 271);
+		lblGanar.setBounds((this.getWidth()-357)/2, 88, 357, 271);
 		lblGanar.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("ganarJuego"))).getImage().getScaledInstance(lblGanar.getWidth(), lblGanar.getHeight(), DO_NOTHING_ON_CLOSE)));
-		getContentPane().add(lblGanar);
+		getContentPane().add(lblGanar, 0);
+		this.setFocusable(false);
+		botonVolver();
 		repaint();
 	}
 	
+	private void botonVolver() {
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.setBounds((this.getWidth()-162)/2, 369, 162, 50);
+		btnVolver.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 20));
+		btnVolver.setVisible(true);
+		this.getContentPane().add(btnVolver, 0);
+		
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				crearPanelMenu();
+			}
+		});
+	}
+		
 	public void controlarPlantasAComprar() {
 		JToggleButton planta1 = (JToggleButton)panelPlantas.getComponent(0);
 		JToggleButton planta2 = (JToggleButton)panelPlantas.getComponent(1);
