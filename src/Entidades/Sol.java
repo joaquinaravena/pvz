@@ -39,7 +39,7 @@ public class Sol extends Lanzable{
 
 	@Override
 	public void morir() {
-		miFila.removerProyectil(this);
+		miFila.removerLanzable(this);
 		entidadGrafica.borrarGrafica();
 	}
 	

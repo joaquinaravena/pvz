@@ -20,7 +20,7 @@ public class Juego {
 	protected int contadorZombies;
 	protected List<Zombie> zombiesAEliminar;
 	protected List<Planta> plantasAEliminar;
-	protected List<Proyectil> proyectilesAEliminar;
+	protected List<Lanzable> lanzablesAEliminar;
 	protected boolean reseteoPlantas;
 	protected boolean reseteoProyectiles;
 	
@@ -42,7 +42,7 @@ public class Juego {
 		contadorZombies = 0;
 		zombiesAEliminar = new ArrayList<Zombie>();
 		plantasAEliminar = new ArrayList<Planta>();
-		proyectilesAEliminar = new ArrayList<Proyectil>();
+		lanzablesAEliminar = new ArrayList<Lanzable>();
 		builder=new Builder(this);
 		reseteoPlantas = false;
 		reseteoProyectiles = false;
@@ -68,7 +68,7 @@ public class Juego {
 			else {
 				filas[i].moverLanzables();
 			}
-		removerProyectiles();
+		removerLanzables();
 		if (reseteoProyectiles==true)
 			reseteoProyectiles = false;
 	}
@@ -96,7 +96,7 @@ public class Juego {
 		zombiesNivel = new ArrayList<Zombie>();
 		zombiesAEliminar = new ArrayList<Zombie>();
 		plantasAEliminar = new ArrayList<Planta>();
-		proyectilesAEliminar = new ArrayList<Proyectil>();
+		lanzablesAEliminar = new ArrayList<Lanzable>();
 		contadorZombies = 0;
 		reseteoPlantas = false;
 		reseteoProyectiles = false; 
@@ -188,8 +188,8 @@ public class Juego {
 			filas[posicionFila].getPlanta(posicionArreglo).setX(x);
 			filas[posicionFila].getPlanta(posicionArreglo).setY(y);
 			filas[posicionFila].getPlanta(posicionArreglo).setFila(filas[posicionFila]);
-			filas[posicionFila].getPlanta(posicionArreglo).getProyectil().setFila(filas[posicionFila]);
-			filas[posicionFila].getPlanta(posicionArreglo).getProyectil().setY(y);
+			filas[posicionFila].getPlanta(posicionArreglo).getLanzable().setFila(filas[posicionFila]);
+			filas[posicionFila].getPlanta(posicionArreglo).getLanzable().setY(y);
 		}
 		
 	}
@@ -206,8 +206,8 @@ public class Juego {
 		plantasAEliminar.add(p);
 	}
 	
-	public void agregarProyectilAEliminar(Proyectil p) {
-		proyectilesAEliminar.add(p);
+	public void agregarLanzableAEliminar(Lanzable p) {
+		lanzablesAEliminar.add(p);
 	}
 	
 	public void removerZombies() {
@@ -223,9 +223,9 @@ public class Juego {
 		}
 	}
 	
-	public void removerProyectiles() {
-		for (Proyectil p: proyectilesAEliminar) {
-			p.getFila().removerProyectil(p);
+	public void removerLanzables() {
+		for (Lanzable p: lanzablesAEliminar) {
+			p.getFila().removerLanzable(p);
 			p.getEntidadGrafica().borrarGrafica();
 		}
 	}

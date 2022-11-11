@@ -10,8 +10,8 @@ public class Planta extends Entidad {
 	protected int precio;
 	protected int vida;
 	protected int daño;
-	protected Lanzable miProyectil;
-	protected boolean tieneProyectil;
+	protected Lanzable miLanzable;
+	protected boolean tieneLanzable;
 	protected List<Zombie> zombiesQueMeAtacan;
 	//ancho y alto representan las dimensiones.
 	//Las plantas se crean sin una posición establecida.
@@ -20,12 +20,12 @@ public class Planta extends Entidad {
 		this.vida = vida;
 		this.daño=daño;
 		entidadGrafica = new EntidadGrafica(v, this, graf);
-		miProyectil = proyectil;
+		miLanzable = proyectil;
 		zombiesQueMeAtacan=new ArrayList<Zombie>();
-		if(miProyectil==null)
-			tieneProyectil=false;
+		if(miLanzable==null)
+			tieneLanzable=false;
 		else 
-			tieneProyectil=true;
+			tieneLanzable=true;
 	}
 
 	public void restarVida(int i) {
@@ -36,7 +36,7 @@ public class Planta extends Entidad {
 	}
 	public void morir() {
 			miFila.borrarPlanta((this.x/74)-2);
-			miProyectil.morir();
+			miLanzable.morir();
 			getEntidadGrafica().borrarGrafica();
 			for(Zombie z:zombiesQueMeAtacan) {
 				z.setPlantaAtacada(null);
@@ -47,11 +47,11 @@ public class Planta extends Entidad {
 	
 
 	public void realizarAccion(Ventana v) {
-			Lanzable aDisparar=miProyectil.clone(v);
+			Lanzable aDisparar=miLanzable.clone(v);
 			aDisparar.setX(x);
 			aDisparar.setY(y);
 			aDisparar.getEntidadGrafica().getGrafica().setLocation(x, y);
-			miFila.agregarProyectiles(aDisparar);
+			miFila.agregarLanzable(aDisparar);
 	}
 	
 	public int getDaño() {
@@ -60,11 +60,11 @@ public class Planta extends Entidad {
 	public int getPrecio() {
 		return precio;
 	}
-	public Lanzable getProyectil() {
-		return miProyectil;
+	public Lanzable getLanzable() {
+		return miLanzable;
 	}
 	public Planta clone(Ventana v) {
-		Planta p = new Planta(this.precio, this.vida, this.daño ,v, this.entidadGrafica.getRutaGrafica(),miProyectil);
+		Planta p = new Planta(this.precio, this.vida, this.daño ,v, this.entidadGrafica.getRutaGrafica(),miLanzable);
 		return p;
 	}
 	

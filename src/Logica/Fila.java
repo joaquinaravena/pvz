@@ -45,11 +45,11 @@ public class Fila {
 		misZombies.remove(z);
 	}
 	
-	public void agregarProyectiles(Lanzable p) {
+	public void agregarLanzable(Lanzable p) {
 		misLanzables.add(p);
 	}
 	
-	public void removerProyectil(Lanzable p) {
+	public void removerLanzable(Lanzable p) {
 		misLanzables.remove(p);
 	}
 	
