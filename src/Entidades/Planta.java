@@ -1,10 +1,10 @@
 package Entidades;
 import java.util.ArrayList;
+
 import java.util.List;
 
 import GUI.EntidadGrafica;
 import GUI.Ventana;
-import Logica.moverZombie;
 
 public class Planta extends Entidad {
 	protected int precio;

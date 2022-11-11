@@ -331,10 +331,17 @@ public class Ventana extends JFrame{
 	public void gameOver() {
 		JLabel lblGameOver = new JLabel();
 		lblGameOver.setBounds(321, 88, 357, 271);
-		this.add(lblGameOver, 0);
 		lblGameOver.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("gameOver"))).getImage().getScaledInstance(lblGameOver.getWidth(), lblGameOver.getHeight(), DO_NOTHING_ON_CLOSE)));
+		
+		for(int x =lblGameOver.getX(); x < lblGameOver.getX()+lblGameOver.getWidth(); x += 60) 
+			for(int y =lblGameOver.getY(); y < lblGameOver.getY()+lblGameOver.getHeight(); y += 60)
+				this.getComponentAt(x, y).setVisible(false);
+		repaint();	
 		this.setFocusable(false);
+		lblGameOver.setVisible(true);
+		this.add(lblGameOver, 0);
 		repaint();
+		
 	}
 	public void ganarJuego() {
 		JLabel lblGanar= new JLabel();
@@ -371,7 +378,7 @@ public class Ventana extends JFrame{
 		return propModo;
 	}
 	public int getBordeDerecho() {
-		return this.getWidth();
+		return this.getWidth()-5;
 	}
 	public int getLinea(int i) {
 		return i*64;

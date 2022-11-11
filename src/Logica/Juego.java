@@ -1,5 +1,6 @@
 package Logica;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import Entidades.*;
 import GUI.Ventana;
@@ -218,7 +219,10 @@ public class Juego {
 	}
 	
 	public void removerPlantas() {
-		for (Planta p: plantasAEliminar) {
+		List<Planta> plantasClone = new CopyOnWriteArrayList<Planta>(plantasAEliminar);
+		Iterator<Planta> itPlantas = plantasClone.iterator();
+		while(itPlantas.hasNext()) {
+			Planta p = itPlantas.next();
 			p.getFila().borrarPlanta((p.getX()/74)-2);
 			p.getFila().getJuego().agregarLanzableAEliminar(p.getLanzable());
 			p.getEntidadGrafica().borrarGrafica();

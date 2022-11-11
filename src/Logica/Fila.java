@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 public class Fila {
 	private List<Zombie> misZombies;
 	private Planta[] misPlantas;
@@ -147,7 +148,10 @@ public class Fila {
 	}
 	
 	public void moverLanzables() {
-		for(Lanzable p: misLanzables) {
+		List<Lanzable> lanzablesClone = new CopyOnWriteArrayList<Lanzable>(misLanzables);
+		Iterator<Lanzable> itLanzables = lanzablesClone.iterator();
+		while(itLanzables.hasNext()) {
+			Lanzable p = itLanzables.next();
 			p.mover();
 			if(p.getX()>=miJuego.getVentana().getBordeDerecho() || p.getY()>=miJuego.getVentana().getBordeInferior()) {
 				p.morir();
