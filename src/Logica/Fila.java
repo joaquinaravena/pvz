@@ -57,7 +57,7 @@ public class Fila {
 	public boolean puedoPonerPlanta(int pos) {
 		return misPlantas[pos] == null;
 	}
-	
+	/*
 	public void chequearColisiones() {
 		boolean huboColision=false;
 		Iterator<Lanzable> itLanzables=misLanzables.iterator();
@@ -95,8 +95,44 @@ public class Fila {
 			}
 		
 		}
-	}
+	}*/  //METODO VIEJO DE JULI SIN BORRAR EL PROYECTIL
 		
+	public void chequearColisiones() {
+		boolean huboColision=false;
+		Iterator<Lanzable> itLanzables=misLanzables.iterator();
+		Iterator<Zombie> itZombie=misZombies.iterator();
+		Zombie auxZombie;
+		int cont=0;
+		Lanzable auxLanzable;
+		while (itZombie.hasNext()) {//Itero lista de zombies
+			auxZombie=itZombie.next();
+			huboColision=false;
+			while(itLanzables.hasNext() && !huboColision) {//Itero lista de lanzables y si detecto una colision freno.
+				auxLanzable=itLanzables.next();
+				huboColision=verColisiones(auxZombie,auxLanzable);
+				if(huboColision) {
+					auxZombie.visitarProyectil(auxLanzable);
+					miJuego.agregarLanzableAEliminar(auxLanzable);
+				}
+					
+			}
+				cont=0;
+				huboColision=false;
+			while(!huboColision && cont<9) {//Itero lista de plantas y si detecto una colision freno.
+				if(misPlantas[cont]!= null) {
+						huboColision=verColisiones(auxZombie,misPlantas[cont]);
+						if(huboColision) {
+							auxZombie.visitarPlanta(misPlantas[cont]);
+							auxZombie.setEstrategia(new atacarZombie());
+						}
+					}
+				
+				cont++;
+			}
+		
+		}
+	}
+	
 	private Rectangle armarHitboxEntidad(Entidad e) {
 		Dimension dimensionEntidad=new Dimension(e.getAncho(),e.getAlto());
 		Point ubicacionEntidad=new Point(e.getX(),e.getY());
@@ -138,6 +174,16 @@ public class Fila {
 			Lanzable p = itLanzables.next();
 			p.getEntidadGrafica().borrarGrafica();
 			misLanzables.remove(p);
+		}
+	}
+	
+	public void resetearListaZombies() {
+		List<Zombie> zombiesClone = new CopyOnWriteArrayList<Zombie>(misZombies);
+		Iterator<Zombie> itZombies = zombiesClone.iterator();
+		while(itZombies.hasNext()) {
+			Zombie z = itZombies.next();
+			z.getEntidadGrafica().borrarGrafica();
+			misZombies.remove(z);
 		}
 	}
 	
