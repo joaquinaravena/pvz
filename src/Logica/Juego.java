@@ -22,13 +22,10 @@ public class Juego {
 	protected List<Zombie> zombiesAEliminar;
 	protected List<Planta> plantasAEliminar;
 	protected List<Lanzable> lanzablesAEliminar;
-	
+	protected int contadorJugadas;
 	
 	public Juego(Ventana v) {
 		miRelojMusica = new RelojMusica();
-		miRelojZombies = new RelojZombies(this);
-		miRelojPlantas = new RelojPlantas(this);
-		miRelojProyectiles = new RelojLanzables(this);
 		soles = 150;
 		plantaEnEspera = null;
 		miVentana = v;
@@ -44,23 +41,17 @@ public class Juego {
 		plantasAEliminar = new ArrayList<Planta>();
 		lanzablesAEliminar = new ArrayList<Lanzable>();
 		builder=new Builder(this);
-		
+		contadorJugadas = 0;
 	}
 	
 	public void jugar(){
-		if (miRelojZombies.isAlive())
-			miRelojZombies.notify();
-		else
-			miRelojZombies.start();
-		if (miRelojPlantas.isAlive())
-			miRelojPlantas.notify();
-		else
-			miRelojPlantas.start();
-		if (miRelojProyectiles.isAlive())
-			miRelojProyectiles.notify();
-		else
-			miRelojProyectiles.start();
-		//Cambiar el administrador despues
+		miRelojZombies = new RelojZombies(this);
+		miRelojPlantas = new RelojPlantas(this);
+		miRelojProyectiles = new RelojLanzables(this);
+		miRelojZombies.start();
+		miRelojPlantas.start();
+		miRelojProyectiles.start();
+		
 		administrador.nuevoNivel(0);
 	}
 		
@@ -69,15 +60,11 @@ public class Juego {
 			miVentana.ganarJuego();
 		else
 			miVentana.gameOver();
-		try {
-			miRelojPlantas.wait();
-			miRelojZombies.wait();
-			miRelojProyectiles.wait();
-		}
-		catch(Exception e) {
-			
-		}
 		
+			miRelojPlantas.setearActivo(false);
+			miRelojZombies.setearActivo(false);
+			miRelojProyectiles.setearActivo(false);
+				
 		for(int i = 1; i <=6; i++) {
 			getFila(i).resetearListaPlantas();
 			getFila(i).resetearListaLanzables();
