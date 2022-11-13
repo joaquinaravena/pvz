@@ -23,6 +23,7 @@ public class Juego {
 	protected List<Planta> plantasAEliminar;
 	protected List<Lanzable> lanzablesAEliminar;
 	protected List<Sol> solesJuego;
+	protected int oleadaActual;
 	
 	public Juego(Ventana v) {
 		miRelojMusica = new RelojMusica();
@@ -42,6 +43,7 @@ public class Juego {
 		lanzablesAEliminar = new ArrayList<Lanzable>();
 		solesJuego=new ArrayList<Sol>();
 		builder=new Builder(this);
+		oleadaActual = 0;
 	}
 	
 	public void jugar(){
@@ -83,7 +85,7 @@ public class Juego {
 		plantasAEliminar = new ArrayList<Planta>();
 		lanzablesAEliminar = new ArrayList<Lanzable>();
 		contadorZombies = 0;
-		
+		oleadaActual = 0;
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -96,7 +98,8 @@ public class Juego {
 	}
 	
 	public void oleada() {
-		System.out.println("oleada");
+		oleadaActual++;
+		miVentana.cambiarOleada(oleadaActual);
 		int i = 1;
 		int aleatorio = 0;
 		while (i<=3 && !zombiesNivel.isEmpty()) {

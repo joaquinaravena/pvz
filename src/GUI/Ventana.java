@@ -23,6 +23,7 @@ import java.util.Properties;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -34,6 +35,8 @@ public class Ventana extends JFrame{
 	private Properties propMenu;
 	private Properties propModo;
 	private JPanel panelPlantas;
+	private JLabel lblOleadas;
+	private JLabel lblNivel;
 	/**
 	 * Launch the application.
 	 */
@@ -317,6 +320,29 @@ public class Ventana extends JFrame{
 		lblFondo.setBounds(0, 0, 884, 467);
 		lblFondo.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propModo.getProperty("fondo"))).getImage().getScaledInstance(lblFondo.getWidth(), lblFondo.getHeight(), DO_NOTHING_ON_CLOSE)));
 		panelDia.add(lblFondo);
+		
+		lblOleadas = new JLabel();
+		lblOleadas.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblOleadas.setHorizontalAlignment(SwingConstants.CENTER);
+		lblOleadas.setBounds(284, 21, 274, 29);
+		if(propModo.getProperty("colorOscuro").equalsIgnoreCase("true"))
+			lblOleadas.setForeground(new Color(255,255,255));
+		else
+			lblOleadas.setForeground(new Color(0,0,0));
+		lblOleadas.setVisible(false);
+		panelDia.add(lblOleadas,0);
+		
+		lblNivel = new JLabel();
+		lblNivel.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblNivel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNivel.setBounds(284, 21, 274, 29);
+		if(propModo.getProperty("colorOscuro").equalsIgnoreCase("true"))
+			lblNivel.setForeground(new Color(255,255,255));
+		else
+			lblNivel.setForeground(new Color(0,0,0));
+		lblNivel.setVisible(false);
+		panelDia.add(lblNivel,0);
+		
 		controlarPlantasAComprar();
 		repaint();	
 	}
@@ -336,10 +362,9 @@ public class Ventana extends JFrame{
 		JLabel lblGameOver = new JLabel();
 		lblGameOver.setBounds((this.getWidth()-357)/2, 88, 357, 271);
 		lblGameOver.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("gameOver"))).getImage().getScaledInstance(lblGameOver.getWidth(), lblGameOver.getHeight(), DO_NOTHING_ON_CLOSE)));
-		
 		getContentPane().add(lblGameOver,0);
 		this.setFocusable(false);
-		botonVolver();
+		botonVolver("GAME OVER!");
 		repaint();
 		
 	}
@@ -349,13 +374,13 @@ public class Ventana extends JFrame{
 		lblGanar.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("ganarJuego"))).getImage().getScaledInstance(lblGanar.getWidth(), lblGanar.getHeight(), DO_NOTHING_ON_CLOSE)));
 		getContentPane().add(lblGanar, 0);
 		this.setFocusable(false);
-		botonVolver();
+		botonVolver("GANASTE!");
 		repaint();
 	}
 	
-	private void botonVolver() {
-		JButton btnVolver = new JButton("Volver");
-		btnVolver.setBounds((this.getWidth()-162)/2, 369, 162, 50);
+	private void botonVolver(String s) {
+		JButton btnVolver = new JButton(s);
+		btnVolver.setBounds((this.getWidth()-162)/2, 369, 180, 50);
 		btnVolver.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 20));
 		btnVolver.setVisible(true);
 		this.getContentPane().add(btnVolver, 0);
@@ -392,10 +417,34 @@ public class Ventana extends JFrame{
 	}
 	
 	public void cambiarOleada(int i) {
+		lblOleadas.setText("¡Oleada "+i+"!");
+		lblOleadas.setVisible(true);
 		
+		int delay = 3500;
+        ActionListener taskPerformer = new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent evt) {
+                 lblOleadas.setVisible(false);
+           }
+        };
+	    Timer timer = new Timer(delay, taskPerformer);
+	    timer.setRepeats(false);
+	    timer.start();
 	}
+	
 	public void cambiarNivel(int i) {
-		
+		lblNivel.setText("¡Nivel "+i+"!");
+		lblNivel.setVisible(true);
+		int delay = 3500;
+        ActionListener taskPerformer = new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent evt) {
+                 lblNivel.setVisible(false);
+           }
+        };
+	    Timer timer = new Timer(delay, taskPerformer);
+	    timer.setRepeats(false);
+	    timer.start();
 	}
 	//getters
 	
