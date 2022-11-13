@@ -9,9 +9,7 @@ public class accionPlantasDisparadoras implements PlantaStrategy{
 	public accionPlantasDisparadoras() {
 		contadorTicks=0;
 	}
-	
-	
-	
+
 	public  void realizarAccion(Planta p,Ventana v) {
 		if(p.getFila().hayZombies()) {
 			if(contadorTicks == 1) {

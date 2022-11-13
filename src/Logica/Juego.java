@@ -16,7 +16,7 @@ public class Juego {
 	protected AdministradorNiveles administradorNiveles;
 	protected AdministradorJuego administradorJuego;
 	protected Fila[] filas;
-	protected Builder builder; 
+	protected AbstractBuilder builder;
 	protected int contadorZombies;
 	protected List<Sol> solesJuego;
 	
@@ -33,7 +33,14 @@ public class Juego {
 		}
 		contadorZombies = 0;
 		solesJuego=new ArrayList<Sol>();
-		builder=new Builder(this);
+	}
+	
+	public void setBuilderDia() {
+		builder=new BuilderDia(this);
+	}
+	
+	public void setBuilderNoche() {
+		builder=new BuilderNoche(this);
 	}
 	
 	public void jugar(){
@@ -186,7 +193,7 @@ public class Juego {
 		return solesJuego;
 	}
 	
-	public Builder getBuilder() {
+	public AbstractBuilder getBuilder() {
 		return builder;
 	}
 	public Ventana getVentana() {

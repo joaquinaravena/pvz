@@ -3,10 +3,10 @@ import Entidades.Zombie;
 import Entidades.Planta;
 import Entidades.Proyectil;
 import Entidades.Sol;
-public class Builder{
-protected Juego miJuego;
+public class BuilderDia implements AbstractBuilder{
+	protected Juego miJuego;
 	//Ver como hacen el properties
-	public Builder(Juego juego) {
+	public BuilderDia(Juego juego) {
 		miJuego = juego;
 	}
 	public Zombie crearZombieDebil() {
