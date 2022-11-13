@@ -27,14 +27,14 @@ protected Juego miJuego;
 	}
 
 	public Planta crearPlantaDebil() {
-		return new Planta(50,100,0,miJuego.getVentana(), "plantaDebil" , new Sol(miJuego.getVentana(),"sol",true));
+		return new Planta(50,100,0,miJuego.getVentana(), "plantaDebil" , new Sol(miJuego.getVentana(),"sol",true),new accionPlantasGeneradoras());
 	}
 
 	public Planta crearPlantaMedio() {
-		return new Planta(100,200,100,miJuego.getVentana(), "plantaMedio" , new Proyectil(100,miJuego.getVentana(),"proyectilDebil",null));
+		return new Planta(100,200,100,miJuego.getVentana(), "plantaMedio" , new Proyectil(100,miJuego.getVentana(),"proyectilDebil",null),new accionPlantasDisparadoras());
 	}
 
 	public Planta crearPlantaFuerte() {
-		return new Planta(150,300,200,miJuego.getVentana(), "plantaFuerte", new Proyectil(100,miJuego.getVentana(),"proyectilRalentizante",null));
+		return new Planta(150,300,200,miJuego.getVentana(), "plantaFuerte", new Proyectil(100,miJuego.getVentana(),"proyectilRalentizante",null),new accionPlantasDisparadoras());
 	}
 }
