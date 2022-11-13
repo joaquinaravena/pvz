@@ -99,7 +99,8 @@ public class Fila {
 		
 	public void chequearColisiones() {
 		boolean huboColision=false;
-		Iterator<Lanzable> itLanzables=misLanzables.iterator();
+		List<Lanzable> lanzablesClone = new CopyOnWriteArrayList<Lanzable>(misLanzables);
+		Iterator<Lanzable> itLanzables = lanzablesClone.iterator();
 		Iterator<Zombie> itZombie=misZombies.iterator();
 		Zombie auxZombie;
 		int cont=0;
@@ -114,10 +115,10 @@ public class Fila {
 					auxZombie.visitarProyectil(auxLanzable);
 					miJuego.agregarLanzableAEliminar(auxLanzable);
 				}
-					
 			}
-				cont=0;
-				huboColision=false;
+			miJuego.removerLanzables();
+			cont=0;
+			huboColision=false;
 			while(!huboColision && cont<9) {//Itero lista de plantas y si detecto una colision freno.
 				if(misPlantas[cont]!= null) {
 						huboColision=verColisiones(auxZombie,misPlantas[cont]);

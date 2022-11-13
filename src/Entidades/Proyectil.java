@@ -20,8 +20,8 @@ public class Proyectil extends Lanzable{
 	
 	
 	public void mover() {
-		x = x+50;
-		getEntidadGrafica().getGrafica().setBounds(getEntidadGrafica().getGrafica().getX()+50, getEntidadGrafica().getGrafica().getY(), getEntidadGrafica().getGrafica().getWidth(), getEntidadGrafica().getGrafica().getHeight());
+		x = x+25;
+		getEntidadGrafica().getGrafica().setBounds(getEntidadGrafica().getGrafica().getX()+25, getEntidadGrafica().getGrafica().getY(), getEntidadGrafica().getGrafica().getWidth(), getEntidadGrafica().getGrafica().getHeight());
 		getEntidadGrafica().actualizarGrafica();
 	}
 	public void chocar(Zombie z) {

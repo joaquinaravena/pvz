@@ -27,7 +27,7 @@ protected Juego miJuego;
 	}
 
 	public Planta crearPlantaDebil() {
-		return new Planta(50,100,0,miJuego.getVentana(), "plantaDebil" , new Sol(miJuego.getVentana(),"sol"));
+		return new Planta(50,100,0,miJuego.getVentana(), "plantaDebil" , new Sol(miJuego.getVentana(),"sol",true));
 	}
 
 	public Planta crearPlantaMedio() {

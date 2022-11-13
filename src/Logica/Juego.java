@@ -22,7 +22,11 @@ public class Juego {
 	protected List<Zombie> zombiesAEliminar;
 	protected List<Planta> plantasAEliminar;
 	protected List<Lanzable> lanzablesAEliminar;
+	protected List<Sol> solesJuego;
 	protected int contadorJugadas;
+	
+	
+	protected int cont;
 	
 	public Juego(Ventana v) {
 		miRelojMusica = new RelojMusica();
@@ -40,6 +44,7 @@ public class Juego {
 		zombiesAEliminar = new ArrayList<Zombie>();
 		plantasAEliminar = new ArrayList<Planta>();
 		lanzablesAEliminar = new ArrayList<Lanzable>();
+		solesJuego=new ArrayList<Sol>();
 		builder=new Builder(this);
 		contadorJugadas = 0;
 	}
@@ -140,6 +145,9 @@ public class Juego {
 	public void accionLanzables() {
 		for (int i=0; i<6; i++)
 				filas[i].moverLanzables();
+		for(Sol p:solesJuego) {
+			p.mover();
+		}
 	}
 	
 	public void moverZombies() {
@@ -150,11 +158,12 @@ public class Juego {
 	}
 
 	
-	//METODOS PARA AGREGAR PLANTAS Y ZOMBIES
+	//METODOS PARA AGREGAR PLANTAS , ZOMBIES y SOLES
 	
 	public void agregarZombieNivel(Zombie z) {
 		zombiesNivel.add(z);
 	}
+	
 	
 	public void agregarZombieActivo() { 
 		boolean hayZombies = false;
@@ -234,11 +243,30 @@ public class Juego {
 	}
 	
 	public void removerLanzables() {
-		for (Lanzable p: lanzablesAEliminar) {
-			p.getFila().removerLanzable(p);
+		List<Lanzable> lanzablesClone = new CopyOnWriteArrayList<Lanzable>(lanzablesAEliminar);
+		for (Lanzable p: lanzablesClone) {
+			if(p.getFila()==null)//Si no tiene fila asignada es un sol de juego.
+				solesJuego.remove(p);
+			else
+				p.getFila().removerLanzable(p);
 			p.getEntidadGrafica().borrarGrafica();
 		}
 		lanzablesAEliminar.clear();
+	}
+	
+	
+	public void agregarSolAJuego() {
+		Sol aAgregar=new Sol(miVentana,"sol",false);
+		int randomX=(int)(Math.random()*600);
+		aAgregar.getEntidadGrafica().getGrafica().setLocation(randomX, 0);
+		aAgregar.setX(randomX);
+		aAgregar.setY(0);
+		solesJuego.add(aAgregar);
+	}
+	
+	public void agregarSolARemover(Sol s) {
+		lanzablesAEliminar.add(s);
+		agregarSoles(100);
 	}
 	
 	//MUSICA

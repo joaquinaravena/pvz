@@ -5,8 +5,10 @@ import GUI.Ventana;
 
 public class Sol extends Lanzable{
 	int contador;
-	public Sol(Ventana v,String graf) {
+	boolean solDePlanta;
+	public Sol(Ventana v,String graf,boolean solDePlanta) {
 		super();
+		this.solDePlanta=solDePlanta;
 		contador=0;
 		this.alto = 45;
 		this.ancho = 45;
@@ -16,23 +18,33 @@ public class Sol extends Lanzable{
 	}
 	
 	public void mover() {
-		if(contador<4) {
-			y=y-10;
-			x=x-2;
-			getEntidadGrafica().getGrafica().setBounds(getEntidadGrafica().getGrafica().getX()-2, getEntidadGrafica().getGrafica().getY()-10, getEntidadGrafica().getGrafica().getWidth(), getEntidadGrafica().getGrafica().getHeight());
-			contador++;
+		if(solDePlanta) {
+			if(contador<4) {
+				y=y-10;
+				x=x-2;
+				getEntidadGrafica().getGrafica().setBounds(getEntidadGrafica().getGrafica().getX()-2, getEntidadGrafica().getGrafica().getY()-10, getEntidadGrafica().getGrafica().getWidth(), getEntidadGrafica().getGrafica().getHeight());
+				contador++;
+			}
+			else if(contador <11) {
+				y=y+10;
+				x=x-2;
+				contador++;
+				getEntidadGrafica().getGrafica().setBounds(getEntidadGrafica().getGrafica().getX()-2, getEntidadGrafica().getGrafica().getY()+10, getEntidadGrafica().getGrafica().getWidth(), getEntidadGrafica().getGrafica().getHeight());
+			}
+			getEntidadGrafica().actualizarGrafica();
 		}
-		else if(contador <11) {
-			y=y+10;
-			x=x-2;
-			contador++;
-			getEntidadGrafica().getGrafica().setBounds(getEntidadGrafica().getGrafica().getX()-2, getEntidadGrafica().getGrafica().getY()+10, getEntidadGrafica().getGrafica().getWidth(), getEntidadGrafica().getGrafica().getHeight());
+		else {
+			if(y<400) {
+				y=y+10;
+				getEntidadGrafica().getGrafica().setBounds(getEntidadGrafica().getGrafica().getX(), getEntidadGrafica().getGrafica().getY()+10, getEntidadGrafica().getGrafica().getWidth(), getEntidadGrafica().getGrafica().getHeight());
+				getEntidadGrafica().actualizarGrafica();
+			}
 		}
-		getEntidadGrafica().actualizarGrafica();
+		
 	}
 	
 	public Sol clone(Ventana v) {
-		Sol aRetornar=new Sol(v,this.getEntidadGrafica().getRutaGrafica());
+		Sol aRetornar=new Sol(v,this.getEntidadGrafica().getRutaGrafica(),solDePlanta);
 		return aRetornar;
 	}
 

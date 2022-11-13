@@ -20,10 +20,11 @@ public class RelojZombies extends Thread{
 				miJuego.moverZombies();
 				miJuego.removerZombies();
 				contador++;
-				if(contador == 25) {
+				if(contador % 25==0) {
 					miJuego.agregarZombieActivo();
-					contador = 0;
 				}
+				if(contador % 45==0)
+					miJuego.agregarSolAJuego();
 			}
 		}
 		catch(InterruptedException e) {
