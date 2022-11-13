@@ -13,37 +13,31 @@ public class Juego {
 	protected int soles;
 	protected Planta plantaEnEspera;
 	protected Ventana miVentana;
-	protected int nivelActual;
 	protected AdministradorNiveles administrador;
 	protected Fila[] filas;
-	protected List<Zombie> zombiesNivel;
 	protected Builder builder; 
 	protected int contadorZombies;
 	protected List<Zombie> zombiesAEliminar;
 	protected List<Planta> plantasAEliminar;
 	protected List<Lanzable> lanzablesAEliminar;
 	protected List<Sol> solesJuego;
-	protected int oleadaActual;
 	
 	public Juego(Ventana v) {
 		miRelojMusica = new RelojMusica();
 		soles = 150;
 		plantaEnEspera = null;
 		miVentana = v;
-		nivelActual = 0;
 		administrador = new AdministradorNiveles(this);
 		filas = new Fila[6];
 		for(int i=0;i<6;i++) {
 			filas[i]=new Fila(this);
 		}
-		zombiesNivel = new ArrayList<Zombie>();
 		contadorZombies = 0;
 		zombiesAEliminar = new ArrayList<Zombie>();
 		plantasAEliminar = new ArrayList<Planta>();
 		lanzablesAEliminar = new ArrayList<Lanzable>();
 		solesJuego=new ArrayList<Sol>();
 		builder=new Builder(this);
-		oleadaActual = 0;
 	}
 	
 	public void jugar(){
@@ -53,7 +47,6 @@ public class Juego {
 		miRelojZombies.start();
 		miRelojPlantas.start();
 		miRelojProyectiles.start();
-		
 		administrador.nuevoNivel(0);
 	}
 		
@@ -75,17 +68,16 @@ public class Juego {
 		soles = 150;
 		miVentana.controlarPlantasAComprar();
 		plantaEnEspera = null;
-		nivelActual = 0;
 		filas = new Fila[6];
 		for(int i=0;i<6;i++) {
 			filas[i]=new Fila(this);
 		}
-		zombiesNivel = new ArrayList<Zombie>();
 		zombiesAEliminar = new ArrayList<Zombie>();
 		plantasAEliminar = new ArrayList<Planta>();
 		lanzablesAEliminar = new ArrayList<Lanzable>();
 		contadorZombies = 0;
-		oleadaActual = 0;
+		administrador.oleadaActual = 0;
+		administrador.nivelActual = 0;
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -95,42 +87,6 @@ public class Juego {
 		miRelojMusica.stop();
 		miRelojProyectiles.stop();
 		System.exit(0);
-	}
-	
-	public void oleada() {
-		oleadaActual++;
-		miVentana.cambiarOleada(oleadaActual);
-		int i = 1;
-		int aleatorio = 0;
-		while (i<=3 && !zombiesNivel.isEmpty()) {
-			int filaRandom = (int)(Math.random()*2+1+aleatorio);
-			zombiesNivel.get(0).setFila(getFila(filaRandom));
-			filas[filaRandom-1].agregarZombie(zombiesNivel.get(0), filaRandom);
-			zombiesNivel.remove(0);
-			i++;
-			aleatorio = aleatorio + 2;
-		}
-	}
-	
-	public void cambiarNivel() {
-		nivelActual++;
-		if (nivelActual==2)
-			terminarJuego(true);
-		else {
-			miRelojPlantas.setearActivo(false);
-			miRelojZombies.setearActivo(false);
-			miRelojProyectiles.setearActivo(false);
-			for(int i=0;i<6;i++) {
-				filas[i].resetearListaLanzables();
-				filas[i].resetearListaPlantas();
-			}
-			miVentana.cambiarNivel(nivelActual);
-			miRelojPlantas.setearActivo(true);
-			miRelojZombies.setearActivo(true);
-			miRelojProyectiles.setearActivo(true);
-			
-			administrador.nuevoNivel(nivelActual);
-		}
 	}
 	
 	//METODOS PARA REALIZAR ACCION DE ENTIDADES
@@ -159,27 +115,22 @@ public class Juego {
 	
 	//METODOS PARA AGREGAR PLANTAS , ZOMBIES y SOLES
 	
-	public void agregarZombieNivel(Zombie z) {
-		zombiesNivel.add(z);
-	}
-	
-	
 	public void agregarZombieActivo() { 
 		boolean hayZombies = false;
 		for (int i=1; i<=6 && !hayZombies; i++) 
 			hayZombies = filas[i-1].hayZombies();
-		if (!hayZombies && zombiesNivel.isEmpty())
-			cambiarNivel();
-		if (!zombiesNivel.isEmpty()) {
+		if (!hayZombies && administrador.zombiesNivel.isEmpty())
+			administrador.cambiarNivel();
+		if (!administrador.zombiesNivel.isEmpty()) {
 			if (contadorZombies % 6 == 0 && contadorZombies>0) {
-				oleada();
+				administrador.oleada();
 				contadorZombies++;
 			}
 			else {
 				int filaRandom = (int)(Math.random()*6+1);
-				zombiesNivel.get(0).setFila(getFila(filaRandom));
-				filas[filaRandom-1].agregarZombie(zombiesNivel.get(0), filaRandom);
-				zombiesNivel.remove(0);
+				administrador.zombiesNivel.get(0).setFila(getFila(filaRandom));
+				filas[filaRandom-1].agregarZombie(administrador.zombiesNivel.get(0), filaRandom);
+				administrador.zombiesNivel.remove(0);
 				contadorZombies++;
 				}
 			}
