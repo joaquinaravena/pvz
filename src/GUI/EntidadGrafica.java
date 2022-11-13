@@ -5,9 +5,9 @@ import javax.swing.JLabel;
 import Entidades.Entidad;
 
 public class EntidadGrafica {
-	private JLabel miGrafica;
-	private Ventana ventana;
-	private String rutaBaseG;
+	protected JLabel miGrafica;
+	protected Ventana ventana;
+	protected String rutaBaseG;
 	
 	public EntidadGrafica(Ventana v, Entidad e, String s) {
 		miGrafica = new JLabel();

@@ -1,6 +1,6 @@
 package Entidades;
 
-import GUI.EntidadGrafica;
+import GUI.SolGrafico;
 import GUI.Ventana;
 
 public class Sol extends Lanzable{
@@ -12,7 +12,7 @@ public class Sol extends Lanzable{
 		contador=0;
 		this.alto = 45;
 		this.ancho = 45;
-		entidadGrafica=new EntidadGrafica(v,this,graf);
+		entidadGrafica=new SolGrafico(v,this,graf, v.getJuego());
 		entidadGrafica.getGrafica().setBounds(30, 0, alto, ancho);
 		entidadGrafica.borrarGrafica();
 	}

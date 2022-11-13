@@ -25,9 +25,6 @@ public class Juego {
 	protected List<Sol> solesJuego;
 	protected int contadorJugadas;
 	
-	
-	protected int cont;
-	
 	public Juego(Ventana v) {
 		miRelojMusica = new RelojMusica();
 		soles = 150;
@@ -76,6 +73,7 @@ public class Juego {
 			getFila(i).resetearListaZombies();
 		}
 		soles = 150;
+		miVentana.controlarPlantasAComprar();
 		plantaEnEspera = null;
 		nivelActual = 0;
 		filas = new Fila[6];
@@ -200,6 +198,7 @@ public class Juego {
 			filas[posicionFila].getPlanta(posicionArreglo).setFila(filas[posicionFila]);
 			filas[posicionFila].getPlanta(posicionArreglo).getLanzable().setFila(filas[posicionFila]);
 			filas[posicionFila].getPlanta(posicionArreglo).getLanzable().setY(y);
+			this.restarSoles(plantaEnEspera.getPrecio());
 		}
 		
 	}
@@ -269,7 +268,7 @@ public class Juego {
 	
 	public void agregarSolARemover(Sol s) {
 		lanzablesAEliminar.add(s);
-		agregarSoles(100);
+		agregarSoles(50);
 	}
 	
 	//MUSICA

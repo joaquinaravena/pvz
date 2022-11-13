@@ -31,10 +31,10 @@ protected Juego miJuego;
 	}
 
 	public Planta crearPlantaMedio() {
-		return new Planta(100,200,100,miJuego.getVentana(), "plantaMedio" , new Proyectil(100,miJuego.getVentana(),"proyectilDebil",null),new accionPlantasDisparadoras());
+		return new Planta(75,200,100,miJuego.getVentana(), "plantaMedio" , new Proyectil(100,miJuego.getVentana(),"proyectilDebil",null),new accionPlantasDisparadoras());
 	}
 
 	public Planta crearPlantaFuerte() {
-		return new Planta(150,300,200,miJuego.getVentana(), "plantaFuerte", new Proyectil(100,miJuego.getVentana(),"proyectilRalentizante",null),new accionPlantasDisparadoras());
+		return new Planta(150,300,200,miJuego.getVentana(), "plantaFuerte", new Proyectil(100,miJuego.getVentana(),"proyectilFuerte",null),new accionPlantasDisparadoras());
 	}
 }

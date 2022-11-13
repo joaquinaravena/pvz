@@ -161,7 +161,6 @@ public class Ventana extends JFrame{
 		panelDia.setLayout(null);
 		
 		panelPlantas = new JPanel();
-		panelPlantas.setIgnoreRepaint(true);
 		panelPlantas.setBackground(new Color(205, 133, 63));
 		panelPlantas.setBounds(0, 0, 274, 62);
 		panelDia.add(panelPlantas);
@@ -366,6 +365,9 @@ public class Ventana extends JFrame{
 		JToggleButton planta1 = (JToggleButton)panelPlantas.getComponent(0);
 		JToggleButton planta2 = (JToggleButton)panelPlantas.getComponent(1);
 		JToggleButton planta3 = (JToggleButton)panelPlantas.getComponent(2);
+		JLabel lblSoles = (JLabel) panelPlantas.getComponent(8);
+		lblSoles.setText(""+miJuego.getSoles());
+		lblSoles.repaint();
 		planta1.setSelected(false);
 		planta2.setSelected(false);
 		planta3.setSelected(false);
@@ -395,7 +397,7 @@ public class Ventana extends JFrame{
 		return propModo;
 	}
 	public int getBordeDerecho() {
-		return this.getWidth()-5;
+		return this.getWidth()-8;
 	}
 	public int getLinea(int i) {
 		return i*64;
@@ -405,5 +407,8 @@ public class Ventana extends JFrame{
 	}
 	public int getFinTablero() {
 		return 130;
+	}
+	public Juego getJuego() {
+		return miJuego;
 	}
 }
