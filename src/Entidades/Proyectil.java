@@ -37,6 +37,6 @@ public class Proyectil extends Lanzable{
 	}
 	
 	public void morir() {
-		miFila.getJuego().agregarLanzableAEliminar(this);
+		miFila.getJuego().getAdministradorJuego().agregarLanzableAEliminar(this);
 	}
 }

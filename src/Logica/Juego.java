@@ -13,13 +13,11 @@ public class Juego {
 	protected int soles;
 	protected Planta plantaEnEspera;
 	protected Ventana miVentana;
-	protected AdministradorNiveles administrador;
+	protected AdministradorNiveles administradorNiveles;
+	protected AdministradorJuego administradorJuego;
 	protected Fila[] filas;
 	protected Builder builder; 
 	protected int contadorZombies;
-	protected List<Zombie> zombiesAEliminar;
-	protected List<Planta> plantasAEliminar;
-	protected List<Lanzable> lanzablesAEliminar;
 	protected List<Sol> solesJuego;
 	
 	public Juego(Ventana v) {
@@ -27,15 +25,13 @@ public class Juego {
 		soles = 150;
 		plantaEnEspera = null;
 		miVentana = v;
-		administrador = new AdministradorNiveles(this);
+		administradorNiveles = new AdministradorNiveles(this);
+		administradorJuego = new AdministradorJuego(this);
 		filas = new Fila[6];
 		for(int i=0;i<6;i++) {
 			filas[i]=new Fila(this);
 		}
 		contadorZombies = 0;
-		zombiesAEliminar = new ArrayList<Zombie>();
-		plantasAEliminar = new ArrayList<Planta>();
-		lanzablesAEliminar = new ArrayList<Lanzable>();
 		solesJuego=new ArrayList<Sol>();
 		builder=new Builder(this);
 	}
@@ -47,7 +43,7 @@ public class Juego {
 		miRelojZombies.start();
 		miRelojPlantas.start();
 		miRelojProyectiles.start();
-		administrador.nuevoNivel(0);
+		administradorNiveles.nuevoNivel(0);
 	}
 		
 	public void terminarJuego(boolean gane) {
@@ -72,12 +68,10 @@ public class Juego {
 		for(int i=0;i<6;i++) {
 			filas[i]=new Fila(this);
 		}
-		zombiesAEliminar = new ArrayList<Zombie>();
-		plantasAEliminar = new ArrayList<Planta>();
-		lanzablesAEliminar = new ArrayList<Lanzable>();
+		administradorJuego.resetearListas();
 		contadorZombies = 0;
-		administrador.oleadaActual = 0;
-		administrador.nivelActual = 0;
+		administradorNiveles.oleadaActual = 0;
+		administradorNiveles.nivelActual = 0;
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -92,7 +86,7 @@ public class Juego {
 	//METODOS PARA REALIZAR ACCION DE ENTIDADES
 	
 	public void accionPlantas() {
-		removerPlantas();
+		administradorJuego.removerPlantas();
 		for (int i=0; i<6; i++)
 				filas[i].accionPlantas();
 	}
@@ -119,18 +113,18 @@ public class Juego {
 		boolean hayZombies = false;
 		for (int i=1; i<=6 && !hayZombies; i++) 
 			hayZombies = filas[i-1].hayZombies();
-		if (!hayZombies && administrador.zombiesNivel.isEmpty())
-			administrador.cambiarNivel();
-		if (!administrador.zombiesNivel.isEmpty()) {
+		if (!hayZombies && administradorNiveles.getZombiesNivel().isEmpty())
+			administradorNiveles.cambiarNivel();
+		if (!administradorNiveles.getZombiesNivel().isEmpty()) {
 			if (contadorZombies % 6 == 0 && contadorZombies>0) {
-				administrador.oleada();
+				administradorNiveles.oleada();
 				contadorZombies++;
 			}
 			else {
 				int filaRandom = (int)(Math.random()*6+1);
-				administrador.zombiesNivel.get(0).setFila(getFila(filaRandom));
-				filas[filaRandom-1].agregarZombie(administrador.zombiesNivel.get(0), filaRandom);
-				administrador.zombiesNivel.remove(0);
+				administradorNiveles.getZombiesNivel().get(0).setFila(getFila(filaRandom));
+				filas[filaRandom-1].agregarZombie(administradorNiveles.getZombiesNivel().get(0), filaRandom);
+				administradorNiveles.getZombiesNivel().remove(0);
 				contadorZombies++;
 				}
 			}
@@ -155,60 +149,6 @@ public class Juego {
 		
 	}
 	
-	//METODOS PARA BORRAR ENTIDADES
-	
-	public void agregarZombieAEliminar(Zombie z) {
-		zombiesAEliminar.add(z);
-	}
-	
-	public void agregarPlantaAEliminar(Planta p) {
-		plantasAEliminar.add(p);
-	}
-	
-	public void agregarLanzableAEliminar(Lanzable p) {
-		lanzablesAEliminar.add(p);
-	}
-	
-	public void removerZombies() {
-		for (Zombie z: zombiesAEliminar) {
-			z.getFila().removerZombie(z);
-			z.getEntidadGrafica().borrarGrafica();
-		}
-		zombiesAEliminar.clear();
-	}
-	
-	public void removerPlantas() {
-		List<Planta> plantasClone = new CopyOnWriteArrayList<Planta>(plantasAEliminar);
-		List<Zombie> zombiesAtacanClone;
-		Iterator<Planta> itPlantas = plantasClone.iterator();
-		while(itPlantas.hasNext()) {
-			Planta p = itPlantas.next();
-			p.getFila().borrarPlanta((p.getX()/74)-2);
-			p.getFila().getJuego().agregarLanzableAEliminar(p.getLanzable());
-			p.getEntidadGrafica().borrarGrafica();
-			zombiesAtacanClone=new CopyOnWriteArrayList<Zombie>(p.getZombiesAtacan());
-			for(Zombie z: zombiesAtacanClone) {
-				z.setPlantaAtacada(null);
-				z.setEstrategia(new moverZombie());
-				z.getEntidadGrafica().cambiarGrafica(z.getMiRutaMover(), z);
-			}
-		}
-		plantasAEliminar.clear();
-	}
-	
-	public void removerLanzables() {
-		List<Lanzable> lanzablesClone = new CopyOnWriteArrayList<Lanzable>(lanzablesAEliminar);
-		for (Lanzable p: lanzablesClone) {
-			if(p.getFila()==null)//Si no tiene fila asignada es un sol de juego.
-				solesJuego.remove(p);
-			else
-				p.getFila().removerLanzable(p);
-			p.getEntidadGrafica().borrarGrafica();
-		}
-		lanzablesAEliminar.clear();
-	}
-	
-	
 	public void agregarSolAJuego() {
 		Sol aAgregar=new Sol(miVentana,"sol",false);
 		int randomX=(int)(Math.random()*600);
@@ -219,7 +159,7 @@ public class Juego {
 	}
 	
 	public void agregarSolARemover(Sol s) {
-		lanzablesAEliminar.add(s);
+		administradorJuego.agregarLanzableAEliminar(s);
 		agregarSoles(50);
 	}
 	
@@ -242,6 +182,10 @@ public class Juego {
 	
 	//getters
 	
+	public List<Sol> getSolesJuego(){
+		return solesJuego;
+	}
+	
 	public Builder getBuilder() {
 		return builder;
 	}
@@ -254,6 +198,10 @@ public class Juego {
 	public Fila getFila(int i) {
 		return filas[i-1];
 	}
+	public AdministradorJuego getAdministradorJuego() {
+		return administradorJuego;
+	}
+	
 	public int getSoles() {
 		return soles;
 	}

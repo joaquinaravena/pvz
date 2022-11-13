@@ -74,10 +74,10 @@ public class Fila {
 				huboColision=verColisiones(auxZombie,auxLanzable);
 				if(huboColision) {
 					auxZombie.visitarProyectil(auxLanzable);
-					miJuego.agregarLanzableAEliminar(auxLanzable);
+					miJuego.getAdministradorJuego().agregarLanzableAEliminar(auxLanzable);
 				}
 			}
-			miJuego.removerLanzables();
+			miJuego.getAdministradorJuego().removerLanzables();
 			cont=0;
 			huboColision=false;
 			while(!huboColision && cont<9) {//Itero lista de plantas y si detecto una colision freno.

@@ -74,4 +74,9 @@ public class AdministradorNiveles {
 			aleatorio = aleatorio + 2;
 		}
 	}
+	
+	public List<Zombie> getZombiesNivel(){
+		return zombiesNivel;
+	}
+	
 }

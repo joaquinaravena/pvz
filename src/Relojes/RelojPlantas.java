@@ -16,7 +16,7 @@ public class RelojPlantas extends Thread{
 		try {
 			while (activo) {
 				Thread.sleep(1000);
-				miJuego.removerPlantas();
+				miJuego.getAdministradorJuego().removerPlantas();
 				miJuego.accionPlantas();
 			}
 		}
