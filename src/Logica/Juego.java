@@ -23,7 +23,6 @@ public class Juego {
 	protected List<Planta> plantasAEliminar;
 	protected List<Lanzable> lanzablesAEliminar;
 	protected List<Sol> solesJuego;
-	protected int contadorJugadas;
 	
 	public Juego(Ventana v) {
 		miRelojMusica = new RelojMusica();
@@ -43,7 +42,6 @@ public class Juego {
 		lanzablesAEliminar = new ArrayList<Lanzable>();
 		solesJuego=new ArrayList<Sol>();
 		builder=new Builder(this);
-		contadorJugadas = 0;
 	}
 	
 	public void jugar(){

@@ -272,12 +272,18 @@ public class Ventana extends JFrame{
 				lblCelda.setBounds(182+74*j, 62+65*i, 74, 65);
 				lblCelda.setOpaque(true);
 				if((color % 2) == 0 ) {
-					lblCelda.setBackground(new Color(0, 128, 0));
-					lblCelda.setForeground(new Color(0, 128, 0));
+					if(propModo.getProperty("colorOscuro").equalsIgnoreCase("true"))
+						lblCelda.setBackground(new Color(25, 25, 112).darker());
+					else
+						lblCelda.setBackground(new Color(0, 128, 0));
+					lblCelda.setForeground(lblCelda.getBackground());
 				}
 				else {
-					lblCelda.setBackground(new Color(50, 205, 50));
-					lblCelda.setForeground(new Color(50, 205, 50));
+					if(propModo.getProperty("colorOscuro").equalsIgnoreCase("true"))
+						lblCelda.setBackground(new Color(70, 130, 180).darker());
+					else
+						lblCelda.setBackground(new Color(50, 205, 50));
+					lblCelda.setForeground(lblCelda.getBackground());
 				}
 				lblCelda.addMouseListener(new MouseAdapter() {
 					@Override
