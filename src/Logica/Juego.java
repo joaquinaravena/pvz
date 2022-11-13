@@ -1,6 +1,5 @@
 package Logica;
 import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import Entidades.*;
 import GUI.Ventana;
@@ -118,7 +117,7 @@ public class Juego {
 		if (!administradorNiveles.getZombiesNivel().isEmpty()) {
 			if (contadorZombies % 6 == 0 && contadorZombies>0) {
 				administradorNiveles.oleada();
-				contadorZombies++;
+				contadorZombies = 0;
 			}
 			else {
 				int filaRandom = (int)(Math.random()*6+1);
@@ -174,10 +173,7 @@ public class Juego {
 	}
 	
 	public boolean reproduciendoMusica() {
-		if(miRelojMusica.reproduciendoMusica())
-			return true;
-		else
-			return false;
+		return miRelojMusica.reproduciendoMusica();
 	}
 	
 	//getters
@@ -228,6 +224,10 @@ public class Juego {
 	
 	public void restarSoles(int s) {
 		soles -= s;
+		miVentana.controlarPlantasAComprar();
+	}
+	public void setSoles(int s) {
+		soles = s;
 		miVentana.controlarPlantasAComprar();
 	}
 }

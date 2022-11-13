@@ -75,9 +75,9 @@ public class AdministradorJuego{
 		}
 		
 		public void resetearListas() {
-			zombiesAEliminar = new ArrayList<Zombie>();
-			plantasAEliminar = new ArrayList<Planta>();
-			lanzablesAEliminar = new ArrayList<Lanzable>();
+			removerPlantas();
+			removerZombies();
+			removerLanzables();
 		}
 		
 	
