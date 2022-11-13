@@ -55,7 +55,7 @@ public class AdministradorNiveles {
 			juego.miRelojPlantas.setearActivo(true);
 			juego.miRelojZombies.setearActivo(true);
 			juego.miRelojProyectiles.setearActivo(true);
-			
+			juego.setSoles(150);
 			nuevoNivel(nivelActual);
 		}
 	}

@@ -134,7 +134,10 @@ public class Ventana extends JFrame{
 		JToggleButton btnMusica = new JToggleButton();
 		btnMusica.setOpaque(true);
 		btnMusica.setToolTipText("frena/reproduce la m\u00FAsica");
-		btnMusica.setSelected(true);
+		if(miJuego.reproduciendoMusica())
+			btnMusica.setSelected(true);
+		else
+			btnMusica.setSelected(false);
 		btnMusica.setBounds(24, 406, 53, 50);
 		btnMusica.setSelectedIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("stop"))).getImage().getScaledInstance(btnMusica.getWidth(), btnMusica.getHeight(), DO_NOTHING_ON_CLOSE)));
 		btnMusica.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("play"))).getImage().getScaledInstance(btnMusica.getWidth(), btnMusica.getHeight(), DO_NOTHING_ON_CLOSE)));
