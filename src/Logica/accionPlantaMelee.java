@@ -6,14 +6,19 @@ import GUI.Ventana;
 public class accionPlantaMelee implements PlantaStrategy{
 	private int contadorTicks;
 	private String plantaAtacando;
+	private boolean plantaEstaAtacando;
 	public accionPlantaMelee(String ataque) {
 		plantaAtacando=ataque;
 		contadorTicks=0;
+		plantaEstaAtacando=false;
 	}
 
 	public  void realizarAccion(Planta p,Ventana v) {
 		if(p.getFila().hayZombies() && !p.getZombiesAtacan().isEmpty() ) {
-			p.getEntidadGrafica().cambiarGrafica(plantaAtacando, p);
+			if(!plantaEstaAtacando) {
+				p.getEntidadGrafica().cambiarGrafica(plantaAtacando, p);
+				plantaEstaAtacando=true;
+				}
 			if(contadorTicks == 1) {
 				for(Zombie z:p.getZombiesAtacan())
 					z.restarVida(p.getDaño());
@@ -22,8 +27,10 @@ public class accionPlantaMelee implements PlantaStrategy{
 			else
 				contadorTicks++;
 		}
-		else 
+		else if(plantaEstaAtacando) {
 			p.getEntidadGrafica().cambiarGrafica(p.getEntidadGrafica().getRutaGrafica(),p);
+			plantaEstaAtacando=false;
+		}
 	}
 
 }

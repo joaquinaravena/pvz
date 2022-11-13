@@ -67,7 +67,7 @@ public class AdministradorNiveles {
 		int aleatorio = 0;
 		while (i<=3 && !zombiesNivel.isEmpty()) {
 			int filaRandom = (int)(Math.random()*2+1+aleatorio);
-			zombiesNivel.get(0).setFila(juego.getFila(filaRandom+1));
+			zombiesNivel.get(0).setFila(juego.getFila(filaRandom));
 			juego.getFila(filaRandom).agregarZombie(zombiesNivel.get(0), filaRandom);
 			zombiesNivel.remove(0);
 			i++;

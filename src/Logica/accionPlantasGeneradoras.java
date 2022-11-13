@@ -13,7 +13,7 @@ public class accionPlantasGeneradoras implements PlantaStrategy{
 	
 	
 	public  void realizarAccion(Planta p,Ventana v) {
-		if(contadorTicks==15) {
+		if(contadorTicks==12) {
 			Lanzable aDisparar=p.getLanzable().clone(v);
 			aDisparar.setX(p.getX());
 			aDisparar.setY(p.getY());

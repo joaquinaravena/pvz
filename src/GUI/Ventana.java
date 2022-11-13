@@ -91,6 +91,7 @@ public class Ventana extends JFrame{
 					InputStream input = new FileInputStream(Ventana.class.getResource("/Archivos/configDia.properties").getFile());
 					propModo = new Properties();
 					propModo.load(input);
+					miJuego.setBuilderDia();
 				} catch (IOException ex) {
 					System.out.println(ex.getMessage());
 				}
@@ -111,6 +112,7 @@ public class Ventana extends JFrame{
 					InputStream input = new FileInputStream(Ventana.class.getResource("/Archivos/configNoche.properties").getFile());
 					propModo = new Properties();
 					propModo.load(input);
+					miJuego.setBuilderNoche();
 				} catch (IOException ex) {
 					System.out.println(ex.getMessage());
 				}

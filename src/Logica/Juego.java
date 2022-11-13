@@ -148,8 +148,10 @@ public class Juego {
 			filas[posicionFila].getPlanta(posicionArreglo).setX(x);
 			filas[posicionFila].getPlanta(posicionArreglo).setY(y);
 			filas[posicionFila].getPlanta(posicionArreglo).setFila(filas[posicionFila]);
-			filas[posicionFila].getPlanta(posicionArreglo).getLanzable().setFila(filas[posicionFila]);
-			filas[posicionFila].getPlanta(posicionArreglo).getLanzable().setY(y);
+			if(filas[posicionFila].getPlanta(posicionArreglo).getLanzable()!=null){
+				filas[posicionFila].getPlanta(posicionArreglo).getLanzable().setFila(filas[posicionFila]);
+				filas[posicionFila].getPlanta(posicionArreglo).getLanzable().setY(y);
+			}
 			this.restarSoles(plantaEnEspera.getPrecio());
 		}
 		
