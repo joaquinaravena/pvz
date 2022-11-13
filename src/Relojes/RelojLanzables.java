@@ -4,7 +4,6 @@ import Logica.Juego;
 
 public class RelojLanzables extends Thread{
 	protected boolean activo;
-	protected boolean resetear;
 	protected Juego miJuego;
 	
 	public RelojLanzables(Juego j) {
@@ -30,7 +29,4 @@ public class RelojLanzables extends Thread{
 		activo = a;
 	}
 	
-	public void setearReseteo(boolean a) {
-		resetear = a;
-	}
 }
