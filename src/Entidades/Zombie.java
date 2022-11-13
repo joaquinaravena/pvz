@@ -10,15 +10,18 @@ public class Zombie extends Entidad {
 	protected int velocidad;
 	protected ZombieStrategy miEstrategia;
 	protected Planta plantaAtacada;
+	protected String miRutaAtacando;
 	
 	
-	public Zombie(int vida,int daño,int velocidad,Ventana v, String graf) {
+	public Zombie(int vida,int daño,int velocidad,Ventana v, String graf,String grafAtaque) {
 		comiendo=false;
 		this.vida=vida;
 		this.velocidad=velocidad;
 		this.daño=daño;
 		entidadGrafica=new EntidadGrafica(v, this, graf);
 		miEstrategia=new moverZombie();
+		miRuta=graf;
+		miRutaAtacando=grafAtaque;
 		plantaAtacada=null;
 	}
 	
@@ -66,5 +69,13 @@ public class Zombie extends Entidad {
 	
 	public void setPlantaAtacada(Planta atacada) {
 		plantaAtacada=atacada;
+	}
+	
+	public String getMiRutaMover() {
+		return miRuta;
+	}
+	
+	public String getMiRutaAtaque() {
+		return miRutaAtacando;
 	}
 }

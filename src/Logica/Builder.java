@@ -10,18 +10,18 @@ protected Juego miJuego;
 		miJuego = juego;
 	}
 	public Zombie crearZombieDebil() {
-		Zombie z = new Zombie(200,50,10,miJuego.getVentana(), "zombieDebil");
+		Zombie z = new Zombie(200,50,10,miJuego.getVentana(),"zombieDebil","zombieDebilAtacando");
 		z.setX(z.getEntidadGrafica().getGrafica().getX());
 		return z;
 	}
 	public Zombie crearZombieMediano() {
-		Zombie z = new Zombie(300,75,10,miJuego.getVentana(), "zombieMedio");
+		Zombie z = new Zombie(300,75,10,miJuego.getVentana(),"zombieMedio","zombieMedioAtacando");
 		z.setX(z.getEntidadGrafica().getGrafica().getX());
 		return z;
 	}
 
 	public Zombie crearZombieFuerte() {
-		Zombie z = new Zombie(400,100,15,miJuego.getVentana(), "zombieFuerte");
+		Zombie z = new Zombie(400,100,15,miJuego.getVentana(),"zombieFuerte","zombieFuerteAtacando");
 		z.setX(z.getEntidadGrafica().getGrafica().getX());
 		return z;
 	}

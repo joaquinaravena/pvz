@@ -228,15 +228,18 @@ public class Juego {
 	
 	public void removerPlantas() {
 		List<Planta> plantasClone = new CopyOnWriteArrayList<Planta>(plantasAEliminar);
+		List<Zombie> zombiesAtacanClone;
 		Iterator<Planta> itPlantas = plantasClone.iterator();
 		while(itPlantas.hasNext()) {
 			Planta p = itPlantas.next();
 			p.getFila().borrarPlanta((p.getX()/74)-2);
 			p.getFila().getJuego().agregarLanzableAEliminar(p.getLanzable());
 			p.getEntidadGrafica().borrarGrafica();
-			for(Zombie z: p.getZombiesAtacan()) {
+			zombiesAtacanClone=new CopyOnWriteArrayList<Zombie>(p.getZombiesAtacan());
+			for(Zombie z: zombiesAtacanClone) {
 				z.setPlantaAtacada(null);
 				z.setEstrategia(new moverZombie());
+				z.getEntidadGrafica().cambiarGrafica(z.getMiRutaMover(), z);
 			}
 		}
 		plantasAEliminar.clear();

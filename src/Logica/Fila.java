@@ -57,46 +57,7 @@ public class Fila {
 	public boolean puedoPonerPlanta(int pos) {
 		return misPlantas[pos] == null;
 	}
-	/*
-	public void chequearColisiones() {
-		boolean huboColision=false;
-		Iterator<Lanzable> itLanzables=misLanzables.iterator();
-		Iterator<Zombie> itZombie=misZombies.iterator();
-		Zombie auxZombie;
-		int cont=0;
-		Lanzable auxLanzable;
-		List<Lanzable> aRemover;
-		while (itZombie.hasNext()) {//Itero lista de zombies
-			aRemover=new ArrayList<Lanzable>();
-			auxZombie=itZombie.next();
-			huboColision=false;
-			while(itLanzables.hasNext() && !huboColision) {//Itero lista de lanzables y si detecto una colision freno.
-				auxLanzable=itLanzables.next();
-				huboColision=verColisiones(auxZombie,auxLanzable);
-				if(huboColision) {
-					auxZombie.visitarProyectil(auxLanzable);
-					aRemover.add(auxLanzable);
-					//probar agregar auxLanzable a juego.agregarLanzablesAEliminar() para que se borre la grafica
-				}
-					
-			}
-				cont=0;
-				huboColision=false;
-			while(!huboColision && cont<9) {//Itero lista de plantas y si detecto una colision freno.
-				if(misPlantas[cont]!= null) {
-						huboColision=verColisiones(auxZombie,misPlantas[cont]);
-						if(huboColision) {
-							auxZombie.visitarPlanta(misPlantas[cont]);
-							auxZombie.setEstrategia(new atacarZombie());
-						}
-					}
-				
-				cont++;
-			}
-		
-		}
-	}*/  //METODO VIEJO DE JULI SIN BORRAR EL PROYECTIL
-		
+	
 	public void chequearColisiones() {
 		boolean huboColision=false;
 		List<Lanzable> lanzablesClone = new CopyOnWriteArrayList<Lanzable>(misLanzables);

@@ -7,12 +7,12 @@ import Entidades.Entidad;
 public class EntidadGrafica {
 	private JLabel miGrafica;
 	private Ventana ventana;
-	private String rutaG;
+	private String rutaBaseG;
 	
 	public EntidadGrafica(Ventana v, Entidad e, String s) {
 		miGrafica = new JLabel();
-		rutaG = s;
-		miGrafica.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(v.getPropertiesModo().getProperty(rutaG))).getImage().getScaledInstance(e.getAncho(), e.getAlto(), 0)));
+		rutaBaseG = s;
+		miGrafica.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(v.getPropertiesModo().getProperty(rutaBaseG))).getImage().getScaledInstance(e.getAncho(), e.getAlto(), 0)));
 		miGrafica.setBounds(v.getBordeDerecho(), v.getLinea(e.getNumeroFila()), miGrafica.getIcon().getIconWidth(), miGrafica.getIcon().getIconHeight());
 		ventana = v;
 		actualizarGrafica();
@@ -28,12 +28,13 @@ public class EntidadGrafica {
 		return miGrafica;
 	}
 	public String getRutaGrafica() {
-		return rutaG;
-	}
-	public void setGrafica() {
-		//para cambiar de gif si esta comiendo/disparando
+		return rutaBaseG;
 	}
 	public void actualizarFilaGrafica(int i) {
 		miGrafica.setBounds(miGrafica.getX(), ventana.getLinea(i), miGrafica.getWidth(), miGrafica.getHeight());
+	}
+	public void cambiarGrafica(String cambioRuta,Entidad e) {
+		//Preguntar si tambien cambio mi rutaG
+		miGrafica.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(ventana.getPropertiesModo().getProperty(cambioRuta))).getImage().getScaledInstance(e.getAncho(),e.getAlto(), 0)));
 	}
 }

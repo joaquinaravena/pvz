@@ -40,7 +40,6 @@ public class Planta extends Entidad {
 	}
 	public void morir() {
 			miFila.getJuego().agregarPlantaAEliminar(this);
-		
 	}
 	
 
@@ -66,6 +65,7 @@ public class Planta extends Entidad {
 		if(z.getPlantaAtacada()==null) {
 			zombiesQueMeAtacan.add(z);
 			z.setPlantaAtacada(this);
+			z.getEntidadGrafica().cambiarGrafica(z.getMiRutaAtaque(), z);
 		}
 	}
 	
