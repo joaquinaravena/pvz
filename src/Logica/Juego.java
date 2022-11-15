@@ -82,10 +82,12 @@ public class Juego {
 	
 	@SuppressWarnings("deprecation")
 	public void salir() {
-		miRelojPlantas.stop();
-		miRelojZombies.stop();
-		miRelojMusica.stop();
-		miRelojProyectiles.stop();
+		if(miRelojPlantas != null) {
+			miRelojPlantas.stop();
+			miRelojZombies.stop();
+			miRelojProyectiles.stop();
+		}
+		miRelojMusica.pararMusica();
 		System.exit(0);
 	}
 	
@@ -109,7 +111,8 @@ public class Juego {
 		for (int i=0; i<6; i++) {
 			filas[i].moverZombies();
 			filas[i].chequearColisiones();
-		}		
+		}
+		administradorJuego.removerZombies();
 	}
 
 	

@@ -14,6 +14,7 @@ public class AdministradorJuego{
 	protected List<Planta> plantasAEliminar;
 	protected List<Lanzable> lanzablesAEliminar;
 	protected Juego juego;
+	
 	public AdministradorJuego(Juego j){
 		juego=j;
 		zombiesAEliminar = new ArrayList<Zombie>();
@@ -38,7 +39,6 @@ public class AdministradorJuego{
 		public void removerZombies() {
 			for (Zombie z: zombiesAEliminar) {
 				z.getFila().removerZombie(z);
-				z.getEntidadGrafica().borrarGrafica();
 			}
 			zombiesAEliminar.clear();
 		}
@@ -52,10 +52,10 @@ public class AdministradorJuego{
 				p.getFila().borrarPlanta((p.getX()/74)-2);
 				if(p.getLanzable()!=null)
 					agregarLanzableAEliminar(p.getLanzable());
-				p.getEntidadGrafica().borrarGrafica();
 				zombiesAtacanClone=new CopyOnWriteArrayList<Zombie>(p.getZombiesAtacan());
 				for(Zombie z: zombiesAtacanClone) {
 					z.setPlantaAtacada(null);
+					//Cambiar desde el realizar accion de zombie.
 					z.setEstrategia(new moverZombie());
 					z.getEntidadGrafica().cambiarGrafica(z.getMiRutaMover(), z);
 				}

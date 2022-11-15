@@ -5,7 +5,7 @@ import java.io.IOException;
 import javax.sound.sampled.*;
 
 
-public class RelojMusica extends Thread {
+public class RelojMusica{
 	protected File archivoMusica;
 	protected AudioInputStream audio;
 	protected Clip clip;

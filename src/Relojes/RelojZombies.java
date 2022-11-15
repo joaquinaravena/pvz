@@ -18,7 +18,6 @@ public class RelojZombies extends Thread{
 			while (activo) {
 				Thread.sleep(300);
 				miJuego.moverZombies();
-				miJuego.getAdministradorJuego().removerZombies();
 				contador++;
 				if(contador % 25==0) {
 					miJuego.agregarZombieActivo();

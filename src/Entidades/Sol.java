@@ -55,6 +55,7 @@ public class Sol extends Lanzable{
 	@Override
 	public void morir() {
 		miFila.getJuego().getAdministradorJuego().agregarLanzableAEliminar(this);
+		entidadGrafica.borrarGrafica();
 	}
 	
 }

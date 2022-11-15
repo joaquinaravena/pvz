@@ -51,7 +51,7 @@ public class AdministradorNiveles {
 				juego.getFila(i).resetearListaLanzables();
 				juego.getFila(i).resetearListaPlantas();
 			}
-			juego.getVentana().cambiarNivel(nivelActual);
+			juego.getVentana().cambiarNivel(nivelActual+1);
 			juego.miRelojPlantas.setearActivo(true);
 			juego.miRelojZombies.setearActivo(true);
 			juego.miRelojProyectiles.setearActivo(true);

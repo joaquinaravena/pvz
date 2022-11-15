@@ -21,7 +21,7 @@ public class BuilderDia implements AbstractBuilder{
 	}
 
 	public Zombie crearZombieFuerte() {
-		Zombie z = new Zombie(400,100,15,miJuego.getVentana(),"zombieFuerte","zombieFuerteAtacando");
+		Zombie z = new Zombie(400,100,10,miJuego.getVentana(),"zombieFuerte","zombieFuerteAtacando");
 		z.setX(z.getEntidadGrafica().getGrafica().getX());
 		return z;
 	}
