@@ -416,6 +416,7 @@ public class Ventana extends JFrame{
 		JToggleButton planta1 = (JToggleButton)panelPlantas.getComponent(0);
 		JToggleButton planta2 = (JToggleButton)panelPlantas.getComponent(1);
 		JToggleButton planta3 = (JToggleButton)panelPlantas.getComponent(2);
+		miJuego.setPlantaEnEspera(0);
 		JLabel lblSoles = (JLabel) panelPlantas.getComponent(8);
 		lblSoles.setText(""+miJuego.getSoles());
 		lblSoles.repaint();
