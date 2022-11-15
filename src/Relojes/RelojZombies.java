@@ -6,17 +6,19 @@ public class RelojZombies extends Thread{
 	protected boolean activo;
 	protected Juego miJuego;
 	protected int contador;
+	protected int velocidad;
 	
 	public RelojZombies(Juego j) {
 		activo = true;
 		miJuego = j;
 		contador = 0;
+		velocidad = 300;
 	}
 	
 	public void run() {
 		try {
 			while (activo) {
-				Thread.sleep(300);
+				Thread.sleep(velocidad);
 				miJuego.moverZombies();
 				contador++;
 				if(contador % 25==0) {
@@ -33,5 +35,11 @@ public class RelojZombies extends Thread{
 	
 	public void setearActivo(boolean a) {
 		activo = a;
+	}
+	public void setVelocidad(int i) {
+		if(i != 1)
+			velocidad = velocidad*i;
+		else
+			velocidad = velocidad/2;
 	}
 }

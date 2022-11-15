@@ -1,4 +1,4 @@
-package Logica;
+package Estrategias;
 import Entidades.Zombie;
 
 public class moverZombie implements ZombieStrategy {

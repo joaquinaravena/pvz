@@ -1,4 +1,4 @@
-package Logica;
+package Estrategias;
 import Entidades.Planta;
 import Entidades.Zombie;
 import GUI.Ventana;

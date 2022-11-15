@@ -74,7 +74,6 @@ public class Ventana extends JFrame{
 		getContentPane().setLayout(null);
 		crearPanelMenu();
 		miJuego.reproducirMusica();
-		
 	}
 	private void crearPanelMenu() {
 		JPanel panelMenu = new JPanel();
@@ -163,15 +162,15 @@ public class Ventana extends JFrame{
 	
 	private void crearPanelModo() {
 		this.setFocusable(true);
-		JPanel panelDia = new JPanel();
-		panelDia.setBounds(0, 0, this.getWidth(), this.getHeight());
-		setContentPane(panelDia);
-		panelDia.setLayout(null);
+		JPanel panelModo = new JPanel();
+		panelModo.setBounds(0, 0, this.getWidth(), this.getHeight());
+		setContentPane(panelModo);
+		panelModo.setLayout(null);
 		
 		panelPlantas = new JPanel();
 		panelPlantas.setBackground(new Color(205, 133, 63));
-		panelPlantas.setBounds(0, 0, 274, 62);
-		panelDia.add(panelPlantas);
+		panelPlantas.setBounds(0, 0, 329, 62);
+		panelModo.add(panelPlantas);
 		
 		JToggleButton botonPlanta1 = new JToggleButton();
 		botonPlanta1.setBounds(61, 2, 45, 48);
@@ -184,7 +183,13 @@ public class Ventana extends JFrame{
 		JToggleButton botonPlanta3 = new JToggleButton();
 		botonPlanta3.setBounds(169, 2, 45, 48);		
 		botonPlanta3.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propModo.getProperty("plantaFuerteBoton"))).getImage().getScaledInstance(botonPlanta3.getWidth(), botonPlanta3.getHeight() , DO_NOTHING_ON_CLOSE)));
-
+		
+		JToggleButton botonVelocidad = new JToggleButton();
+		botonVelocidad.setToolTipText("aumenta/disminuye la velocidad del juego");
+		botonVelocidad.setSelected(false);
+		botonVelocidad.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("velocidad"))).getImage().getScaledInstance(botonPlanta3.getWidth(), botonPlanta3.getHeight() , DO_NOTHING_ON_CLOSE)));
+		botonVelocidad.setBounds(275, 2, 45, 48);
+		
 		JToggleButton botonMusica = new JToggleButton();
 		botonMusica.setToolTipText("frena/reproduce la m\u00FAsica");
 		botonMusica.setBounds(220, 2, 45, 48);
@@ -205,7 +210,6 @@ public class Ventana extends JFrame{
 					miJuego.setPlantaEnEspera(0);
 			}
 		});
-		
 		
 		botonPlanta2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -239,6 +243,14 @@ public class Ventana extends JFrame{
 			}
 		});
 		
+		botonVelocidad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(botonVelocidad.isSelected())
+					miJuego.cambiarVelocidad(1);
+				else
+					miJuego.cambiarVelocidad(2);
+			}
+		});
 		
 		JLabel lblSol = new JLabel();
 		lblSol.setBounds(6, 2, 45, 48);
@@ -272,6 +284,9 @@ public class Ventana extends JFrame{
 		lblSolesActuales.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSolesActuales.setBounds(6, 48, 46, 14);
 		panelPlantas.add(lblSolesActuales);
+		
+		panelPlantas.add(botonVelocidad);
+
 		
 		for(int i = 0; i < 6; i++)
 			for(int j = 0; j < 9; j++) {
@@ -317,14 +332,14 @@ public class Ventana extends JFrame{
 							lblCelda.setBackground(lblCelda.getForeground());
 					}
 				});
-				panelDia.add(lblCelda);
+				panelModo.add(lblCelda);
 			}
 		
 		JLabel lblFondo = new JLabel();
 		lblFondo.setIgnoreRepaint(true);
 		lblFondo.setBounds(0, 0, 884, 467);
 		lblFondo.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propModo.getProperty("fondo"))).getImage().getScaledInstance(lblFondo.getWidth(), lblFondo.getHeight(), DO_NOTHING_ON_CLOSE)));
-		panelDia.add(lblFondo);
+		panelModo.add(lblFondo);
 		
 		lblOleadas = new JLabel();
 		lblOleadas.setFont(new Font("Tahoma", Font.BOLD, 30));
@@ -335,7 +350,7 @@ public class Ventana extends JFrame{
 		else
 			lblOleadas.setForeground(new Color(0,0,0));
 		lblOleadas.setVisible(false);
-		panelDia.add(lblOleadas,0);
+		panelModo.add(lblOleadas,0);
 		
 		lblNivel = new JLabel();
 		lblNivel.setFont(new Font("Tahoma", Font.BOLD, 30));
@@ -346,7 +361,7 @@ public class Ventana extends JFrame{
 		else
 			lblNivel.setForeground(new Color(0,0,0));
 		lblNivel.setVisible(false);
-		panelDia.add(lblNivel,0);
+		panelModo.add(lblNivel,0);
 		
 		controlarPlantasAComprar();
 		repaint();	
@@ -422,7 +437,10 @@ public class Ventana extends JFrame{
 	}
 	
 	public void cambiarOleada(int i) {
-		lblOleadas.setText("¡Oleada "+i+"!");
+		if(i != 5)
+			lblOleadas.setText("¡Oleada "+i+"!");
+		else
+			lblOleadas.setText("¡Oleada final!");
 		lblOleadas.setVisible(true);
 		
 		int delay = 3500;

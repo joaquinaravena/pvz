@@ -1,4 +1,4 @@
-package Logica;
+package Estrategias;
 
 import Entidades.Lanzable;
 import Entidades.Planta;

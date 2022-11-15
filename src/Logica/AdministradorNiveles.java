@@ -20,7 +20,7 @@ public class AdministradorNiveles {
 		oleadaActual = 0;
 		zombiesNivel = new ArrayList<Zombie>();
 
-		niveles[0]=new Nivel(4,0,6);
+		niveles[0]=new Nivel(1,0,0);
 		niveles[1]=new Nivel(20,15,8);
 
 	}

@@ -1,5 +1,8 @@
 package Logica;
 import Entidades.Zombie;
+import Estrategias.accionPlantaMelee;
+import Estrategias.accionPlantasDisparadoras;
+import Estrategias.accionPlantasGeneradoras;
 import Entidades.Planta;
 import Entidades.Proyectil;
 import Entidades.Sol;

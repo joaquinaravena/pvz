@@ -1,7 +1,9 @@
 package Entidades;
+import Estrategias.ZombieStrategy;
+import Estrategias.atacarZombie;
+import Estrategias.moverZombie;
 import GUI.EntidadGrafica;
 import GUI.Ventana;
-import Logica.*;
 
 public class Zombie extends Entidad {
 	protected boolean comiendo;

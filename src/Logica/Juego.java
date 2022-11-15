@@ -95,6 +95,12 @@ public class Juego {
 		System.exit(0);
 	}
 	
+	public void cambiarVelocidad(int vel) {
+		miRelojPlantas.setVelocidad(vel);
+		miRelojProyectiles.setVelocidad(vel);
+		miRelojZombies.setVelocidad(vel);
+	}
+	
 	//METODOS PARA REALIZAR ACCION DE ENTIDADES
 	
 	public void accionPlantas() {
@@ -208,10 +214,6 @@ public class Juego {
 	
 	public int getSoles() {
 		return soles;
-	}
-	
-	public boolean puedeComprarPlanta() {
-		return soles-plantaEnEspera.getPrecio()>=0;
 	}
 	
 	//setters/cambios basicos en atributos

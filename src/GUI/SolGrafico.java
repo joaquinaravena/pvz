@@ -16,6 +16,7 @@ public class SolGrafico extends EntidadGrafica {
 			public void mouseClicked(MouseEvent e) {
 				((Sol)ent).morir(j);
 				j.agregarSoles(50);
+				v.controlarPlantasAComprar();
 			}
 		});
 	}

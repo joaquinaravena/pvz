@@ -3,9 +3,9 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+import Estrategias.PlantaStrategy;
 import GUI.EntidadGrafica;
 import GUI.Ventana;
-import Logica.PlantaStrategy;
 
 public class Planta extends Entidad {
 	protected int precio;
