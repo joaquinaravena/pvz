@@ -19,10 +19,6 @@ public class Fila {
 		misLanzables=new ArrayList<Lanzable>();
 	}
 	
-	public Juego getJuego() {
-		return miJuego;
-	}
-	
 	public void agregarPlanta(Planta p,int pos) {
 		misPlantas[pos]=p;
 		misPlantas[pos].setFila(this);
@@ -54,9 +50,7 @@ public class Fila {
 		misLanzables.remove(p);
 	}
 	
-	public boolean puedoPonerPlanta(int pos) {
-		return misPlantas[pos] == null;
-	}
+	
 	
 	public void chequearColisiones() {
 		boolean huboColision=false;
@@ -72,10 +66,8 @@ public class Fila {
 			while(itLanzables.hasNext() && !huboColision) {//Itero lista de lanzables y si detecto una colision freno.
 				auxLanzable=itLanzables.next();
 				huboColision=verColisiones(auxZombie,auxLanzable);
-				if(huboColision) {
+				if(huboColision) 
 					auxZombie.visitarProyectil(auxLanzable);
-					miJuego.getAdministradorJuego().agregarLanzableAEliminar(auxLanzable);
-				}
 			}
 			miJuego.getAdministradorJuego().removerLanzables();
 			cont=0;
@@ -87,19 +79,10 @@ public class Fila {
 							auxZombie.visitarPlanta(misPlantas[cont]);
 						}
 					}
-				
 				cont++;
 			}
 		
 		}
-	}
-	
-	private Rectangle armarHitboxEntidad(Entidad e) {
-		Dimension dimensionEntidad=new Dimension(e.getAncho(),e.getAlto());
-		Point ubicacionEntidad=new Point(e.getX(),e.getY());
-		
-		Rectangle hitboxEntidad=new Rectangle(ubicacionEntidad,dimensionEntidad);
-		return hitboxEntidad;
 	}
 
 	/**
@@ -117,11 +100,19 @@ public class Fila {
 		return colisiono;
 	}
 	
+	private Rectangle armarHitboxEntidad(Entidad e) {
+		Dimension dimensionEntidad=new Dimension(e.getAncho(),e.getAlto());
+		Point ubicacionEntidad=new Point(e.getX(),e.getY());
+		
+		Rectangle hitboxEntidad=new Rectangle(ubicacionEntidad,dimensionEntidad);
+		return hitboxEntidad;
+	}
+	
 	public void resetearListaPlantas() {
 		int cont=0;
 		for (Planta p: misPlantas) {
 			if (p!=null) {
-				p.getEntidadGrafica().borrarGrafica();
+				p.morir();
 			}
 			misPlantas[cont]=null;
 			cont++;
@@ -171,7 +162,7 @@ public class Fila {
 			Lanzable p = itLanzables.next();
 			p.mover();
 			if(p.getX()>=miJuego.getVentana().getBordeDerecho() || p.getY()>=miJuego.getVentana().getBordeInferior()) {
-				p.morir();
+				p.morir(miJuego);
 			}
 		}
 	}
@@ -186,6 +177,10 @@ public class Fila {
 	
 	public void borrarPlanta(int i) {
 		misPlantas[i]=null;
+	}
+	
+	public Juego getJuego() {
+		return miJuego;
 	}
 	
 }

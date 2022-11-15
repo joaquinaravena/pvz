@@ -24,7 +24,6 @@ public class Juego {
 		soles = 150;
 		plantaEnEspera = null;
 		miVentana = v;
-		administradorNiveles = new AdministradorNiveles(this);
 		administradorJuego = new AdministradorJuego(this);
 		filas = new Fila[6];
 		for(int i=0;i<6;i++) {
@@ -49,24 +48,29 @@ public class Juego {
 		miRelojZombies.start();
 		miRelojPlantas.start();
 		miRelojProyectiles.start();
+		administradorNiveles = new AdministradorNiveles(this);
 		administradorNiveles.nuevoNivel(0);
 	}
 		
 	public void terminarJuego(boolean gane) {
+		miRelojPlantas.setearActivo(false);
+		miRelojZombies.setearActivo(false);
+		miRelojProyectiles.setearActivo(false);
+		
 		if(gane)
 			miVentana.ganarJuego();
 		else
 			miVentana.gameOver();
 		
-			miRelojPlantas.setearActivo(false);
-			miRelojZombies.setearActivo(false);
-			miRelojProyectiles.setearActivo(false);
-				
+		for(Sol s: solesJuego) {
+			s.morir(this);	
+		}
 		for(int i = 1; i <=6; i++) {
+			getFila(i).resetearListaZombies();
 			getFila(i).resetearListaPlantas();
 			getFila(i).resetearListaLanzables();
-			getFila(i).resetearListaZombies();
 		}
+		
 		soles = 150;
 		miVentana.controlarPlantasAComprar();
 		plantaEnEspera = null;
@@ -100,6 +104,7 @@ public class Juego {
 	}
 	
 	public void accionLanzables() {
+		administradorJuego.removerLanzables();
 		for (int i=0; i<6; i++)
 				filas[i].moverLanzables();
 		for(Sol p:solesJuego) {
@@ -108,11 +113,11 @@ public class Juego {
 	}
 	
 	public void moverZombies() {
+		administradorJuego.removerZombies();
 		for (int i=0; i<6; i++) {
 			filas[i].moverZombies();
 			filas[i].chequearColisiones();
 		}
-		administradorJuego.removerZombies();
 	}
 
 	
@@ -137,27 +142,22 @@ public class Juego {
 				contadorZombies++;
 				}
 			}
-		
 	}
-	
 	
 	public void agregarPlanta(int x,int y) {
 		int posicionArreglo= (x / 74)-2;
 		int posicionFila=(y / 65);
-		if(filas[posicionFila].puedoPonerPlanta(posicionArreglo)) {
-			filas[posicionFila].agregarPlanta(plantaEnEspera, posicionArreglo);
-			filas[posicionFila].getPlanta(posicionArreglo).setAncho(plantaEnEspera.getEntidadGrafica().getGrafica().getWidth());
-			filas[posicionFila].getPlanta(posicionArreglo).setAlto(plantaEnEspera.getEntidadGrafica().getGrafica().getHeight());
-			filas[posicionFila].getPlanta(posicionArreglo).setX(x);
-			filas[posicionFila].getPlanta(posicionArreglo).setY(y);
-			filas[posicionFila].getPlanta(posicionArreglo).setFila(filas[posicionFila]);
-			if(filas[posicionFila].getPlanta(posicionArreglo).getLanzable()!=null){
-				filas[posicionFila].getPlanta(posicionArreglo).getLanzable().setFila(filas[posicionFila]);
-				filas[posicionFila].getPlanta(posicionArreglo).getLanzable().setY(y);
-			}
-			this.restarSoles(plantaEnEspera.getPrecio());
+		filas[posicionFila].agregarPlanta(plantaEnEspera, posicionArreglo);
+		filas[posicionFila].getPlanta(posicionArreglo).setAncho(plantaEnEspera.getEntidadGrafica().getGrafica().getWidth());
+		filas[posicionFila].getPlanta(posicionArreglo).setAlto(plantaEnEspera.getEntidadGrafica().getGrafica().getHeight());
+		filas[posicionFila].getPlanta(posicionArreglo).setX(x);
+		filas[posicionFila].getPlanta(posicionArreglo).setY(y);
+		filas[posicionFila].getPlanta(posicionArreglo).setFila(filas[posicionFila]);
+		if(filas[posicionFila].getPlanta(posicionArreglo).getLanzable()!=null){
+			filas[posicionFila].getPlanta(posicionArreglo).getLanzable().setFila(filas[posicionFila]);
+			filas[posicionFila].getPlanta(posicionArreglo).getLanzable().setY(y);
 		}
-		
+		this.restarSoles(plantaEnEspera.getPrecio());
 	}
 	
 	public void agregarSolAJuego() {
@@ -169,10 +169,6 @@ public class Juego {
 		solesJuego.add(aAgregar);
 	}
 	
-	public void agregarSolARemover(Sol s) {
-		administradorJuego.agregarLanzableAEliminar(s);
-		agregarSoles(50);
-	}
 	
 	//MUSICA
 	

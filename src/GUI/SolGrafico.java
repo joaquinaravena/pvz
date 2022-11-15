@@ -14,8 +14,8 @@ public class SolGrafico extends EntidadGrafica {
 		this.miGrafica.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				j.agregarSolARemover((Sol)ent);
-				borrarGrafica();
+				((Sol)ent).morir(j);
+				j.agregarSoles(50);
 			}
 		});
 	}

@@ -2,6 +2,7 @@ package Entidades;
 
 import GUI.SolGrafico;
 import GUI.Ventana;
+import Logica.Juego;
 
 public class Sol extends Lanzable{
 	int contador;
@@ -53,8 +54,8 @@ public class Sol extends Lanzable{
 	}
 
 	@Override
-	public void morir() {
-		miFila.getJuego().getAdministradorJuego().agregarLanzableAEliminar(this);
+	public void morir(Juego j) {
+		j.getAdministradorJuego().agregarLanzableAEliminar(this);
 		entidadGrafica.borrarGrafica();
 	}
 	
