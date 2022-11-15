@@ -55,9 +55,6 @@ public class AdministradorJuego{
 				zombiesAtacanClone=new CopyOnWriteArrayList<Zombie>(p.getZombiesAtacan());
 				for(Zombie z: zombiesAtacanClone) {
 					z.setPlantaAtacada(null);
-					//Cambiar desde el realizar accion de zombie.
-					z.setEstrategia(new moverZombie());
-					z.getEntidadGrafica().cambiarGrafica(z.getMiRutaMover(), z);
 				}
 			}
 			plantasAEliminar.clear();

@@ -8,10 +8,10 @@ public class Zombie extends Entidad {
 	protected int vida;
 	protected int daño;
 	protected int velocidad;
-	protected ZombieStrategy miEstrategia;
+	protected ZombieStrategy estrategiaAtacar,estrategiaMover;
 	protected Planta plantaAtacada;
 	protected String miRutaAtacando;
-	
+	protected String rutaEnUso;
 	
 	public Zombie(int vida,int daño,int velocidad,Ventana v, String graf,String grafAtaque) {
 		comiendo=false;
@@ -19,14 +19,30 @@ public class Zombie extends Entidad {
 		this.velocidad=velocidad;
 		this.daño=daño;
 		entidadGrafica=new EntidadGrafica(v, this, graf);
-		miEstrategia=new moverZombie();
+		estrategiaAtacar=new atacarZombie();
+		estrategiaMover=new moverZombie();
 		miRuta=graf;
 		miRutaAtacando=grafAtaque;
+		rutaEnUso=graf;
 		plantaAtacada=null;
 	}
 	
 	public void realizarAccion(){
-		miEstrategia.realizarAccion(this);
+		if(plantaAtacada==null) {
+			if(rutaEnUso==miRutaAtacando) {
+				getEntidadGrafica().cambiarGrafica(miRuta, this);
+				rutaEnUso=miRuta;
+			}
+			estrategiaMover.realizarAccion(this);
+		}
+		else {
+			if(rutaEnUso==miRuta) {
+				getEntidadGrafica().cambiarGrafica(miRutaAtacando, this);
+				rutaEnUso=miRutaAtacando;
+			}
+			estrategiaAtacar.realizarAccion(this);
+		}
+			
 	}
 	
 	public Planta getPlantaAtacada() {
@@ -64,9 +80,6 @@ public class Zombie extends Entidad {
 		p.chocar(this);
 	}
 	
-	public void setEstrategia(ZombieStrategy nueva) {
-		miEstrategia=nueva;
-	}
 	
 	public void setPlantaAtacada(Planta atacada) {
 		plantaAtacada=atacada;

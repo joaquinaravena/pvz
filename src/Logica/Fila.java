@@ -85,7 +85,6 @@ public class Fila {
 						huboColision=verColisiones(auxZombie,misPlantas[cont]);
 						if(huboColision) {
 							auxZombie.visitarPlanta(misPlantas[cont]);
-							auxZombie.setEstrategia(new atacarZombie());
 						}
 					}
 				

@@ -66,7 +66,6 @@ public class Planta extends Entidad {
 		if(z.getPlantaAtacada()==null) {
 			zombiesQueMeAtacan.add(z);
 			z.setPlantaAtacada(this);
-			z.getEntidadGrafica().cambiarGrafica(z.getMiRutaAtaque(), z);
 		}
 	}
 	
