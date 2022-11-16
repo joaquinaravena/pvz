@@ -136,7 +136,7 @@ public class Juego {
 		if (!hayZombies && administradorNiveles.getZombiesNivel().isEmpty())
 			administradorNiveles.cambiarNivel();
 		if (!administradorNiveles.getZombiesNivel().isEmpty()) {
-			if (contadorZombies % 6 == 0 && contadorZombies>0) {
+			if (contadorZombies % 5 == 0 && contadorZombies>0) {
 				administradorNiveles.oleada();
 				contadorZombies = 0;
 			}

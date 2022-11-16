@@ -20,7 +20,7 @@ public class AdministradorNiveles {
 		oleadaActual = 0;
 		zombiesNivel = new ArrayList<Zombie>();
 
-		niveles[0]=new Nivel(1,0,0);
+		niveles[0]=new Nivel(55,0,0);
 		niveles[1]=new Nivel(20,15,8);
 
 	}
@@ -60,19 +60,32 @@ public class AdministradorNiveles {
 		}
 	}
 	
+	//Inserta un zombie en una fila random entre x e y
+	
+	public void insertarZombieEntreFilas(int y, int x) {
+		int filaRandom = (int)(Math.random()*(x-y+1)+y);
+		zombiesNivel.get(0).setFila(juego.getFila(filaRandom));
+		juego.getFila(filaRandom).agregarZombie(zombiesNivel.get(0), filaRandom);
+		zombiesNivel.remove(0);
+	}
+	
 	public void oleada() {
 		oleadaActual++;
+		int cantInsertados = 0;
 		juego.getVentana().cambiarOleada(oleadaActual);
 		int i = 1;
-		int aleatorio = 0;
+		int aleatorio = 1;
 		while (i<=3 && !zombiesNivel.isEmpty()) {
-			int filaRandom = (int)(Math.random()*2+1+aleatorio);
-			zombiesNivel.get(0).setFila(juego.getFila(filaRandom));
-			juego.getFila(filaRandom).agregarZombie(zombiesNivel.get(0), filaRandom);
-			zombiesNivel.remove(0);
-			i++;
+			insertarZombieEntreFilas(aleatorio, aleatorio+1); //el primer ciclo inserta un zombie en la fila 1 o 2, el segundo ciclo en la fila 3 o 4, y el tercer ciclo en la fila 5 o 6
 			aleatorio = aleatorio + 2;
+			i++;
+			cantInsertados++;
 		}
+		for (int j=0; j<oleadaActual && !zombiesNivel.isEmpty(); j++) {
+			insertarZombieEntreFilas(1, 6);
+			cantInsertados++;
+		}
+		System.out.println(cantInsertados);
 	}
 	
 	public List<Zombie> getZombiesNivel(){
