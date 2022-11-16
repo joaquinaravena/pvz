@@ -186,7 +186,7 @@ public class Ventana extends JFrame{
 		
 		JToggleButton botonPlanta4= new JToggleButton();
 		botonPlanta4.setBounds(224, 2, 45, 48);		
-		botonPlanta4.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propModo.getProperty("plantaFuerteBoton"))).getImage().getScaledInstance(botonPlanta3.getWidth(), botonPlanta3.getHeight() , DO_NOTHING_ON_CLOSE)));
+		botonPlanta4.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propModo.getProperty("plantaTanqueBoton"))).getImage().getScaledInstance(botonPlanta4.getWidth(), botonPlanta4.getHeight() , DO_NOTHING_ON_CLOSE)));
 		
 		JToggleButton botonMusica = new JToggleButton();
 		botonMusica.setToolTipText("frena/reproduce la m\u00FAsica");

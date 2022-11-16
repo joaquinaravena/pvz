@@ -4,6 +4,7 @@ import Entidades.Zombie;
 import Estrategias.accionPlantaMelee;
 import Estrategias.accionPlantasDisparadoras;
 import Estrategias.accionPlantasGeneradoras;
+import Estrategias.accionPlantasTanque;
 import Entidades.Planta;
 import Entidades.Proyectil;
 import Entidades.Sol;
@@ -43,6 +44,6 @@ protected Juego miJuego;
 	}
 	
 	public Planta crearPlantaTanque() {
-		return new Planta(Integer.parseInt(miJuego.getVentana().getPropertiesModo().getProperty("precioTanque")),500,0,miJuego.getVentana(), "plantaTanque", null , null);
+		return new Planta(Integer.parseInt(miJuego.getVentana().getPropertiesModo().getProperty("precioTanque")),500,0,miJuego.getVentana(), "plantaTanqueFullVida", null , new accionPlantasTanque("plantaTanqueMediaVida","plantaTanquePocaVida"));
 	}
 }

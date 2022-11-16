@@ -2,6 +2,7 @@ package Logica;
 import Entidades.Zombie;
 import Estrategias.accionPlantasDisparadoras;
 import Estrategias.accionPlantasGeneradoras;
+import Estrategias.accionPlantasTanque;
 import Entidades.Planta;
 import Entidades.Proyectil;
 import Entidades.Sol;
@@ -40,6 +41,6 @@ public class BuilderDia implements AbstractBuilder{
 		return new Planta(Integer.parseInt(miJuego.getVentana().getPropertiesModo().getProperty("precioFuerte")),300,200,miJuego.getVentana(), "plantaFuerte", new Proyectil(100,miJuego.getVentana(),"proyectilFuerte",null),new accionPlantasDisparadoras());
 	}
 	public Planta crearPlantaTanque() {
-		return new Planta(Integer.parseInt(miJuego.getVentana().getPropertiesModo().getProperty("precioTanque")),500,0,miJuego.getVentana(), "plantaTanque", null , null);
+		return new Planta(Integer.parseInt(miJuego.getVentana().getPropertiesModo().getProperty("precioTanque")),500,0,miJuego.getVentana(), "plantaTanqueFullVida", null , new accionPlantasTanque("plantaTanqueMediaVida","plantaTanqueMuriendo"));
 	}
 }

@@ -72,4 +72,8 @@ public class Planta extends Entidad {
 	public List<Zombie> getZombiesAtacan(){
 		return zombiesQueMeAtacan;
 	}
+	
+	public int getVida() {
+		return vida;
+	}
 }
