@@ -11,6 +11,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Color;
+import java.awt.Cursor;
 
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -26,6 +27,8 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -37,6 +40,7 @@ public class Ventana extends JFrame{
 	private JPanel panelPlantas;
 	private JLabel lblOleadas;
 	private JLabel lblNivel;
+	private JLabel lblSolesActuales;
 	/**
 	 * Launch the application.
 	 */
@@ -157,6 +161,9 @@ public class Ventana extends JFrame{
 		lblLogoMenu.setBounds(242, 11, 360, 229);
 		panelMenu.add(lblLogoMenu);
 		
+		Image im = Toolkit.getDefaultToolkit().createImage("src/Recursos/mouseInactivo.png");
+		Cursor cur = Toolkit.getDefaultToolkit().createCustomCursor(im, new Point(15,15),"WILL");
+		setCursor(cur);
 	}
 	
 	
@@ -168,10 +175,13 @@ public class Ventana extends JFrame{
 		panelModo.setLayout(null);
 		
 		panelPlantas = new JPanel();
-		panelPlantas.setBackground(new Color(205, 133, 63));
 		panelPlantas.setBounds(0, 0, 388, 62);
 		panelModo.add(panelPlantas);
 		
+		JLabel fondoBotonera = new JLabel();
+		fondoBotonera.setBounds(0,0, 388, 62);
+		fondoBotonera.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("botonera"))).getImage().getScaledInstance(fondoBotonera.getWidth(), fondoBotonera.getHeight(), DO_NOTHING_ON_CLOSE)));
+
 		JToggleButton botonPlanta1 = new JToggleButton();
 		botonPlanta1.setBounds(61, 2, 45, 48);
 		botonPlanta1.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propModo.getProperty("plantaGeneradoraBoton"))).getImage().getScaledInstance(botonPlanta1.getWidth(), botonPlanta1.getHeight() , DO_NOTHING_ON_CLOSE)));
@@ -291,26 +301,31 @@ public class Ventana extends JFrame{
 		JLabel lblPrecioP1 = new JLabel(propModo.getProperty("precioGeneradora"));
 		lblPrecioP1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPrecioP1.setBounds(61, 48, 46, 14);
+		lblPrecioP1.setFont(new Font("Tahoma", Font.BOLD, 12));
 		panelPlantas.add(lblPrecioP1);
 		
 		JLabel lblPrecioP2 = new JLabel(propModo.getProperty("precioDebil"));
 		lblPrecioP2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPrecioP2.setBounds(116, 48, 46, 14);
+		lblPrecioP2.setFont(new Font("Tahoma", Font.BOLD, 12));
 		panelPlantas.add(lblPrecioP2);
 		
 		JLabel lblPrecioP3 = new JLabel(propModo.getProperty("precioFuerte"));
 		lblPrecioP3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPrecioP3.setBounds(169, 48, 46, 14);
+		lblPrecioP3.setFont(new Font("Tahoma", Font.BOLD, 12));
 		panelPlantas.add(lblPrecioP3);
 		
 		JLabel lblPrecioP4 = new JLabel(propModo.getProperty("precioTanque"));
 		lblPrecioP4.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPrecioP4.setBounds(222, 48, 46, 14);
+		lblPrecioP4.setFont(new Font("Tahoma", Font.BOLD, 12));
 		panelPlantas.add(lblPrecioP4);
 		
-		JLabel lblSolesActuales = new JLabel(""+miJuego.getSoles());
+		lblSolesActuales = new JLabel(""+miJuego.getSoles());
 		lblSolesActuales.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSolesActuales.setBounds(6, 48, 46, 14);
+		lblSolesActuales.setFont(new Font("Tahoma", Font.BOLD, 12));
 		panelPlantas.add(lblSolesActuales);
 
 		
@@ -390,6 +405,7 @@ public class Ventana extends JFrame{
 		panelModo.add(lblNivel,0);
 		
 		controlarPlantasAComprar();
+		panelPlantas.add(fondoBotonera);
 		repaint();	
 	}
 	
@@ -442,17 +458,24 @@ public class Ventana extends JFrame{
 		JToggleButton planta1 = (JToggleButton)panelPlantas.getComponent(0);
 		JToggleButton planta2 = (JToggleButton)panelPlantas.getComponent(1);
 		JToggleButton planta3 = (JToggleButton)panelPlantas.getComponent(2);
+		JToggleButton planta4 = (JToggleButton)panelPlantas.getComponent(3);
 		miJuego.setPlantaEnEspera(0);
-		JLabel lblSoles = (JLabel) panelPlantas.getComponent(8);
-		lblSoles.setText(""+miJuego.getSoles());
-		lblSoles.repaint();
+		lblSolesActuales.setText(""+miJuego.getSoles());
 		planta1.setSelected(false);
 		planta2.setSelected(false);
 		planta3.setSelected(false);
+		planta4.setSelected(false);
 		planta1.setEnabled(false);
 		planta2.setEnabled(false);
 		planta3.setEnabled(false);
-		if(miJuego.getSoles() >= Integer.parseInt(propModo.getProperty("precioFuerte"))) {
+		planta4.setEnabled(false);
+		if(miJuego.getSoles() >= Integer.parseInt(propModo.getProperty("precioTanque"))) {
+			planta1.setEnabled(true);
+			planta2.setEnabled(true);
+			planta3.setEnabled(true);
+			planta4.setEnabled(true);
+		}
+		else if(miJuego.getSoles() >= Integer.parseInt(propModo.getProperty("precioFuerte"))) {
 			planta1.setEnabled(true);
 			planta2.setEnabled(true);
 			planta3.setEnabled(true);
