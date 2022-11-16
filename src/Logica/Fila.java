@@ -162,7 +162,7 @@ public class Fila {
 			Lanzable p = itLanzables.next();
 			p.mover();
 			if(p.getX()>=miJuego.getVentana().getBordeDerecho() || p.getY()>=miJuego.getVentana().getBordeInferior()) {
-				p.morir(miJuego);
+				p.morir();
 			}
 		}
 	}

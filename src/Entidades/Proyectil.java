@@ -4,7 +4,6 @@ package Entidades;
 import GUI.EntidadGrafica;
 import GUI.Ventana;
 import Logica.Fila;
-import Logica.Juego;
 
 public class Proyectil extends Lanzable{
 	protected int valorAccion;
@@ -27,7 +26,7 @@ public class Proyectil extends Lanzable{
 	}
 	public void chocar(Zombie z) {
 		z.restarVida(valorAccion);
-		this.morir(miFila.getJuego());
+		this.morir();
 	}
 	public int getValorAccion() {
 		return valorAccion;
@@ -38,7 +37,7 @@ public class Proyectil extends Lanzable{
 		return aRetornar;
 	}
 	
-	public void morir(Juego j) {
+	public void morir() {
 		miFila.getJuego().getAdministradorJuego().agregarLanzableAEliminar(this);
 		entidadGrafica.borrarGrafica();
 	}

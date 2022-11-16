@@ -56,5 +56,6 @@ public abstract class Entidad {
 	public int getNumeroFila() {
 		return fila;
 	}
+	public abstract void morir();
 
 }

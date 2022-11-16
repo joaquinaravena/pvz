@@ -3,13 +3,13 @@ package Logica;
 import java.util.ArrayList;
 import java.util.List;
 
+import Entidades.Sol;
 import Entidades.Zombie;
 
 public class AdministradorNiveles {
 	private Juego juego;
 	private Nivel[] niveles;
 	protected int nivelActual;
-	protected int oleadaActual;
 	protected List<Zombie> zombiesNivel;
 	
 	public AdministradorNiveles(Juego juego) {
@@ -17,12 +17,9 @@ public class AdministradorNiveles {
 		niveles=new Nivel[2];
 		this.juego=juego;
 		nivelActual = 0;
-		oleadaActual = 0;
 		zombiesNivel = new ArrayList<Zombie>();
-
-		niveles[0]=new Nivel(55,0,0);
-		niveles[1]=new Nivel(20,15,8);
-
+		niveles[0]=new Nivel(50,20,0);
+		niveles[1]=new Nivel(30,25,15);
 	}
 	
 	public void nuevoNivel(int nivelElegido) {
@@ -47,9 +44,13 @@ public class AdministradorNiveles {
 			juego.miRelojPlantas.setearActivo(false);
 			juego.miRelojZombies.setearActivo(false);
 			juego.miRelojProyectiles.setearActivo(false);
+			for(Sol s: juego.solesJuego) {
+				s.morir();	
+			}
 			for(int i=1;i<=6;i++) {
-				juego.getFila(i).resetearListaLanzables();
+				juego.getFila(i).resetearListaZombies();
 				juego.getFila(i).resetearListaPlantas();
+				juego.getFila(i).resetearListaLanzables();
 			}
 			juego.getVentana().cambiarNivel(nivelActual+1);
 			juego.miRelojPlantas.setearActivo(true);
@@ -57,6 +58,7 @@ public class AdministradorNiveles {
 			juego.miRelojProyectiles.setearActivo(true);
 			juego.setSoles(150);
 			nuevoNivel(nivelActual);
+			juego.oleadaActual=0;
 		}
 	}
 	
@@ -70,22 +72,11 @@ public class AdministradorNiveles {
 	}
 	
 	public void oleada() {
-		oleadaActual++;
-		int cantInsertados = 0;
-		juego.getVentana().cambiarOleada(oleadaActual);
-		int i = 1;
 		int aleatorio = 1;
-		while (i<=3 && !zombiesNivel.isEmpty()) {
+		for(int i = 1; i <= 3 && !zombiesNivel.isEmpty(); i++) {
 			insertarZombieEntreFilas(aleatorio, aleatorio+1); //el primer ciclo inserta un zombie en la fila 1 o 2, el segundo ciclo en la fila 3 o 4, y el tercer ciclo en la fila 5 o 6
 			aleatorio = aleatorio + 2;
-			i++;
-			cantInsertados++;
 		}
-		for (int j=0; j<oleadaActual && !zombiesNivel.isEmpty(); j++) {
-			insertarZombieEntreFilas(1, 6);
-			cantInsertados++;
-		}
-		System.out.println(cantInsertados);
 	}
 	
 	public List<Zombie> getZombiesNivel(){

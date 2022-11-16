@@ -30,11 +30,13 @@ public class EntidadGrafica {
 	public String getRutaGrafica() {
 		return rutaBaseG;
 	}
+	public Ventana getVentana() {
+		return ventana;
+	}
 	public void actualizarFilaGrafica(int i) {
 		miGrafica.setBounds(miGrafica.getX(), ventana.getLinea(i), miGrafica.getWidth(), miGrafica.getHeight());
 	}
 	public void cambiarGrafica(String cambioRuta,Entidad e) {
-		//Preguntar si tambien cambio mi rutaG
 		miGrafica.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(ventana.getPropertiesModo().getProperty(cambioRuta))).getImage().getScaledInstance(e.getAncho(),e.getAlto(), 0)));
 	}
 }

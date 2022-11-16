@@ -385,7 +385,7 @@ public class Ventana extends JFrame{
 		lblOleadas = new JLabel();
 		lblOleadas.setFont(new Font("Tahoma", Font.BOLD, 30));
 		lblOleadas.setHorizontalAlignment(SwingConstants.CENTER);
-		lblOleadas.setBounds(284, 21, 274, 29);
+		lblOleadas.setBounds(360, 21, 274, 29);
 		if(propModo.getProperty("colorOscuro").equalsIgnoreCase("true"))
 			lblOleadas.setForeground(new Color(255,255,255));
 		else

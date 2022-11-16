@@ -7,12 +7,13 @@ public class RelojZombies extends Thread{
 	protected Juego miJuego;
 	protected int contador;
 	protected int velocidad;
+	protected int contOleadas;
 	
 	public RelojZombies(Juego j) {
 		activo = true;
 		miJuego = j;
 		contador = 0;
-		velocidad = 300;
+		velocidad = 250;
 	}
 	
 	public void run() {
@@ -21,11 +22,16 @@ public class RelojZombies extends Thread{
 				Thread.sleep(velocidad);
 				miJuego.moverZombies();
 				contador++;
-				if(contador % 25==0) {
-					miJuego.agregarZombieActivo();
+				if(contOleadas != 0 && contador % 7 == 0) {
+					miJuego.getAdministradorNiveles().oleada();
+					contOleadas--;
+				}else {
+					if(contador % 30==0) {
+						miJuego.agregarZombieActivo();
+					}
+					if(contador % 50==0)
+						miJuego.agregarSolAJuego();
 				}
-				if(contador % 45==0)
-					miJuego.agregarSolAJuego();
 			}
 		}
 		catch(InterruptedException e) {
@@ -41,5 +47,8 @@ public class RelojZombies extends Thread{
 			velocidad = velocidad*i;
 		else
 			velocidad = velocidad/2;
+	}
+	public void setContOleadas(int i) {
+		contOleadas = i;
 	}
 }

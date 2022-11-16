@@ -10,6 +10,7 @@ public class Juego {
 	protected RelojZombies miRelojZombies;
 	protected RelojLanzables miRelojProyectiles;
 	protected int soles;
+	protected int oleadaActual;
 	protected Planta plantaEnEspera;
 	protected Ventana miVentana;
 	protected AdministradorNiveles administradorNiveles;
@@ -30,6 +31,7 @@ public class Juego {
 			filas[i]=new Fila(this);
 		}
 		contadorZombies = 0;
+		oleadaActual = 0;
 		solesJuego=new ArrayList<Sol>();
 	}
 	
@@ -63,7 +65,7 @@ public class Juego {
 			miVentana.gameOver();
 		
 		for(Sol s: solesJuego) {
-			s.morir(this);	
+			s.morir();	
 		}
 		for(int i = 1; i <=6; i++) {
 			getFila(i).resetearListaZombies();
@@ -80,7 +82,7 @@ public class Juego {
 		}
 		administradorJuego.resetearListas();
 		contadorZombies = 0;
-		administradorNiveles.oleadaActual = 0;
+		oleadaActual = 0;
 		administradorNiveles.nivelActual = 0;
 	}
 	
@@ -135,9 +137,12 @@ public class Juego {
 			hayZombies = filas[i-1].hayZombies();
 		if (!hayZombies && administradorNiveles.getZombiesNivel().isEmpty())
 			administradorNiveles.cambiarNivel();
+		
 		if (!administradorNiveles.getZombiesNivel().isEmpty()) {
 			if (contadorZombies % 5 == 0 && contadorZombies>0) {
-				administradorNiveles.oleada();
+				oleadaActual++;
+				getVentana().cambiarOleada(oleadaActual);
+				miRelojZombies.setContOleadas(oleadaActual);
 				contadorZombies = 0;
 			}
 			else {
@@ -210,6 +215,9 @@ public class Juego {
 	}
 	public AdministradorJuego getAdministradorJuego() {
 		return administradorJuego;
+	}
+	public AdministradorNiveles getAdministradorNiveles() {
+		return administradorNiveles;
 	}
 	
 	public int getSoles() {
