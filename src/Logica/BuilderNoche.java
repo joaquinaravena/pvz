@@ -1,3 +1,4 @@
+
 package Logica;
 import Entidades.Zombie;
 import Estrategias.accionPlantaMelee;
@@ -8,7 +9,7 @@ import Entidades.Proyectil;
 import Entidades.Sol;
 public class BuilderNoche implements AbstractBuilder{
 protected Juego miJuego;
-	//Ver como hacen el properties
+
 	public BuilderNoche(Juego juego) {
 		miJuego = juego;
 	}
@@ -29,15 +30,19 @@ protected Juego miJuego;
 		return z;
 	}
 
-	public Planta crearPlantaDebil() {
-		return new Planta(50,100,0,miJuego.getVentana(), "plantaDebil" , new Sol(miJuego.getVentana(),"sol",true),new accionPlantasGeneradoras());
+	public Planta crearPlantaGeneradora() {
+		return new Planta(Integer.parseInt(miJuego.getVentana().getPropertiesModo().getProperty("precioGeneradora")),100,0,miJuego.getVentana(), "plantaGeneradora" , new Sol(miJuego.getVentana(),"moneda",true),new accionPlantasGeneradoras());
 	}
 
-	public Planta crearPlantaMedio() {
-		return new Planta(75,200,100,miJuego.getVentana(), "plantaMedio" , new Proyectil(100,miJuego.getVentana(),"proyectilDebil",null),new accionPlantasDisparadoras());
+	public Planta crearPlantaDebil() {
+		return new Planta(Integer.parseInt(miJuego.getVentana().getPropertiesModo().getProperty("precioDebil")),200,100,miJuego.getVentana(), "plantaDebil" , new Proyectil(100,miJuego.getVentana(),"proyectilDebil",null),new accionPlantasDisparadoras());
 	}
 
 	public Planta crearPlantaFuerte() {
-		return new Planta(150,300,200,miJuego.getVentana(), "plantaFuerte", null ,new accionPlantaMelee("plantaFuerteAtacando"));
+		return new Planta(Integer.parseInt(miJuego.getVentana().getPropertiesModo().getProperty("precioFuerte")),300,200,miJuego.getVentana(), "plantaFuerte", null ,new accionPlantaMelee("plantaFuerteAtacando"));
+	}
+	
+	public Planta crearPlantaTanque() {
+		return new Planta(Integer.parseInt(miJuego.getVentana().getPropertiesModo().getProperty("precioTanque")),500,0,miJuego.getVentana(), "plantaTanque", null , null);
 	}
 }

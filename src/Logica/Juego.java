@@ -167,7 +167,7 @@ public class Juego {
 	}
 	
 	public void agregarSolAJuego() {
-		Sol aAgregar=new Sol(miVentana,"sol",false);
+		Sol aAgregar=new Sol(miVentana,"moneda",false);
 		int randomX=(int)(Math.random()*600);
 		aAgregar.getEntidadGrafica().getGrafica().setLocation(randomX, 0);
 		aAgregar.setX(randomX);
@@ -221,9 +221,10 @@ public class Juego {
 	public void setPlantaEnEspera(int i) {
 		switch(i) {
 			case 0: plantaEnEspera = null;break;
-			case 1: plantaEnEspera = builder.crearPlantaDebil();break;
-			case 2: plantaEnEspera = builder.crearPlantaMedio();break;
+			case 1: plantaEnEspera = builder.crearPlantaGeneradora();break;
+			case 2: plantaEnEspera = builder.crearPlantaDebil();break;
 			case 3: plantaEnEspera = builder.crearPlantaFuerte();break;
+			case 4: plantaEnEspera = builder.crearPlantaTanque();break;
 		}
 	}
 	

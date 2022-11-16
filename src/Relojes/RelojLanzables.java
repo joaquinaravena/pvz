@@ -10,7 +10,7 @@ public class RelojLanzables extends Thread{
 	public RelojLanzables(Juego j) {
 		activo = true;
 		miJuego = j;
-		velocidad = 100;
+		velocidad = 80;
 	}
 	
 

@@ -45,7 +45,7 @@ public class Planta extends Entidad {
 	
 
 	public void realizarAccion(Ventana v) {
-			miEstrategia.realizarAccion(this, v);
+		miEstrategia.realizarAccion(this, v);
 	}
 	
 	public int getDaño() {

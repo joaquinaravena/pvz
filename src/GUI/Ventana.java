@@ -169,30 +169,28 @@ public class Ventana extends JFrame{
 		
 		panelPlantas = new JPanel();
 		panelPlantas.setBackground(new Color(205, 133, 63));
-		panelPlantas.setBounds(0, 0, 329, 62);
+		panelPlantas.setBounds(0, 0, 388, 62);
 		panelModo.add(panelPlantas);
 		
 		JToggleButton botonPlanta1 = new JToggleButton();
 		botonPlanta1.setBounds(61, 2, 45, 48);
-		botonPlanta1.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propModo.getProperty("plantaDebilBoton"))).getImage().getScaledInstance(botonPlanta1.getWidth(), botonPlanta1.getHeight() , DO_NOTHING_ON_CLOSE)));
+		botonPlanta1.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propModo.getProperty("plantaGeneradoraBoton"))).getImage().getScaledInstance(botonPlanta1.getWidth(), botonPlanta1.getHeight() , DO_NOTHING_ON_CLOSE)));
 		
 		JToggleButton botonPlanta2 = new JToggleButton();
 		botonPlanta2.setBounds(114, 2, 45, 48);
-		botonPlanta2.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propModo.getProperty("plantaMedioBoton"))).getImage().getScaledInstance(botonPlanta2.getWidth(), botonPlanta2.getHeight() , DO_NOTHING_ON_CLOSE)));
+		botonPlanta2.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propModo.getProperty("plantaDebilBoton"))).getImage().getScaledInstance(botonPlanta2.getWidth(), botonPlanta2.getHeight() , DO_NOTHING_ON_CLOSE)));
 		
 		JToggleButton botonPlanta3 = new JToggleButton();
 		botonPlanta3.setBounds(169, 2, 45, 48);		
 		botonPlanta3.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propModo.getProperty("plantaFuerteBoton"))).getImage().getScaledInstance(botonPlanta3.getWidth(), botonPlanta3.getHeight() , DO_NOTHING_ON_CLOSE)));
 		
-		JToggleButton botonVelocidad = new JToggleButton();
-		botonVelocidad.setToolTipText("aumenta/disminuye la velocidad del juego");
-		botonVelocidad.setSelected(false);
-		botonVelocidad.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("velocidad"))).getImage().getScaledInstance(botonPlanta3.getWidth(), botonPlanta3.getHeight() , DO_NOTHING_ON_CLOSE)));
-		botonVelocidad.setBounds(275, 2, 45, 48);
+		JToggleButton botonPlanta4= new JToggleButton();
+		botonPlanta4.setBounds(224, 2, 45, 48);		
+		botonPlanta4.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propModo.getProperty("plantaFuerteBoton"))).getImage().getScaledInstance(botonPlanta3.getWidth(), botonPlanta3.getHeight() , DO_NOTHING_ON_CLOSE)));
 		
 		JToggleButton botonMusica = new JToggleButton();
 		botonMusica.setToolTipText("frena/reproduce la m\u00FAsica");
-		botonMusica.setBounds(220, 2, 45, 48);
+		botonMusica.setBounds(279, 2, 45, 48);
 		botonMusica.setSelected(true);
 		if(!miJuego.reproduciendoMusica())
 			botonMusica.setSelected(false);
@@ -204,6 +202,7 @@ public class Ventana extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				botonPlanta2.setSelected(false);
 				botonPlanta3.setSelected(false);
+				botonPlanta4.setSelected(false);
 				if(botonPlanta1.isSelected())
 					miJuego.setPlantaEnEspera(1);
 				else
@@ -215,6 +214,7 @@ public class Ventana extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				botonPlanta1.setSelected(false);
 				botonPlanta3.setSelected(false);
+				botonPlanta4.setSelected(false);
 				if(botonPlanta2.isSelected())
 					miJuego.setPlantaEnEspera(2);
 				else
@@ -227,8 +227,21 @@ public class Ventana extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				botonPlanta2.setSelected(false);
 				botonPlanta1.setSelected(false);
+				botonPlanta4.setSelected(false);
 				if(botonPlanta3.isSelected()) 
 					miJuego.setPlantaEnEspera(3);
+				else
+					miJuego.setPlantaEnEspera(0);
+			}
+		});
+		
+		botonPlanta4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				botonPlanta2.setSelected(false);
+				botonPlanta3.setSelected(false);
+				botonPlanta1.setSelected(false);
+				if(botonPlanta4.isSelected())
+					miJuego.setPlantaEnEspera(4);
 				else
 					miJuego.setPlantaEnEspera(0);
 			}
@@ -243,6 +256,26 @@ public class Ventana extends JFrame{
 			}
 		});
 		
+		JLabel lblSol = new JLabel();
+		lblSol.setBounds(6, 2, 45, 48);
+		lblSol.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propModo.getProperty("moneda"))).getImage().getScaledInstance(lblSol.getWidth(), lblSol.getHeight(), DO_NOTHING_ON_CLOSE)));
+		lblSol.setVerticalAlignment(SwingConstants.BOTTOM);
+		lblSol.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		panelPlantas.setLayout(null);
+		panelPlantas.add(botonPlanta1);
+		panelPlantas.add(botonPlanta2);
+		panelPlantas.add(botonPlanta3);
+		panelPlantas.add(botonPlanta4);
+		panelPlantas.add(botonMusica);
+		
+		
+		JToggleButton botonVelocidad = new JToggleButton();
+		botonVelocidad.setToolTipText("aumenta/disminuye la velocidad del juego");
+		botonVelocidad.setSelected(false);
+		botonVelocidad.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("velocidad"))).getImage().getScaledInstance(botonPlanta3.getWidth(), botonPlanta3.getHeight() , DO_NOTHING_ON_CLOSE)));
+		botonVelocidad.setBounds(334, 2, 45, 48);
+		
 		botonVelocidad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(botonVelocidad.isSelected())
@@ -252,40 +285,33 @@ public class Ventana extends JFrame{
 			}
 		});
 		
-		JLabel lblSol = new JLabel();
-		lblSol.setBounds(6, 2, 45, 48);
-		lblSol.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propModo.getProperty("sol"))).getImage().getScaledInstance(lblSol.getWidth(), lblSol.getHeight(), DO_NOTHING_ON_CLOSE)));
-		lblSol.setVerticalAlignment(SwingConstants.BOTTOM);
-		lblSol.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		panelPlantas.setLayout(null);
-		panelPlantas.add(botonPlanta1);
-		panelPlantas.add(botonPlanta2);
-		panelPlantas.add(botonPlanta3);
-		panelPlantas.add(botonMusica);
+		panelPlantas.add(botonVelocidad);
 		panelPlantas.add(lblSol);
 		
-		JLabel lblPrecioP1 = new JLabel(propModo.getProperty("precio1"));
+		JLabel lblPrecioP1 = new JLabel(propModo.getProperty("precioGeneradora"));
 		lblPrecioP1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPrecioP1.setBounds(61, 48, 46, 14);
 		panelPlantas.add(lblPrecioP1);
 		
-		JLabel lblPrecioP2 = new JLabel(propModo.getProperty("precio2"));
+		JLabel lblPrecioP2 = new JLabel(propModo.getProperty("precioDebil"));
 		lblPrecioP2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPrecioP2.setBounds(116, 48, 46, 14);
 		panelPlantas.add(lblPrecioP2);
 		
-		JLabel lblPrecioP3 = new JLabel(propModo.getProperty("precio3"));
+		JLabel lblPrecioP3 = new JLabel(propModo.getProperty("precioFuerte"));
 		lblPrecioP3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPrecioP3.setBounds(169, 48, 46, 14);
 		panelPlantas.add(lblPrecioP3);
+		
+		JLabel lblPrecioP4 = new JLabel(propModo.getProperty("precioTanque"));
+		lblPrecioP4.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPrecioP4.setBounds(222, 48, 46, 14);
+		panelPlantas.add(lblPrecioP4);
 		
 		JLabel lblSolesActuales = new JLabel(""+miJuego.getSoles());
 		lblSolesActuales.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSolesActuales.setBounds(6, 48, 46, 14);
 		panelPlantas.add(lblSolesActuales);
-		
-		panelPlantas.add(botonVelocidad);
 
 		
 		for(int i = 0; i < 6; i++)
@@ -426,14 +452,14 @@ public class Ventana extends JFrame{
 		planta1.setEnabled(false);
 		planta2.setEnabled(false);
 		planta3.setEnabled(false);
-		if(miJuego.getSoles() >= Integer.parseInt(propModo.getProperty("precio3"))) {
+		if(miJuego.getSoles() >= Integer.parseInt(propModo.getProperty("precioFuerte"))) {
 			planta1.setEnabled(true);
 			planta2.setEnabled(true);
 			planta3.setEnabled(true);
-		}else if(miJuego.getSoles() >= Integer.parseInt(propModo.getProperty("precio2"))) {
+		}else if(miJuego.getSoles() >= Integer.parseInt(propModo.getProperty("precioDebil"))) {
 			planta1.setEnabled(true);
 			planta2.setEnabled(true);
-		}else if(miJuego.getSoles() >= Integer.parseInt(propModo.getProperty("precio1")))
+		}else if(miJuego.getSoles() >= Integer.parseInt(propModo.getProperty("precioGeneradora")))
 			planta1.setEnabled(true);
 	}
 	

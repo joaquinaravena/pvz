@@ -22,15 +22,15 @@ public class Sol extends Lanzable{
 		if(solDePlanta) {
 			if(contador<4) {
 				y=y-10;
-				x=x-2;
-				getEntidadGrafica().getGrafica().setBounds(getEntidadGrafica().getGrafica().getX()-2, getEntidadGrafica().getGrafica().getY()-10, getEntidadGrafica().getGrafica().getWidth(), getEntidadGrafica().getGrafica().getHeight());
+				x=x-4;
+				getEntidadGrafica().getGrafica().setBounds(getEntidadGrafica().getGrafica().getX()-4, getEntidadGrafica().getGrafica().getY()-10, getEntidadGrafica().getGrafica().getWidth(), getEntidadGrafica().getGrafica().getHeight());
 				contador++;
 			}
 			else if(contador <11) {
 				y=y+10;
-				x=x-2;
+				x=x-3;
 				contador++;
-				getEntidadGrafica().getGrafica().setBounds(getEntidadGrafica().getGrafica().getX()-2, getEntidadGrafica().getGrafica().getY()+10, getEntidadGrafica().getGrafica().getWidth(), getEntidadGrafica().getGrafica().getHeight());
+				getEntidadGrafica().getGrafica().setBounds(getEntidadGrafica().getGrafica().getX()-3, getEntidadGrafica().getGrafica().getY()+10, getEntidadGrafica().getGrafica().getWidth(), getEntidadGrafica().getGrafica().getHeight());
 			}
 			getEntidadGrafica().actualizarGrafica();
 		}
