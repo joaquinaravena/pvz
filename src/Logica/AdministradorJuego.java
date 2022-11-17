@@ -37,10 +37,11 @@ public class AdministradorJuego{
 		}
 		
 		public void removerZombies() {
-			for (Zombie z: zombiesAEliminar) {
+			List<Zombie> zombiesClone= new CopyOnWriteArrayList<Zombie>(zombiesAEliminar);
+			for (Zombie z: zombiesClone) {
 				z.getFila().removerZombie(z);
+				zombiesAEliminar.remove(z);
 			}
-			zombiesAEliminar.clear();
 		}
 		
 		public void removerPlantas() {
@@ -56,20 +57,19 @@ public class AdministradorJuego{
 				for(Zombie z: zombiesAtacanClone) {
 					z.setPlantaAtacada(null);
 				}
+				plantasAEliminar.remove(p);
 			}
-			plantasAEliminar.clear();
 		}
 		
-		public void removerLanzables() {
+		public void removerLanzables() {			
 			List<Lanzable> lanzablesClone = new CopyOnWriteArrayList<Lanzable>(lanzablesAEliminar);
 			for (Lanzable p: lanzablesClone) {
 				if(p.getFila()==null)//Si no tiene fila asignada es un sol de juego.
 					juego.getSolesJuego().remove(p);
 				else
 					p.getFila().removerLanzable(p);
-				p.getEntidadGrafica().borrarGrafica();
+				lanzablesAEliminar.remove(p);
 			}
-			lanzablesAEliminar.clear();
 		}
 		
 		public void resetearListas() {
