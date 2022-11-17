@@ -1,6 +1,7 @@
 package Logica;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import Entidades.Sol;
@@ -44,7 +45,10 @@ public class AdministradorNiveles {
 			juego.miRelojPlantas.setearActivo(false);
 			juego.miRelojZombies.setearActivo(false);
 			juego.miRelojProyectiles.setearActivo(false);
-			for(Sol s: juego.solesJuego) {
+			
+			Iterator<Sol> itSoles = juego.getSolesJuego().iterator();
+			while(itSoles.hasNext()){
+				Sol s = itSoles.next();
 				s.morir();	
 			}
 			for(int i=1;i<=6;i++) {
@@ -52,6 +56,7 @@ public class AdministradorNiveles {
 				juego.getFila(i).resetearListaPlantas();
 				juego.getFila(i).resetearListaLanzables();
 			}
+			juego.getAdministradorJuego().resetearListas();
 			juego.getVentana().cambiarNivel(nivelActual+1);
 			juego.miRelojPlantas.setearActivo(true);
 			juego.miRelojZombies.setearActivo(true);
@@ -59,6 +64,8 @@ public class AdministradorNiveles {
 			juego.setSoles(150);
 			nuevoNivel(nivelActual);
 			juego.oleadaActual=0;
+			juego.contadorZombies=0;
+			
 		}
 	}
 	

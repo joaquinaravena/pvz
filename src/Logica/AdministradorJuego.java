@@ -52,7 +52,7 @@ public class AdministradorJuego{
 				Planta p = itPlantas.next();
 				p.getFila().borrarPlanta((p.getX()/74)-2);
 				if(p.getLanzable()!=null)
-					agregarLanzableAEliminar(p.getLanzable());
+					p.getLanzable().morir();
 				zombiesAtacanClone=new CopyOnWriteArrayList<Zombie>(p.getZombiesAtacan());
 				for(Zombie z: zombiesAtacanClone) {
 					z.setPlantaAtacada(null);

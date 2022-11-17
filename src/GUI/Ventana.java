@@ -418,6 +418,7 @@ public class Ventana extends JFrame{
 	public void borrarGrafica(JLabel label) {
 		label.setVisible(false);
 		getContentPane().remove(label);
+		getContentPane().revalidate();
 		getContentPane().repaint();
 	}
 	public void gameOver() {
@@ -469,20 +470,13 @@ public class Ventana extends JFrame{
 		planta2.setEnabled(false);
 		planta3.setEnabled(false);
 		planta4.setEnabled(false);
-		if(miJuego.getSoles() >= Integer.parseInt(propModo.getProperty("precioTanque"))) {
-			planta1.setEnabled(true);
-			planta2.setEnabled(true);
-			planta3.setEnabled(true);
+		if(miJuego.getSoles() >= Integer.parseInt(propModo.getProperty("precioTanque"))) 
 			planta4.setEnabled(true);
-		}
-		else if(miJuego.getSoles() >= Integer.parseInt(propModo.getProperty("precioFuerte"))) {
-			planta1.setEnabled(true);
-			planta2.setEnabled(true);
+		if(miJuego.getSoles() >= Integer.parseInt(propModo.getProperty("precioFuerte"))) 
 			planta3.setEnabled(true);
-		}else if(miJuego.getSoles() >= Integer.parseInt(propModo.getProperty("precioDebil"))) {
-			planta1.setEnabled(true);
+		if(miJuego.getSoles() >= Integer.parseInt(propModo.getProperty("precioDebil"))) 
 			planta2.setEnabled(true);
-		}else if(miJuego.getSoles() >= Integer.parseInt(propModo.getProperty("precioGeneradora")))
+		if(miJuego.getSoles() >= Integer.parseInt(propModo.getProperty("precioGeneradora")))
 			planta1.setEnabled(true);
 	}
 	
@@ -525,7 +519,7 @@ public class Ventana extends JFrame{
 		return propModo;
 	}
 	public int getBordeDerecho() {
-		return this.getWidth()-8;
+		return this.getWidth()-10;
 	}
 	public int getLinea(int i) {
 		return i*64;

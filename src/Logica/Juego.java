@@ -64,7 +64,9 @@ public class Juego {
 		else
 			miVentana.gameOver();
 		
-		for(Sol s: solesJuego) {
+		Iterator<Sol> itSoles = solesJuego.iterator();
+		while(itSoles.hasNext()){
+			Sol s = itSoles.next();
 			s.morir();	
 		}
 		for(int i = 1; i <=6; i++) {
