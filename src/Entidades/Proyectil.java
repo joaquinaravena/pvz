@@ -13,15 +13,15 @@ public class Proyectil extends Lanzable{
 		this.alto = 30;
 		this.valorAccion = valorAccion;
 		entidadGrafica=new EntidadGrafica(v,this,graf);
-		entidadGrafica.getGrafica().setBounds(0, 20, this.ancho, this.alto);
+		entidadGrafica.getGrafica().setBounds(0, 30, this.ancho, this.alto);
 		entidadGrafica.borrarGrafica();
 		miFila=f;
 	}
 	
 	
 	public void mover() {
-		x = x+25;
-		getEntidadGrafica().getGrafica().setBounds(getEntidadGrafica().getGrafica().getX()+25, getEntidadGrafica().getGrafica().getY(), getEntidadGrafica().getGrafica().getWidth(), getEntidadGrafica().getGrafica().getHeight());
+		x = x+30;
+		getEntidadGrafica().getGrafica().setBounds(getEntidadGrafica().getGrafica().getX()+30, getEntidadGrafica().getGrafica().getY(), getEntidadGrafica().getGrafica().getWidth(), getEntidadGrafica().getGrafica().getHeight());
 		getEntidadGrafica().actualizarGrafica();
 	}
 	public void chocar(Zombie z) {

@@ -103,7 +103,6 @@ public class Fila {
 	private Rectangle armarHitboxEntidad(Entidad e) {
 		Dimension dimensionEntidad=new Dimension(e.getAncho(),e.getAlto());
 		Point ubicacionEntidad=new Point(e.getX(),e.getY());
-		
 		Rectangle hitboxEntidad=new Rectangle(ubicacionEntidad,dimensionEntidad);
 		return hitboxEntidad;
 	}

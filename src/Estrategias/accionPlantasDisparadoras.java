@@ -12,7 +12,7 @@ public class accionPlantasDisparadoras implements PlantaStrategy{
 
 	public  void realizarAccion(Planta p,Ventana v) {
 		if(p.getFila().hayZombies()) {
-			if(contadorTicks == 1) {
+			if(contadorTicks == 2) {
 				Lanzable aDisparar=p.getLanzable().clone(v);
 				aDisparar.setX(p.getX());
 				aDisparar.setY(p.getY());
