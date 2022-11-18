@@ -58,9 +58,11 @@ public class AdministradorJuego{
 				for(Zombie z: zombiesAtacanClone) {
 					z.setPlantaAtacada(null);
 				}
+				zombiesAtacanClone.clear();
 				plantasAEliminar.remove(p);
 			}
 			plantasClone.clear();
+			
 		}
 		
 		public void removerLanzables() {			

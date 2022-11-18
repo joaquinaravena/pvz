@@ -1,5 +1,6 @@
 package Logica;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import Entidades.*;
 import GUI.Ventana;
@@ -68,8 +69,8 @@ public class Juego {
 			miVentana.ganarJuego();
 		else
 			miVentana.gameOver();
-		
-		Iterator<Sol> itSoles = solesJuego.iterator();
+		List<Sol>solesClone = new CopyOnWriteArrayList<Sol>(solesJuego); // clone agregado
+		Iterator<Sol> itSoles = solesClone.iterator();
 		while(itSoles.hasNext()){
 			Sol s = itSoles.next();
 			s.morir();	
@@ -79,7 +80,7 @@ public class Juego {
 			getFila(i).resetearListaPlantas();
 			getFila(i).resetearListaLanzables();
 		}
-		
+		//saque el admin juego resetear listas porque ya se hace en cada fila
 		soles = 150;
 		miVentana.controlarPlantasAComprar();
 		plantaEnEspera = null;
@@ -147,9 +148,12 @@ public class Juego {
 		
 		if (!administradorNiveles.getZombiesNivel().isEmpty()) {
 			if (contadorZombies % 5 == 0 && contadorZombies>0) {
-					oleadaActual++;
+				oleadaActual++;
 				getVentana().cambiarOleada(oleadaActual);
-				miRelojZombies.setContOleadas(oleadaActual);
+				if (oleadaActual>3)
+					miRelojZombies.setContOleadas(3);
+				else
+					miRelojZombies.setContOleadas(oleadaActual);
 				contadorZombies = 0;
 			}
 			else {

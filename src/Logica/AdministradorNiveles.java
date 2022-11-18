@@ -3,6 +3,7 @@ package Logica;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import Entidades.Sol;
 import Entidades.Zombie;
@@ -19,8 +20,8 @@ public class AdministradorNiveles {
 		this.juego=juego;
 		nivelActual = 0;
 		zombiesNivel = new ArrayList<Zombie>();
-		niveles[0]=new Nivel(20,30,22);
-		niveles[1]=new Nivel(30,25,17);
+		niveles[0]=new Nivel(20,30,12);
+		niveles[1]=new Nivel(30,25,7);
 	}
 	
 	public void nuevoNivel(int nivelElegido) {
@@ -46,7 +47,8 @@ public class AdministradorNiveles {
 			juego.miRelojZombies.setearActivo(false);
 			juego.miRelojProyectiles.setearActivo(false);
 			
-			Iterator<Sol> itSoles = juego.getSolesJuego().iterator();
+			List<Sol>solesClone = new CopyOnWriteArrayList<Sol>(juego.getSolesJuego()); // clone agregado
+			Iterator<Sol> itSoles = solesClone.iterator();
 			while(itSoles.hasNext()){
 				Sol s = itSoles.next();
 				s.morir();	
@@ -75,7 +77,7 @@ public class AdministradorNiveles {
 	public void insertarZombieEntreFilas(int y, int x) {
 		int filaRandom = (int)(Math.random()*(x-y+1)+y);
 		zombiesNivel.get(0).setFila(juego.getFila(filaRandom));
-		juego.getFila(filaRandom).agregarZombie(zombiesNivel.get(0), filaRandom);
+		juego.getFila(filaRandom).agregarZombie(zombiesNivel.get(0), filaRandom); // corregido
 		zombiesNivel.remove(0);
 	}
 	
