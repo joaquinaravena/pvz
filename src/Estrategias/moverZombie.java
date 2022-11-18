@@ -12,7 +12,6 @@ public class moverZombie implements ZombieStrategy {
 		else {
 			z.setX(z.getX()-z.getVelocidad());
 			z.getEntidadGrafica().getGrafica().setBounds(z.getEntidadGrafica().getGrafica().getX()- z.getVelocidad(), z.getEntidadGrafica().getGrafica().getY(), z.getEntidadGrafica().getGrafica().getWidth(), z.getEntidadGrafica().getGrafica().getHeight());
-			z.getEntidadGrafica().actualizarGrafica();
 		}
 	}
 }

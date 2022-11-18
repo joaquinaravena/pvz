@@ -35,6 +35,7 @@ public class Fila {
 		z.setY(z.getEntidadGrafica().getGrafica().getY());
 		z.setAncho(z.getEntidadGrafica().getGrafica().getWidth());
 		z.setAlto(z.getEntidadGrafica().getGrafica().getHeight());
+		z.getEntidadGrafica().actualizarGrafica();
 		misZombies.add(z);
 	}
 	
@@ -49,8 +50,6 @@ public class Fila {
 	public void removerLanzable(Lanzable p) {
 		misLanzables.remove(p);
 	}
-	
-	
 	
 	public void chequearColisiones() {
 		boolean huboColision=false;

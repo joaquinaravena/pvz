@@ -44,6 +44,11 @@ public class Juego {
 	}
 	
 	public void jugar(){
+		if(miRelojZombies != null) {
+			miRelojZombies.stop();
+			miRelojPlantas.stop();
+			miRelojProyectiles.stop();
+		}
 		miRelojZombies = new RelojZombies(this);
 		miRelojPlantas = new RelojPlantas(this);
 		miRelojProyectiles = new RelojLanzables(this);

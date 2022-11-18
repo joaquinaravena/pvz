@@ -13,7 +13,7 @@ public class RelojZombies extends Thread{
 		activo = true;
 		miJuego = j;
 		contador = 0;
-		velocidad = 250;
+		velocidad = 220;
 	}
 	
 	public void run() {

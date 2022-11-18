@@ -20,6 +20,7 @@ public class accionPlantasDisparadoras implements PlantaStrategy{
 				aDisparar.setFila(p.getFila());
 				p.getFila().agregarLanzable(aDisparar);
 				contadorTicks=0;
+				aDisparar.getEntidadGrafica().actualizarGrafica();
 			}
 			else
 				contadorTicks++;

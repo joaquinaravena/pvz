@@ -63,9 +63,10 @@ public class AdministradorNiveles {
 			juego.miRelojProyectiles.setearActivo(true);
 			juego.setSoles(150);
 			nuevoNivel(nivelActual);
+			juego.getVentana().controlarPlantasAComprar();
 			juego.oleadaActual=0;
 			juego.contadorZombies=0;
-			
+			juego.setPlantaEnEspera(0);
 		}
 	}
 	
