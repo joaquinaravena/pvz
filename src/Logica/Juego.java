@@ -22,7 +22,7 @@ public class Juego {
 	
 	public Juego(Ventana v) {
 		miRelojMusica = new RelojMusica();
-		soles = 150;
+		soles = 1500;
 		plantaEnEspera = null;
 		miVentana = v;
 		administradorJuego = new AdministradorJuego(this);

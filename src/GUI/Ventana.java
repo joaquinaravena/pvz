@@ -522,7 +522,7 @@ public class Ventana extends JFrame{
 		return this.getWidth()-10;
 	}
 	public int getLinea(int i) {
-		return i*64;
+		return i*64; 
 	}
 	public int getBordeInferior() {
 		return this.getHeight();

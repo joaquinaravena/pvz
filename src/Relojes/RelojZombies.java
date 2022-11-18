@@ -22,7 +22,7 @@ public class RelojZombies extends Thread{
 				Thread.sleep(velocidad);
 				miJuego.moverZombies();
 				contador++;
-				if(contOleadas != 0 && contador % 7 == 0) {
+				if(contOleadas != 0) {
 					miJuego.getAdministradorNiveles().oleada();
 					contOleadas--;
 				}else {
