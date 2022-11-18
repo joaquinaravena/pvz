@@ -147,7 +147,6 @@ public class Juego {
 		
 		if (!administradorNiveles.getZombiesNivel().isEmpty()) {
 			if (contadorZombies % 5 == 0 && contadorZombies>0) {
-				if (oleadaActual<3)
 					oleadaActual++;
 				getVentana().cambiarOleada(oleadaActual);
 				miRelojZombies.setContOleadas(oleadaActual);
