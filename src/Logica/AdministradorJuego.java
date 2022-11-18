@@ -42,6 +42,7 @@ public class AdministradorJuego{
 				z.getFila().removerZombie(z);
 				zombiesAEliminar.remove(z);
 			}
+			zombiesClone.clear();
 		}
 		
 		public void removerPlantas() {
@@ -59,6 +60,7 @@ public class AdministradorJuego{
 				}
 				plantasAEliminar.remove(p);
 			}
+			plantasClone.clear();
 		}
 		
 		public void removerLanzables() {			
@@ -70,6 +72,7 @@ public class AdministradorJuego{
 					p.getFila().removerLanzable(p);
 				lanzablesAEliminar.remove(p);
 			}
+			lanzablesClone.clear();
 		}
 		
 		public void resetearListas() {

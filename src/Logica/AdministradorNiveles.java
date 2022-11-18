@@ -19,8 +19,8 @@ public class AdministradorNiveles {
 		this.juego=juego;
 		nivelActual = 0;
 		zombiesNivel = new ArrayList<Zombie>();
-		niveles[0]=new Nivel(20,30,10);
-		niveles[1]=new Nivel(30,25,15);
+		niveles[0]=new Nivel(20,30,22);
+		niveles[1]=new Nivel(30,25,17);
 	}
 	
 	public void nuevoNivel(int nivelElegido) {
@@ -56,12 +56,12 @@ public class AdministradorNiveles {
 				juego.getFila(i).resetearListaPlantas();
 				juego.getFila(i).resetearListaLanzables();
 			}
-			juego.getAdministradorJuego().resetearListas();
+			//juego.getAdministradorJuego().resetearListas();
 			juego.getVentana().cambiarNivel(nivelActual+1);
 			juego.miRelojPlantas.setearActivo(true);
 			juego.miRelojZombies.setearActivo(true);
 			juego.miRelojProyectiles.setearActivo(true);
-			juego.setSoles(1500);
+			juego.setSoles(15000);
 			nuevoNivel(nivelActual);
 			juego.getVentana().controlarPlantasAComprar();
 			juego.oleadaActual=0;

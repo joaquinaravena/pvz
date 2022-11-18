@@ -125,6 +125,7 @@ public class Fila {
 			p.getEntidadGrafica().borrarGrafica();
 			misLanzables.remove(p);
 		}
+		lanzablesClone.clear();
 	}
 	
 	public void resetearListaZombies() {
@@ -135,6 +136,7 @@ public class Fila {
 			z.getEntidadGrafica().borrarGrafica();
 			misZombies.remove(z);
 		}
+		zombiesClone.clear();
 	}
 	
 	public void moverZombies() {
@@ -144,6 +146,7 @@ public class Fila {
 			Zombie z = itZombies.next();
 			z.realizarAccion();
 		}
+		zombiesClone.clear();
 	}
 	
 	public void accionPlantas() {
@@ -163,6 +166,7 @@ public class Fila {
 				p.morir();
 			}
 		}
+		lanzablesClone.clear();
 	}
 	
 	public boolean hayZombies() {

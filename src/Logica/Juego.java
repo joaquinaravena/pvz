@@ -22,7 +22,7 @@ public class Juego {
 	
 	public Juego(Ventana v) {
 		miRelojMusica = new RelojMusica();
-		soles = 1500;
+		soles = 15000;
 		plantaEnEspera = null;
 		miVentana = v;
 		administradorJuego = new AdministradorJuego(this);
@@ -147,7 +147,8 @@ public class Juego {
 		
 		if (!administradorNiveles.getZombiesNivel().isEmpty()) {
 			if (contadorZombies % 5 == 0 && contadorZombies>0) {
-				oleadaActual++;
+				if (oleadaActual<3)
+					oleadaActual++;
 				getVentana().cambiarOleada(oleadaActual);
 				miRelojZombies.setContOleadas(oleadaActual);
 				contadorZombies = 0;
