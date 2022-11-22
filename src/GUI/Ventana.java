@@ -6,12 +6,12 @@ import Logica.*;
 
 
 
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Color;
-import java.awt.Cursor;
 
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -27,8 +27,6 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.JButton;
 import java.awt.Font;
-import java.awt.Image;
-import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -160,10 +158,6 @@ public class Ventana extends JFrame{
 		lblLogoMenu.setIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("menu"))));
 		lblLogoMenu.setBounds(242, 11, 360, 229);
 		panelMenu.add(lblLogoMenu);
-		
-		Image im = Toolkit.getDefaultToolkit().createImage("src/Recursos/mouseInactivo.png");
-		Cursor cur = Toolkit.getDefaultToolkit().createCustomCursor(im, new Point(15,15),"WILL");
-		setCursor(cur);
 	}
 	
 	

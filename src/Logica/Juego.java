@@ -44,6 +44,7 @@ public class Juego {
 		builder=new BuilderNoche(this);
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void jugar(){
 		if(miRelojZombies != null) {
 			miRelojZombies.stop();
