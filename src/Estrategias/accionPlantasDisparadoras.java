@@ -9,7 +9,9 @@ public class accionPlantasDisparadoras implements PlantaStrategy{
 	public accionPlantasDisparadoras() {
 		contadorTicks=0;
 	}
-
+	/*
+	 * Setea el lanzable con la imagen correspondiente. Tambien cambia la imagen de la propia planta. La planta dispara cada dos ticks si hay zombies en su fila
+	 */
 	public  void realizarAccion(Planta p,Ventana v) {
 		if(p.getFila().hayZombies()) {
 			if(contadorTicks == 2) {

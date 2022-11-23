@@ -36,14 +36,14 @@ protected Juego miJuego;
 	}
 
 	public Planta crearPlantaDebil() {
-		return new Planta(Integer.parseInt(miJuego.getVentana().getPropertiesModo().getProperty("precioDebil")),200,100,miJuego.getVentana(), "plantaDebil" , new Proyectil(100,miJuego.getVentana(),"proyectilDebil",null),new accionPlantasDisparadoras());
+		return new Planta(Integer.parseInt(miJuego.getVentana().getPropertiesModo().getProperty("precioDebil")),200,150,miJuego.getVentana(), "plantaDebil" , new Proyectil(100,miJuego.getVentana(),"proyectilDebil",null),new accionPlantasDisparadoras());
 	}
 
 	public Planta crearPlantaFuerte() {
-		return new Planta(Integer.parseInt(miJuego.getVentana().getPropertiesModo().getProperty("precioFuerte")),300,200,miJuego.getVentana(), "plantaFuerte", null ,new accionPlantaMelee("plantaFuerteAtacando"));
+		return new Planta(Integer.parseInt(miJuego.getVentana().getPropertiesModo().getProperty("precioFuerte")),450,200,miJuego.getVentana(), "plantaFuerte", null ,new accionPlantaMelee("plantaFuerteAtacando"));
 	}
 	
 	public Planta crearPlantaTanque() {
-		return new Planta(Integer.parseInt(miJuego.getVentana().getPropertiesModo().getProperty("precioTanque")),500,0,miJuego.getVentana(), "plantaTanqueFullVida", null , new accionPlantasTanque("plantaTanqueMediaVida","plantaTanquePocaVida"));
+		return new Planta(Integer.parseInt(miJuego.getVentana().getPropertiesModo().getProperty("precioTanque")),600,0,miJuego.getVentana(), "plantaTanqueFullVida", null , new accionPlantasTanque("plantaTanqueMediaVida","plantaTanquePocaVida"));
 	}
 }

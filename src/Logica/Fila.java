@@ -18,7 +18,6 @@ public class Fila {
 		misPlantas=new Planta[9];
 		misLanzables=new ArrayList<Lanzable>();
 	}
-	
 	public void agregarPlanta(Planta p,int pos) {
 		misPlantas[pos]=p;
 		misPlantas[pos].setFila(this);
@@ -50,7 +49,9 @@ public class Fila {
 	public void removerLanzable(Lanzable p) {
 		misLanzables.remove(p);
 	}
-	
+	/*
+	 * Itera la lista de zombies de la fila y chequea si hay lanzables o plantas con las que pueda colisionar usando el método verColisiones
+	 */
 	public void chequearColisiones() {
 		boolean huboColision=false;
 		List<Lanzable> lanzablesClone = new CopyOnWriteArrayList<Lanzable>(misLanzables);

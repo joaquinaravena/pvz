@@ -61,7 +61,6 @@ public class AdministradorNiveles {
 	}
 	
 	//Inserta un zombie en una fila random entre x e y
-	
 	public void insertarZombieEntreFilas(int y, int x) {
 		int filaRandom = (int)(Math.random()*(x-y+1)+y);
 		zombiesNivel.get(0).setFila(juego.getFila(filaRandom));

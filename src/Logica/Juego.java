@@ -23,7 +23,7 @@ public class Juego {
 	
 	public Juego(Ventana v) {
 		miReproductorMusica = new ReproductorMusica();
-		soles = 150;
+		soles = 200;
 		plantaEnEspera = null;
 		miVentana = v;
 		administradorJuego = new AdministradorJuego(this);
@@ -46,13 +46,10 @@ public class Juego {
 	}
 	
 	public void jugar(int nivel){
-		this.soles = 15000;
+		this.soles = 200;
 
 		if(miRelojZombies != null) {
 			miRelojZombies.setearActivo(false);
-			System.out.println("llega1");
-			//miRelojZombies.stop();
-			System.out.println("llega2");
 			miRelojPlantas.setearActivo(false);
 			miRelojLanzables.setearActivo(false);
 		}
@@ -62,6 +59,7 @@ public class Juego {
 		miRelojZombies.start();
 		miRelojPlantas.start();
 		miRelojLanzables.start();
+		administradorNiveles = new AdministradorNiveles(this);
 		
 		administradorNiveles.nuevoNivel(nivel);
 		miVentana.cambiarNivel(nivel+1);
@@ -71,7 +69,10 @@ public class Juego {
 		contadorZombies=0;
 		plantaEnEspera = null;
 	}
-		
+	/*
+	 * El terminarJuego generará el mensaje correspondiente según si el usuario ganó o perdió el juego.
+	 * Se resetean las listas de zombies, plantas y proyectiles de cada fila, y la lista de soles de juego.
+	 */	
 	public void terminarJuego(boolean gane) {
 		
 		miRelojZombies.setearActivo(false);
@@ -146,7 +147,10 @@ public class Juego {
 
 	
 	//METODOS PARA AGREGAR PLANTAS , ZOMBIES y SOLES
-	
+	/*
+	 * Si el jugador mató a todos los zombies de todas las filas y además no quedan zombies del nivel para agregar se cambia el nivel.
+	 * Sino, analizamos la cantidad de zombies ya lanzados. Si esta cantidad en multiplo de 5, mandamos una oleada, sino agregamos un zombie en una fila random.
+	 */
 	public void agregarZombieActivo() { 
 		boolean hayZombies = false;
 		for (int i=1; i<=6 && !hayZombies; i++) 
@@ -173,7 +177,11 @@ public class Juego {
 				}
 			}
 	}
-	
+	/*
+	 * Agrega una planta a la posicion correspondiente (en el arreglo de plantas que tiene cada fila)
+	 * Resta los soles correspondientes
+	 * Setea los parámetros de lanzable
+	 */
 	public void agregarPlanta(int x,int y) {
 		int posicionArreglo= (x / 74)-2;
 		int posicionFila=(y / 65);

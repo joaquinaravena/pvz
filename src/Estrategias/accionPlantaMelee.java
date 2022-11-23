@@ -12,7 +12,9 @@ public class accionPlantaMelee implements PlantaStrategy{
 		contadorTicks=0;
 		plantaEstaAtacando=false;
 	}
-
+	/*
+	 * Chequea si la planta esta atacando y pone la imagen correspondiente. Se utiliza un contador de ticks para que la planta ataque repetidamente hasta que muera o el zombie muera
+	 */
 	public  void realizarAccion(Planta p,Ventana v) {
 		if(p.getFila().hayZombies() && !p.getZombiesAtacan().isEmpty() ) {
 			if(!plantaEstaAtacando) {

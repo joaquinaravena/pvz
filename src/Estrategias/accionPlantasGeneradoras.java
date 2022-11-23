@@ -11,7 +11,9 @@ public class accionPlantasGeneradoras implements PlantaStrategy{
 		contadorTicks=0;
 	}
 	
-	
+	/*
+	 * Setea el lanzable con la imagen correspondiente. Tambien cambia la imagen de la propia planta. La planta genera un lanzable cada 12 ticks
+	 */
 	public  void realizarAccion(Planta p,Ventana v) {
 		if(contadorTicks==12) {
 			Lanzable aDisparar=p.getLanzable().clone(v);
