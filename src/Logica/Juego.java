@@ -6,10 +6,10 @@ import Entidades.*;
 import GUI.Ventana;
 import Relojes.*;
 public class Juego {
-	protected RelojMusica miRelojMusica;
+	protected ReproductorMusica miReproductorMusica;
 	protected RelojPlantas miRelojPlantas;
 	protected RelojZombies miRelojZombies;
-	protected RelojLanzables miRelojProyectiles;
+	protected RelojLanzables miRelojLanzables;
 	protected int soles;
 	protected int oleadaActual;
 	protected Planta plantaEnEspera;
@@ -22,8 +22,8 @@ public class Juego {
 	protected List<Sol> solesJuego;
 	
 	public Juego(Ventana v) {
-		miRelojMusica = new RelojMusica();
-		soles = 15000;
+		miReproductorMusica = new ReproductorMusica();
+		soles = 150;
 		plantaEnEspera = null;
 		miVentana = v;
 		administradorJuego = new AdministradorJuego(this);
@@ -46,14 +46,14 @@ public class Juego {
 	}
 	
 	public void jugar(int nivel){
-		this.soles = 15000;
+		this.soles = 150;
 		
 		miRelojZombies = new RelojZombies(this);
 		miRelojPlantas = new RelojPlantas(this);
-		miRelojProyectiles = new RelojLanzables(this);
+		miRelojLanzables = new RelojLanzables(this);
 		miRelojZombies.start();
 		miRelojPlantas.start();
-		miRelojProyectiles.start();
+		miRelojLanzables.start();
 		
 		administradorNiveles.nuevoNivel(nivel);
 		miVentana.cambiarNivel(nivel+1);
@@ -66,14 +66,14 @@ public class Juego {
 		
 	public void terminarJuego(boolean gane) {
 		
-		miRelojZombies = null;
-		miRelojPlantas = null;
-		miRelojProyectiles = null;
+		miRelojZombies.setearActivo(false);
+		miRelojPlantas.setearActivo(false);
+		miRelojLanzables.setearActivo(false);
 		if(gane)
 			miVentana.ganarJuego();
 		else
 			miVentana.gameOver();
-		List<Sol>solesClone = new CopyOnWriteArrayList<Sol>(solesJuego); // clone agregado
+		List<Sol>solesClone = new CopyOnWriteArrayList<Sol>(solesJuego);
 		Iterator<Sol> itSoles = solesClone.iterator();
 		while(itSoles.hasNext()){
 			Sol s = itSoles.next();
@@ -91,7 +91,7 @@ public class Juego {
 			filas[i]=new Fila(this);
 		}
 		administradorJuego.resetearListas();
-		administradorNiveles.nivelActual = 0;
+		administradorNiveles.setNivelActual(0);
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -99,15 +99,15 @@ public class Juego {
 		if(miRelojPlantas != null) {
 			miRelojPlantas.stop();
 			miRelojZombies.stop();
-			miRelojProyectiles.stop();
+			miRelojLanzables.stop();
 		}
-		miRelojMusica.pararMusica();
+		miReproductorMusica.pararMusica();
 		System.exit(0);
 	}
 	
 	public void cambiarVelocidad(int vel) {
 		miRelojPlantas.setVelocidad(vel);
-		miRelojProyectiles.setVelocidad(vel);
+		miRelojLanzables.setVelocidad(vel);
 		miRelojZombies.setVelocidad(vel);
 	}
 	
@@ -188,6 +188,7 @@ public class Juego {
 		aAgregar.getEntidadGrafica().getGrafica().setLocation(randomX, 0);
 		aAgregar.setX(randomX);
 		aAgregar.setY(0);
+		miVentana.actualizarGrafica(aAgregar.getEntidadGrafica());
 		solesJuego.add(aAgregar);
 	}
 	
@@ -195,15 +196,15 @@ public class Juego {
 	//MUSICA
 	
 	public void reproducirMusica() {
-		miRelojMusica.reproducirMusica();
+		miReproductorMusica.reproducirMusica();
 	}
 	
 	public void pararMusica() {
-		miRelojMusica.pararMusica();		
+		miReproductorMusica.pararMusica();		
 	}
 	
 	public boolean reproduciendoMusica() {
-		return miRelojMusica.reproduciendoMusica();
+		return miReproductorMusica.reproduciendoMusica();
 	}
 	
 	//getters

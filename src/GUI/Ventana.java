@@ -1,6 +1,7 @@
 package GUI;
 import Logica.*;
 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -17,7 +18,6 @@ import java.util.Properties;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.JButton;
 import java.awt.Font;
@@ -33,25 +33,8 @@ public class Ventana extends JFrame{
 	private JLabel lblOleadas;
 	private JLabel lblNivel;
 	private JLabel lblSolesActuales;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Ventana window = new Ventana();
-					window.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	
-	/**
-	 * Create the application.
-	 */
+
+
 	public Ventana() {
 		try {
 			InputStream input = new FileInputStream(Ventana.class.getResource("/Archivos/configMenu.properties").getFile());

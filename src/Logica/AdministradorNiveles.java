@@ -10,8 +10,8 @@ import Entidades.Sol;
 import Entidades.Zombie;
 
 public class AdministradorNiveles {
-	private Juego juego;
-	private Nivel[] niveles;
+	protected Juego juego;
+	protected Nivel[] niveles;
 	protected int nivelActual;
 	protected List<Zombie> zombiesNivel;
 	
@@ -79,6 +79,10 @@ public class AdministradorNiveles {
 	
 	public List<Zombie> getZombiesNivel(){
 		return zombiesNivel;
+	}
+	
+	public void setNivelActual(int n) {
+		nivelActual = n;
 	}
 	
 }

@@ -22,7 +22,7 @@ public class RelojZombies extends Thread{
 				Thread.sleep(velocidad);
 				miJuego.moverZombies();
 				contador++;
-				if(contOleadas != 0) { //chequear la condicion contador %7 esta mal porque se rompe junto con la de contador%5 que hay en juego
+				if(contOleadas != 0) { 
 					miJuego.getAdministradorNiveles().oleada();
 					contOleadas--;
 				}else {

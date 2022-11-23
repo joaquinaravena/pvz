@@ -5,12 +5,12 @@ import java.io.IOException;
 import javax.sound.sampled.*;
 
 
-public class RelojMusica{
+public class ReproductorMusica{
 	protected File archivoMusica;
 	protected AudioInputStream audio;
 	protected Clip clip;
 		
-	public RelojMusica() {
+	public ReproductorMusica() {
 		archivoMusica = new File("src/Recursos/Cancion.wav");
 		try {
 			audio = AudioSystem.getAudioInputStream(archivoMusica);
