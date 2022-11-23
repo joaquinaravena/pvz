@@ -22,7 +22,6 @@ public class Proyectil extends Lanzable{
 	public void mover() {
 		x = x+30;
 		getEntidadGrafica().getGrafica().setBounds(getEntidadGrafica().getGrafica().getX()+30, getEntidadGrafica().getGrafica().getY(), getEntidadGrafica().getGrafica().getWidth(), getEntidadGrafica().getGrafica().getHeight());
-		//getEntidadGrafica().actualizarGrafica();
 	}
 	public void chocar(Zombie z) {
 		z.restarVida(valorAccion);

@@ -1,19 +1,12 @@
 package GUI;
 import Logica.*;
 
-
-
-
-
-
-
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Color;
 
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.ImageIcon;
 import javax.swing.JToggleButton;
 import java.awt.event.ActionListener;
@@ -24,6 +17,7 @@ import java.util.Properties;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.JButton;
 import java.awt.Font;
@@ -43,7 +37,7 @@ public class Ventana extends JFrame{
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					Ventana window = new Ventana();
@@ -54,7 +48,7 @@ public class Ventana extends JFrame{
 			}
 		});
 	}
-
+	
 	/**
 	 * Create the application.
 	 */
@@ -163,14 +157,14 @@ public class Ventana extends JFrame{
 	
 	private void crearPanelModo() {
 		this.setFocusable(true);
-		JPanel panelModo = new JPanel();
+		JLayeredPane panelModo = new JLayeredPane();
 		panelModo.setBounds(0, 0, this.getWidth(), this.getHeight());
 		setContentPane(panelModo);
 		panelModo.setLayout(null);
 		
 		panelPlantas = new JPanel();
 		panelPlantas.setBounds(0, 0, 388, 62);
-		panelModo.add(panelPlantas);
+		panelModo.add(panelPlantas, JLayeredPane.PALETTE_LAYER);
 		
 		JLabel fondoBotonera = new JLabel();
 		fondoBotonera.setBounds(0,0, 388, 62);
@@ -374,7 +368,7 @@ public class Ventana extends JFrame{
 		lblFondo.setIgnoreRepaint(true);
 		lblFondo.setBounds(0, 0, 884, 467);
 		lblFondo.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propModo.getProperty("fondo"))).getImage().getScaledInstance(lblFondo.getWidth(), lblFondo.getHeight(), DO_NOTHING_ON_CLOSE)));
-		panelModo.add(lblFondo);
+		panelModo.add(lblFondo, JLayeredPane.DEFAULT_LAYER);
 		
 		lblOleadas = new JLabel();
 		lblOleadas.setFont(new Font("Tahoma", Font.BOLD, 30));
@@ -385,18 +379,18 @@ public class Ventana extends JFrame{
 		else
 			lblOleadas.setForeground(new Color(0,0,0));
 		lblOleadas.setVisible(false);
-		panelModo.add(lblOleadas,0);
+		panelModo.add(lblOleadas, JLayeredPane.PALETTE_LAYER);
 		
 		lblNivel = new JLabel();
 		lblNivel.setFont(new Font("Tahoma", Font.BOLD, 30));
 		lblNivel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNivel.setBounds(284, 21, 274, 29);
+		lblNivel.setBounds(360, 21, 274, 29);
 		if(propModo.getProperty("colorOscuro").equalsIgnoreCase("true"))
 			lblNivel.setForeground(new Color(255,255,255));
 		else
 			lblNivel.setForeground(new Color(0,0,0));
 		lblNivel.setVisible(false);
-		panelModo.add(lblNivel,0);
+		panelModo.add(lblNivel,JLayeredPane.PALETTE_LAYER);
 		
 		controlarPlantasAComprar();
 		panelPlantas.add(fondoBotonera);
@@ -405,21 +399,20 @@ public class Ventana extends JFrame{
 	
 	public void actualizarGrafica(EntidadGrafica eg) {
 		eg.getGrafica().setVisible(true);
-		getContentPane().add(eg.getGrafica(),0);
+		getContentPane().add(eg.getGrafica(), JLayeredPane.PALETTE_LAYER);
 		getContentPane().repaint();
 		
 	}
 	public void borrarGrafica(JLabel label) {
 		label.setVisible(false);
 		getContentPane().remove(label);
-		getContentPane().revalidate();
 		getContentPane().repaint();
 	}
 	public void gameOver() {
 		JLabel lblGameOver = new JLabel();
 		lblGameOver.setBounds((this.getWidth()-357)/2, 88, 357, 271);
 		lblGameOver.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("gameOver"))).getImage().getScaledInstance(lblGameOver.getWidth(), lblGameOver.getHeight(), DO_NOTHING_ON_CLOSE)));
-		getContentPane().add(lblGameOver,0);
+		getContentPane().add(lblGameOver, JLayeredPane.POPUP_LAYER);
 		this.setFocusable(false);
 		botonVolver("GAME OVER!");
 		repaint();
@@ -429,7 +422,7 @@ public class Ventana extends JFrame{
 		JLabel lblGanar= new JLabel();
 		lblGanar.setBounds((this.getWidth()-357)/2, 88, 357, 271);
 		lblGanar.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("ganarJuego"))).getImage().getScaledInstance(lblGanar.getWidth(), lblGanar.getHeight(), DO_NOTHING_ON_CLOSE)));
-		getContentPane().add(lblGanar, 0);
+		getContentPane().add(lblGanar, JLayeredPane.POPUP_LAYER);
 		this.setFocusable(false);
 		botonVolver("GANASTE!");
 		repaint();
@@ -440,7 +433,7 @@ public class Ventana extends JFrame{
 		btnVolver.setBounds((this.getWidth()-162)/2, 369, 180, 50);
 		btnVolver.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 20));
 		btnVolver.setVisible(true);
-		this.getContentPane().add(btnVolver, 0);
+		this.getContentPane().add(btnVolver, JLayeredPane.POPUP_LAYER);
 		
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
