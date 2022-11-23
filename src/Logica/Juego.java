@@ -46,8 +46,16 @@ public class Juego {
 	}
 	
 	public void jugar(int nivel){
-		this.soles = 150;
-		
+		this.soles = 15000;
+
+		if(miRelojZombies != null) {
+			miRelojZombies.setearActivo(false);
+			System.out.println("llega1");
+			//miRelojZombies.stop();
+			System.out.println("llega2");
+			miRelojPlantas.setearActivo(false);
+			miRelojLanzables.setearActivo(false);
+		}
 		miRelojZombies = new RelojZombies(this);
 		miRelojPlantas = new RelojPlantas(this);
 		miRelojLanzables = new RelojLanzables(this);

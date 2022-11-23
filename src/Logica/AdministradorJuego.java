@@ -72,9 +72,8 @@ public class AdministradorJuego{
 					juego.getSolesJuego().remove(p);
 				else
 					p.getFila().removerLanzable(p);
-				lanzablesAEliminar.remove(p);
 			}
-			lanzablesClone.clear();
+			lanzablesAEliminar.removeAll(lanzablesClone);
 		}
 		
 		public void resetearListas() {

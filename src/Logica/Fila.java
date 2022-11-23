@@ -55,7 +55,8 @@ public class Fila {
 		boolean huboColision=false;
 		List<Lanzable> lanzablesClone = new CopyOnWriteArrayList<Lanzable>(misLanzables);
 		Iterator<Lanzable> itLanzables = lanzablesClone.iterator();
-		Iterator<Zombie> itZombie=misZombies.iterator();
+		List<Zombie> lanzablesZombies = new CopyOnWriteArrayList<Zombie>(misZombies);
+		Iterator<Zombie> itZombie=lanzablesZombies.iterator();
 		Zombie auxZombie;
 		int cont=0;
 		Lanzable auxLanzable;

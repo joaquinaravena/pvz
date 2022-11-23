@@ -19,6 +19,7 @@ public class accionPlantasGeneradoras implements PlantaStrategy{
 			aDisparar.setY(p.getY());
 			aDisparar.getEntidadGrafica().getGrafica().setLocation(p.getX(), p.getY());
 			aDisparar.setFila(p.getFila());
+			v.actualizarGrafica(aDisparar.getEntidadGrafica());
 			p.getFila().agregarLanzable(aDisparar);
 			contadorTicks=0;
 		}
