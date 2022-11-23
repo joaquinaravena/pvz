@@ -13,11 +13,11 @@ public class accionPlantasTanque implements PlantaStrategy{
 	}
 	
 	public void realizarAccion(Planta p, Ventana v) {
-		if(p.getVida()<=250 && contCambios==0) {
+		if(p.getVida()<=350 && contCambios==0) {
 			p.getEntidadGrafica().cambiarGrafica(mitadVida, p);
 			contCambios++;
 		}
-		else if(p.getVida()<60 && contCambios==1) {
+		else if(p.getVida()<150 && contCambios==1) {
 			p.getEntidadGrafica().cambiarGrafica(muerte, p);
 			contCambios++;
 		}

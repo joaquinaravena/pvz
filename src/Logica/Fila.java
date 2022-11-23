@@ -61,8 +61,7 @@ public class Fila {
 		Lanzable auxLanzable;
 		while (itZombie.hasNext()) {//Itero lista de zombies
 			auxZombie=itZombie.next();
-			huboColision=false;
-			while(itLanzables.hasNext() && !huboColision) {//Itero lista de lanzables y si detecto una colision freno.
+			while(itLanzables.hasNext()) {//Itero lista de lanzables y si detecto una colision freno.
 				auxLanzable=itLanzables.next();
 				huboColision=verColisiones(auxZombie,auxLanzable);
 				if(huboColision) 
