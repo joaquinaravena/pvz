@@ -26,9 +26,7 @@ public class RelojLanzables extends Thread{
 		}
 	}
 	
-	public void setearActivo(boolean a) {
-		activo = a;
-	}
+	
 	public void setVelocidad(int i) {
 		if(i != 1)
 			velocidad = velocidad*i;

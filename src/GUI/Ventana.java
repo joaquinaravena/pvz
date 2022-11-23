@@ -91,7 +91,7 @@ public class Ventana extends JFrame{
 					System.out.println(ex.getMessage());
 				}
 				crearPanelModo();
-				miJuego.jugar();
+				miJuego.jugar(0);
 			}
 		});
 				
@@ -112,7 +112,7 @@ public class Ventana extends JFrame{
 					System.out.println(ex.getMessage());
 				}
 				crearPanelModo();
-				miJuego.jugar();
+				miJuego.jugar(0);
 			}
 		});
 		btnModoNoche.setBounds(352, 308, 162, 50);
@@ -499,6 +499,7 @@ public class Ventana extends JFrame{
 	    Timer timer = new Timer(delay, taskPerformer);
 	    timer.setRepeats(false);
 	    timer.start();
+	    controlarPlantasAComprar();
 	}
 	//getters
 	

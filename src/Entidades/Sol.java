@@ -31,13 +31,11 @@ public class Sol extends Lanzable{
 				contador++;
 				getEntidadGrafica().getGrafica().setBounds(getEntidadGrafica().getGrafica().getX()-3, getEntidadGrafica().getGrafica().getY()+10, getEntidadGrafica().getGrafica().getWidth(), getEntidadGrafica().getGrafica().getHeight());
 			}
-			getEntidadGrafica().actualizarGrafica();
 		}
 		else {
 			if(y<400) {
 				y=y+10;
 				getEntidadGrafica().getGrafica().setBounds(getEntidadGrafica().getGrafica().getX(), getEntidadGrafica().getGrafica().getY()+10, getEntidadGrafica().getGrafica().getWidth(), getEntidadGrafica().getGrafica().getHeight());
-				getEntidadGrafica().actualizarGrafica();
 			}
 		}
 		

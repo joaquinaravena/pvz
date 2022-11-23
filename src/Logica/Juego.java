@@ -27,6 +27,7 @@ public class Juego {
 		plantaEnEspera = null;
 		miVentana = v;
 		administradorJuego = new AdministradorJuego(this);
+		administradorNiveles = new AdministradorNiveles(this);
 		filas = new Fila[6];
 		for(int i=0;i<6;i++) {
 			filas[i]=new Fila(this);
@@ -44,28 +45,30 @@ public class Juego {
 		builder=new BuilderNoche(this);
 	}
 	
-	@SuppressWarnings("deprecation")
-	public void jugar(){
-		if(miRelojZombies != null) {
-			miRelojZombies.stop();
-			miRelojPlantas.stop();
-			miRelojProyectiles.stop();
-		}
+	public void jugar(int nivel){
+		this.soles = 15000;
+		
 		miRelojZombies = new RelojZombies(this);
 		miRelojPlantas = new RelojPlantas(this);
 		miRelojProyectiles = new RelojLanzables(this);
 		miRelojZombies.start();
 		miRelojPlantas.start();
 		miRelojProyectiles.start();
-		administradorNiveles = new AdministradorNiveles(this);
-		administradorNiveles.nuevoNivel(0);
+		
+		administradorNiveles.nuevoNivel(nivel);
+		miVentana.cambiarNivel(nivel+1);
+		
+		administradorJuego.resetearListas();
+		oleadaActual=0;
+		contadorZombies=0;
+		plantaEnEspera = null;
 	}
 		
 	public void terminarJuego(boolean gane) {
-		miRelojPlantas.setearActivo(false);
-		miRelojZombies.setearActivo(false);
-		miRelojProyectiles.setearActivo(false);
 		
+		miRelojZombies = null;
+		miRelojPlantas = null;
+		miRelojProyectiles = null;
 		if(gane)
 			miVentana.ganarJuego();
 		else
@@ -82,16 +85,12 @@ public class Juego {
 			getFila(i).resetearListaLanzables();
 		}
 		//saque el admin juego resetear listas porque ya se hace en cada fila
-		soles = 150;
-		miVentana.controlarPlantasAComprar();
-		plantaEnEspera = null;
+
 		filas = new Fila[6];
 		for(int i=0;i<6;i++) {
 			filas[i]=new Fila(this);
 		}
 		administradorJuego.resetearListas();
-		contadorZombies = 0;
-		oleadaActual = 0;
 		administradorNiveles.nivelActual = 0;
 	}
 	

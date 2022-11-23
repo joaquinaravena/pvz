@@ -1,6 +1,7 @@
 package Logica;
 
 import java.util.ArrayList;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -43,11 +44,8 @@ public class AdministradorNiveles {
 		if (nivelActual==2)
 			juego.terminarJuego(true);
 		else {
-			juego.miRelojPlantas.setearActivo(false);
-			juego.miRelojZombies.setearActivo(false);
-			juego.miRelojProyectiles.setearActivo(false);
 			
-			List<Sol>solesClone = new CopyOnWriteArrayList<Sol>(juego.getSolesJuego()); // clone agregado
+			List<Sol>solesClone = new CopyOnWriteArrayList<Sol>(juego.getSolesJuego());
 			Iterator<Sol> itSoles = solesClone.iterator();
 			while(itSoles.hasNext()){
 				Sol s = itSoles.next();
@@ -58,17 +56,7 @@ public class AdministradorNiveles {
 				juego.getFila(i).resetearListaPlantas();
 				juego.getFila(i).resetearListaLanzables();
 			}
-			//juego.getAdministradorJuego().resetearListas();
-			juego.getVentana().cambiarNivel(nivelActual+1);
-			juego.miRelojPlantas.setearActivo(true);
-			juego.miRelojZombies.setearActivo(true);
-			juego.miRelojProyectiles.setearActivo(true);
-			juego.setSoles(15000);
-			nuevoNivel(nivelActual);
-			juego.getVentana().controlarPlantasAComprar();
-			juego.oleadaActual=0;
-			juego.contadorZombies=0;
-			juego.setPlantaEnEspera(0);
+			juego.jugar(nivelActual);
 		}
 	}
 	
