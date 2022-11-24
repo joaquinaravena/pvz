@@ -1,9 +1,8 @@
 package Entidades;
 import java.util.ArrayList;
 
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
+import java.util.List;
 import Estrategias.PlantaStrategy;
 import GUI.EntidadGrafica;
 import GUI.Ventana;
