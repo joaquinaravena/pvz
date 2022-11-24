@@ -63,8 +63,8 @@ public class Juego {
 		miRelojZombies.start();
 		miRelojPlantas.start();
 		miRelojLanzables.start();
-		administradorNiveles = new AdministradorNiveles(this);
-		
+		if(nivel==0) 
+			administradorNiveles = new AdministradorNiveles(this);
 		administradorNiveles.nuevoNivel(nivel);
 		miVentana.cambiarNivel(nivel+1);
 		

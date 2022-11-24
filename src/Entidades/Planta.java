@@ -2,6 +2,7 @@ package Entidades;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import Estrategias.PlantaStrategy;
 import GUI.EntidadGrafica;
@@ -15,6 +16,7 @@ public class Planta extends Entidad {
 	protected boolean tieneLanzable;
 	protected PlantaStrategy miEstrategia;
 	protected List<Zombie> zombiesQueMeAtacan;
+	protected List<Zombie> zombiesAEliminar;
 	
 	//ancho y alto representan las dimensiones.
 	//Las plantas se crean sin una posición establecida.
@@ -25,6 +27,7 @@ public class Planta extends Entidad {
 		entidadGrafica = new EntidadGrafica(v, this, graf);
 		miLanzable = proyectil;
 		zombiesQueMeAtacan=new ArrayList<Zombie>();
+		zombiesAEliminar=new ArrayList<Zombie>();
 		if(miLanzable==null)
 			tieneLanzable=false;
 		else 
@@ -45,6 +48,10 @@ public class Planta extends Entidad {
 	
 
 	public void realizarAccion(Ventana v) {
+		for(Zombie z:zombiesAEliminar) {
+			zombiesQueMeAtacan.remove(z);
+		}
+		zombiesAEliminar.clear();
 		miEstrategia.realizarAccion(this, v);
 	}
 	
@@ -75,5 +82,8 @@ public class Planta extends Entidad {
 	
 	public int getVida() {
 		return vida;
+	}
+	public void removerZombieAtacado(Zombie z) {
+		zombiesAEliminar.add(z);
 	}
 }

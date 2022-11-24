@@ -68,6 +68,8 @@ public class Zombie extends Entidad {
 	}
 	
 	public void morir(){
+		if(plantaAtacada!=null)
+			plantaAtacada.removerZombieAtacado(this);
 		miFila.getJuego().getAdministradorJuego().agregarZombieAEliminar(this);
 		entidadGrafica.borrarGrafica();
 	}

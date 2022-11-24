@@ -41,8 +41,11 @@ public class AdministradorNiveles {
 	
 	public void cambiarNivel() {
 		nivelActual++;
-		if (nivelActual==2)
+		System.out.println(nivelActual);
+		if (nivelActual==2) {
 			juego.terminarJuego(true);
+			System.out.println("Entro");
+		}
 		else {
 			
 			List<Sol>solesClone = new CopyOnWriteArrayList<Sol>(juego.getSolesJuego());
