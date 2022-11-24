@@ -21,8 +21,8 @@ public class AdministradorNiveles {
 		this.juego=juego;
 		nivelActual = 0;
 		zombiesNivel = new ArrayList<Zombie>();
-		niveles[0]=new Nivel(20,30,12);
-		niveles[1]=new Nivel(30,25,7);
+		niveles[0]=new Nivel(30,20,12);
+		niveles[1]=new Nivel(25,25,12);
 	}
 	
 	public void nuevoNivel(int nivelElegido) {

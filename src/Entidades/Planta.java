@@ -39,8 +39,8 @@ public class Planta extends Entidad {
 			vida -= i;		
 	}
 	public void morir() {
-			miFila.getJuego().getAdministradorJuego().agregarPlantaAEliminar(this);
-			entidadGrafica.borrarGrafica();
+		miFila.getJuego().getAdministradorJuego().agregarPlantaAEliminar(this);
+		entidadGrafica.borrarGrafica();
 	}
 	
 

@@ -33,6 +33,7 @@ public class Ventana extends JFrame{
 	private JLabel lblOleadas;
 	private JLabel lblNivel;
 	private JLabel lblSolesActuales;
+	private JToggleButton botonVelocidad;
 
 
 	public Ventana() {
@@ -146,11 +147,11 @@ public class Ventana extends JFrame{
 		panelModo.setLayout(null);
 		
 		panelPlantas = new JPanel();
-		panelPlantas.setBounds(0, 0, 388, 62);
+		panelPlantas.setBounds(0, 0, 443, 62);
 		panelModo.add(panelPlantas, JLayeredPane.PALETTE_LAYER);
 		
 		JLabel fondoBotonera = new JLabel();
-		fondoBotonera.setBounds(0,0, 388, 62);
+		fondoBotonera.setBounds(0,0, panelPlantas.getWidth(), panelPlantas.getHeight());
 		fondoBotonera.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("botonera"))).getImage().getScaledInstance(fondoBotonera.getWidth(), fondoBotonera.getHeight(), DO_NOTHING_ON_CLOSE)));
 
 		JToggleButton botonPlanta1 = new JToggleButton();
@@ -179,14 +180,22 @@ public class Ventana extends JFrame{
 		botonMusica.setSelectedIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("stop"))).getImage().getScaledInstance(botonMusica.getWidth(), botonMusica.getHeight(), DO_NOTHING_ON_CLOSE)));
 		botonMusica.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("play"))).getImage().getScaledInstance(botonMusica.getWidth(), botonMusica.getHeight(), DO_NOTHING_ON_CLOSE)));
 		
+		JToggleButton botonPala = new JToggleButton();
+		botonPala.setToolTipText("remueve una planta del tablero y devuelve el 50% del valor de la planta");
+		botonPala.setSelected(false);
+		botonPala.setBounds(389, 2, 45, 48);
+		botonPala.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("pala"))).getImage().getScaledInstance(botonPala.getWidth(), botonPala.getHeight() , DO_NOTHING_ON_CLOSE)));
+		
 		botonPlanta1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				botonPlanta2.setSelected(false);
 				botonPlanta3.setSelected(false);
 				botonPlanta4.setSelected(false);
-				if(botonPlanta1.isSelected())
+				botonPala.setSelected(false);
+				if(botonPlanta1.isSelected()) {
 					miJuego.setPlantaEnEspera(1);
-				else
+					miJuego.setPalaSeleccionada(false);
+				}else
 					miJuego.setPlantaEnEspera(0);
 			}
 		});
@@ -196,9 +205,11 @@ public class Ventana extends JFrame{
 				botonPlanta1.setSelected(false);
 				botonPlanta3.setSelected(false);
 				botonPlanta4.setSelected(false);
-				if(botonPlanta2.isSelected())
+				botonPala.setSelected(false);
+				if(botonPlanta2.isSelected()) {
 					miJuego.setPlantaEnEspera(2);
-				else
+					miJuego.setPalaSeleccionada(false);
+				}else
 					miJuego.setPlantaEnEspera(0);
 			}
 		});
@@ -209,9 +220,11 @@ public class Ventana extends JFrame{
 				botonPlanta2.setSelected(false);
 				botonPlanta1.setSelected(false);
 				botonPlanta4.setSelected(false);
-				if(botonPlanta3.isSelected()) 
+				botonPala.setSelected(false);
+				if(botonPlanta3.isSelected()) { 
 					miJuego.setPlantaEnEspera(3);
-				else
+					miJuego.setPalaSeleccionada(false);
+				}else
 					miJuego.setPlantaEnEspera(0);
 			}
 		});
@@ -221,10 +234,26 @@ public class Ventana extends JFrame{
 				botonPlanta2.setSelected(false);
 				botonPlanta3.setSelected(false);
 				botonPlanta1.setSelected(false);
-				if(botonPlanta4.isSelected())
+				botonPala.setSelected(false);
+				if(botonPlanta4.isSelected()) {
 					miJuego.setPlantaEnEspera(4);
-				else
+					miJuego.setPalaSeleccionada(false);
+				}else
 					miJuego.setPlantaEnEspera(0);
+			}
+		});
+		
+		botonPala.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				botonPlanta2.setSelected(false);
+				botonPlanta3.setSelected(false);
+				botonPlanta1.setSelected(false);
+				botonPlanta4.setSelected(false);
+				if(botonPala.isSelected()) {
+					miJuego.setPalaSeleccionada(true);
+					miJuego.setPlantaEnEspera(0);
+				}else
+					miJuego.setPalaSeleccionada(false);
 			}
 		});
 		
@@ -248,14 +277,15 @@ public class Ventana extends JFrame{
 		panelPlantas.add(botonPlanta2);
 		panelPlantas.add(botonPlanta3);
 		panelPlantas.add(botonPlanta4);
+		panelPlantas.add(botonPala);
 		panelPlantas.add(botonMusica);
 		
 		
-		JToggleButton botonVelocidad = new JToggleButton();
+		botonVelocidad = new JToggleButton();
 		botonVelocidad.setToolTipText("aumenta/disminuye la velocidad del juego");
 		botonVelocidad.setSelected(false);
-		botonVelocidad.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("velocidad"))).getImage().getScaledInstance(botonPlanta3.getWidth(), botonPlanta3.getHeight() , DO_NOTHING_ON_CLOSE)));
 		botonVelocidad.setBounds(334, 2, 45, 48);
+		botonVelocidad.setIcon(new ImageIcon(new ImageIcon(Ventana.class.getResource(propMenu.getProperty("velocidad"))).getImage().getScaledInstance(botonVelocidad.getWidth(), botonVelocidad.getHeight() , DO_NOTHING_ON_CLOSE)));
 		
 		botonVelocidad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -265,6 +295,8 @@ public class Ventana extends JFrame{
 					miJuego.cambiarVelocidad(2);
 			}
 		});
+		
+
 		
 		panelPlantas.add(botonVelocidad);
 		panelPlantas.add(lblSol);
@@ -323,17 +355,27 @@ public class Ventana extends JFrame{
 				lblCelda.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						if(Ventana.this.isFocusable() && miJuego.getPlantaEnEspera() != null && (lblCelda.getComponentCount() == 0 || !lblCelda.getComponent(0).isVisible())) { 
-							if(lblCelda.getComponentCount() == 1) 
-								lblCelda.remove(0);
-							JLabel lblPlanta = miJuego.getPlantaEnEspera().getEntidadGrafica().getGrafica();
-							lblPlanta.setBounds(0, 0, lblPlanta.getWidth(), lblPlanta.getHeight());
-							lblCelda.add(lblPlanta);
-							miJuego.agregarPlanta(lblCelda.getX(),lblCelda.getY());
-							controlarPlantasAComprar();
-							miJuego.setPlantaEnEspera(0);
+						if(Ventana.this.isFocusable() ) {
+							if(!miJuego.getPalaSeleccionada() && miJuego.getPlantaEnEspera() != null && (lblCelda.getComponentCount() == 0 || !lblCelda.getComponent(0).isVisible())){
+								if(lblCelda.getComponentCount() == 1) 
+									lblCelda.remove(0);
+								JLabel lblPlanta = miJuego.getPlantaEnEspera().getEntidadGrafica().getGrafica();
+								lblPlanta.setBounds(0, 0, lblPlanta.getWidth(), lblPlanta.getHeight());
+								lblCelda.add(lblPlanta);
+								miJuego.agregarPlanta(lblCelda.getX(),lblCelda.getY());
+								controlarPlantasAComprar();
+								miJuego.setPlantaEnEspera(0);
+							}
+							else if(miJuego.getPalaSeleccionada() && lblCelda.getComponentCount() > 0) {
+								miJuego.removerPlanta(lblCelda.getX(), lblCelda.getY());
+								lblCelda.removeAll();
+								controlarPlantasAComprar();
+								miJuego.setPlantaEnEspera(0);
+							}
+							
 						}
 					}
+					
 					public void mouseEntered(MouseEvent e) {
 						if(Ventana.this.isFocusable())
 							lblCelda.setBackground(lblCelda.getBackground().brighter());
@@ -344,7 +386,7 @@ public class Ventana extends JFrame{
 							lblCelda.setBackground(lblCelda.getForeground());
 					}
 				});
-				panelModo.add(lblCelda);
+				panelModo.add(lblCelda, JLayeredPane.DEFAULT_LAYER);
 			}
 		
 		JLabel lblFondo = new JLabel();
@@ -356,7 +398,7 @@ public class Ventana extends JFrame{
 		lblOleadas = new JLabel();
 		lblOleadas.setFont(new Font("Tahoma", Font.BOLD, 30));
 		lblOleadas.setHorizontalAlignment(SwingConstants.CENTER);
-		lblOleadas.setBounds(360, 21, 274, 29);
+		lblOleadas.setBounds(415, 21, 274, 29);
 		if(propModo.getProperty("colorOscuro").equalsIgnoreCase("true"))
 			lblOleadas.setForeground(new Color(255,255,255));
 		else
@@ -367,7 +409,7 @@ public class Ventana extends JFrame{
 		lblNivel = new JLabel();
 		lblNivel.setFont(new Font("Tahoma", Font.BOLD, 30));
 		lblNivel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNivel.setBounds(360, 21, 274, 29);
+		lblNivel.setBounds(415, 21, 274, 29);
 		if(propModo.getProperty("colorOscuro").equalsIgnoreCase("true"))
 			lblNivel.setForeground(new Color(255,255,255));
 		else
@@ -430,12 +472,14 @@ public class Ventana extends JFrame{
 		JToggleButton planta2 = (JToggleButton)panelPlantas.getComponent(1);
 		JToggleButton planta3 = (JToggleButton)panelPlantas.getComponent(2);
 		JToggleButton planta4 = (JToggleButton)panelPlantas.getComponent(3);
+		JToggleButton botonPala = (JToggleButton)panelPlantas.getComponent(4);
 		miJuego.setPlantaEnEspera(0);
 		lblSolesActuales.setText(""+miJuego.getSoles());
 		planta1.setSelected(false);
 		planta2.setSelected(false);
 		planta3.setSelected(false);
 		planta4.setSelected(false);
+		botonPala.setSelected(false);
 		planta1.setEnabled(false);
 		planta2.setEnabled(false);
 		planta3.setEnabled(false);
@@ -470,6 +514,7 @@ public class Ventana extends JFrame{
 	}
 	
 	public void cambiarNivel(int i) {
+		botonVelocidad.setSelected(false);
 		lblNivel.setText("¡Nivel "+i+"!");
 		lblNivel.setVisible(true);
 		int delay = 3500;

@@ -20,11 +20,14 @@ public class Juego {
 	protected AbstractBuilder builder;
 	protected int contadorZombies;
 	protected List<Sol> solesJuego;
+	protected boolean gameOver;
+	protected boolean palaSeleccionada;
 	
 	public Juego(Ventana v) {
 		miReproductorMusica = new ReproductorMusica();
 		soles = 200;
 		plantaEnEspera = null;
+		palaSeleccionada = false;
 		miVentana = v;
 		administradorJuego = new AdministradorJuego(this);
 		administradorNiveles = new AdministradorNiveles(this);
@@ -35,6 +38,7 @@ public class Juego {
 		contadorZombies = 0;
 		oleadaActual = 0;
 		solesJuego=new ArrayList<Sol>();
+		gameOver = true;
 	}
 	
 	public void setBuilderDia() {
@@ -47,7 +51,7 @@ public class Juego {
 	
 	public void jugar(int nivel){
 		this.soles = 200;
-
+		gameOver = false;
 		if(miRelojZombies != null) {
 			miRelojZombies.setearActivo(false);
 			miRelojPlantas.setearActivo(false);
@@ -74,7 +78,7 @@ public class Juego {
 	 * Se resetean las listas de zombies, plantas y proyectiles de cada fila, y la lista de soles de juego.
 	 */	
 	public void terminarJuego(boolean gane) {
-		
+		gameOver = true;
 		miRelojZombies.setearActivo(false);
 		miRelojPlantas.setearActivo(false);
 		miRelojLanzables.setearActivo(false);
@@ -155,7 +159,7 @@ public class Juego {
 		boolean hayZombies = false;
 		for (int i=1; i<=6 && !hayZombies; i++) 
 			hayZombies = filas[i-1].hayZombies();
-		if (!hayZombies && administradorNiveles.getZombiesNivel().isEmpty())
+		if (!hayZombies && administradorNiveles.getZombiesNivel().isEmpty() && !gameOver)
 			administradorNiveles.cambiarNivel();
 		
 		if (!administradorNiveles.getZombiesNivel().isEmpty()) {
@@ -185,6 +189,7 @@ public class Juego {
 	public void agregarPlanta(int x,int y) {
 		int posicionArreglo= (x / 74)-2;
 		int posicionFila=(y / 65);
+		
 		filas[posicionFila].agregarPlanta(plantaEnEspera, posicionArreglo);
 		filas[posicionFila].getPlanta(posicionArreglo).setAncho(plantaEnEspera.getEntidadGrafica().getGrafica().getWidth());
 		filas[posicionFila].getPlanta(posicionArreglo).setAlto(plantaEnEspera.getEntidadGrafica().getGrafica().getHeight());
@@ -196,6 +201,21 @@ public class Juego {
 			filas[posicionFila].getPlanta(posicionArreglo).getLanzable().setY(y);
 		}
 		this.restarSoles(plantaEnEspera.getPrecio());
+	}
+	
+	/*
+	 * Remueve una planta usando la pala
+	 * Aumenta la cantidad de soles en el 50% del precio de la planta removida
+	 */
+	public void removerPlanta(int x, int y) {
+		int posicionArreglo= (x / 74)-2;
+		int posicionFila=(y / 65);
+		Planta p = filas[posicionFila].getPlanta(posicionArreglo);
+		if(p != null) {
+			int precio = p.getPrecio()/2;
+			this.agregarSoles(precio+1);
+			p.morir();
+		}
 	}
 	
 	public void agregarSolAJuego() {
@@ -252,6 +272,10 @@ public class Juego {
 		return soles;
 	}
 	
+	public boolean getPalaSeleccionada() {
+		return palaSeleccionada;
+	}
+	
 	//setters/cambios basicos en atributos
 	
 	public void setPlantaEnEspera(int i) {
@@ -264,6 +288,9 @@ public class Juego {
 		}
 	}
 	
+	public void setPalaSeleccionada(boolean b) {
+		palaSeleccionada = b;
+	}
 	public void agregarSoles(int s) {
 		soles += s;
 		miVentana.controlarPlantasAComprar();
