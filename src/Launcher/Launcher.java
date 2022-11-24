@@ -1,4 +1,6 @@
 package Launcher;
+
+
 import GUI.*;
 
 //Launcher de la aplicacion

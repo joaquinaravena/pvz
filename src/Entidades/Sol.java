@@ -4,8 +4,9 @@ import GUI.SolGrafico;
 import GUI.Ventana;
 
 public class Sol extends Lanzable{
-	int contador;
-	boolean solDePlanta;
+	protected int contador;
+	protected boolean solDePlanta;
+	
 	public Sol(Ventana v,String graf,boolean solDePlanta) {
 		super();
 		this.solDePlanta=solDePlanta;

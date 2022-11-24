@@ -200,7 +200,7 @@ public class Juego {
 			filas[posicionFila].getPlanta(posicionArreglo).getLanzable().setFila(filas[posicionFila]);
 			filas[posicionFila].getPlanta(posicionArreglo).getLanzable().setY(y);
 		}
-		this.restarSoles(plantaEnEspera.getPrecio());
+		this.setSoles(this.getSoles()-plantaEnEspera.getPrecio());
 	}
 	
 	/*
@@ -213,7 +213,7 @@ public class Juego {
 		Planta p = filas[posicionFila].getPlanta(posicionArreglo);
 		if(p != null) {
 			int precio = p.getPrecio()/2;
-			this.agregarSoles(precio+1);
+			this.setSoles(this.getSoles()+precio+1);
 			p.morir();
 		}
 	}
@@ -290,15 +290,6 @@ public class Juego {
 	
 	public void setPalaSeleccionada(boolean b) {
 		palaSeleccionada = b;
-	}
-	public void agregarSoles(int s) {
-		soles += s;
-		miVentana.controlarPlantasAComprar();
-	}
-	
-	public void restarSoles(int s) {
-		soles -= s;
-		miVentana.controlarPlantasAComprar();
 	}
 	public void setSoles(int s) {
 		soles = s;

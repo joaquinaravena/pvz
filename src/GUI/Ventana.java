@@ -2,6 +2,7 @@ package GUI;
 import Logica.*;
 
 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -10,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.ImageIcon;
 import javax.swing.JToggleButton;
+
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -52,8 +54,18 @@ public class Ventana extends JFrame{
 		setBounds(100, 100, 900, 506);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
-		crearPanelMenu();
-		miJuego.reproducirMusica();
+		
+		crearSplashScreen();
+        ActionListener crearPaneles = new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent evt) {
+                 crearPanelMenu();
+                 miJuego.reproducirMusica();
+           }
+        };
+	    Timer timer = new Timer(2500, crearPaneles);
+	    timer.setRepeats(false);
+	    timer.start();
 	}
 	private void crearPanelMenu() {
 		JPanel panelMenu = new JPanel();
@@ -528,6 +540,17 @@ public class Ventana extends JFrame{
 	    timer.setRepeats(false);
 	    timer.start();
 	    controlarPlantasAComprar();
+	}
+	
+	private void crearSplashScreen() {
+		JPanel splash = new JPanel();
+		setContentPane(splash);
+		splash.setLayout(null);
+		splash.setBackground(new Color(205, 133, 63));
+		JLabel img = new JLabel();
+		img.setBounds(0, -30, 900, 500);
+		img.setIcon(new ImageIcon(new ImageIcon("src/Recursos/splash.png").getImage().getScaledInstance(900, 450, DO_NOTHING_ON_CLOSE)));
+		splash.add(img);
 	}
 	//getters
 	

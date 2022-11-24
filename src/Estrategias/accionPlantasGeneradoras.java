@@ -5,7 +5,7 @@ import Entidades.Planta;
 import GUI.Ventana;
 
 public class accionPlantasGeneradoras implements PlantaStrategy{
-	int contadorTicks;
+	protected int contadorTicks;
 	
 	public accionPlantasGeneradoras() {
 		contadorTicks=0;
